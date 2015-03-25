@@ -1,0 +1,219 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% ICML 2014 EXAMPLE LATEX SUBMISSION FILE %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Use the following line _only_ if you're still using LaTeX 2.09.
+%\documentstyle[icml2014,epsf,natbib]{article}
+% If you rely on Latex2e packages, like most moden people use this:
+\documentclass{article}
+
+% use Times
+\usepackage{times}
+% For figures
+\usepackage{graphicx} % more modern
+%\usepackage{epsfig} % less modern
+\usepackage{subfigure} 
+
+% For citations
+\usepackage{natbib}
+
+% For algorithms
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{amssymb,amsthm,amsmath}
+
+% As of 2011, we use the hyperref package to produce hyperlinks in the
+% resulting PDF.  If this breaks your system, please commend out the
+% following usepackage line and replace \usepackage{icml2014} with
+% \usepackage[nohyperref]{icml2014} above.
+\usepackage{hyperref}
+
+% Packages hyperref and algorithmic misbehave sometimes.  We can fix
+% this with the following command.
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Employ the following version of the ``usepackage'' statement for
+% submitting the draft version of the paper for review.  This will set
+% the note in the first column to ``Under review.  Do not distribute.''
+\usepackage[accepted]{icml2014} 
+% Employ this version of the ``usepackage'' statement after the paper has
+% been accepted, when creating the final version.  This will set the
+% note in the first column to ``Proceedings of the...''
+%\usepackage[accepted]{icml2014}
+
+
+% The \icmltitle you define below is probably too long as a header.
+% Therefore, a short form for the running title is supplied here:
+%\icmltitlerunning{Project Proposal for CS6780}
+
+\begin{document} 
+
+\twocolumn[
+\icmltitle{Local Search Approximation Algorithms for Partitional and Hierarchical Clustering}
+
+% It is OKAY to include author information, even for blind
+% submissions: the style file will automatically remove it for you
+% unless you've provided the [accepted] option to the icml2014
+% package.
+\icmlauthor{Alice Paul (ajp336), Calvin Wylie (cjw278), David Lingenbrink (dal299)}{}
+
+% You may provide any keywords that you 
+% find helpful for describing your paper; these are used to populate 
+% the "keywords" metadata in the PDF but will not be shown in the document
+\icmlkeywords{boring formatting information, machine learning, ICML}
+
+\vskip 0.3in
+]
+
+
+\section{Introduction}
+As the data we have access to grows in variety and size and becomes cheaper to store, we need methods to efficiently learn from this data. 
+Partitioning data (clustering) into similar groups (clusters) is one of the key tools to learn about a set of unlabeled data such as a set of customers who have visited a website or a set of handwritten documents.
+Clustering in these situations helps us learn underlying structure and classifications of our data, and it presents large data sets in a simplified and compressed view \cite{Jain}.
+
+There are two main branches of clustering: partitional (or flat) clustering and hierarchical clustering. In partitional clustering we want to partition the data into disjoint sets whereas in hierarchical clustering we are interested in finding a nested tree of partitions. Often these problems are solved using heuristic algorithms which have no guarantee on the solution produced but tend to be fast and easy to implement. We will look at how local search approximation algorithms, which do have some guarantee on the constructed solution and are less computationally expensive than other approximation methods, compare in practice to the most used machine learning algorithms both in the quality of the solution and in computation time. 
+
+\section{Literature Review}
+
+Clustering algorithms data back to over 50 years ago, and since then there have been many variations introduced \cite{Jain}. However, clustering algorithms are often formulated as NP-hard problems and are inherently hard to solve \cite{Jain}. When comparing algorithms, we need to consider the stability of the solutions, the computation time, and the proposed objective. 
+
+\subsection{Partitional Clustering}
+
+For partitional clustering, we are often given a number $k$, representing the number of clusters, and distances between the data, representing a measure of dissimilarity between points, such as Euclidean distance. In addition, many problems require that this distance satisfy the triangle inequality. The objective is then formulated as identifying $k$ clusters so as to minimize some function of the distances. 
+
+One popular objective is that of $k$-means in which we want to choose $k$ cluster centers to minimize the sum of squared distances from each point to its cluster center \cite{Jain}. The most used algorithm for this problem is Lloyd's $k$-means algorithm which iteratively greedily updates the centers of each cluster (assigning points to the closest center) until the solution becomes stable \cite{Jain}. This algorithm is only guaranteed to reach a local optimum and can be very sensitive to outliers and the initial points chosen \cite{Kanungo}. There also exists a local search algorithm for $k$-means which guarantees to be within a factor of $(9+\varepsilon)$ of the optimal solution that performs well in practice when combined with Lloyd's algorithm \cite{Kanungo}. A relaxation of this problem is fuzzy $c$-means which has the same objective but allows points to belong partially to multiple clusters \cite{ESL}.
+
+Variations on $k$-means attempt to reduce the sensitivity and worst-case behavior. One other objective is to minimize the maximum distance from a point to its cluster center. This problem can be thought of as minimizing the worst case and is called $k$-center clustering. Here, a simple greedy algorithm is guaranteed to come within a factor of $2$ of the optimal solution as long as the given distances satisfy the triangle inequality \cite{Hopcroft}. Furthermore, this is best approximation ratio possible unless P=NP \cite{Shmoys}.  However, $k$-center does not perform well in practice compared to other methods \cite{Murphy}. This may be because it focuses too much on the worst case distance.
+
+An objective function in between $k$-means and $k$-center is to minimize the sum of distances from each point to the median point of its cluster. This problem is called $k$-median or $k$-medoids clustering. Another way of defining this problem is choosing a set of $k$ data points to be centers so as to minimize the sum of distances from each point to their closest center. 
+
+There are two common heuristic algorithms for this problem. The first is a local search algorithm called partition around medoids (PAM) which starts with $k$ randomly chosen centers and repeatedly looks for a single point swap to improve the objective function until no such move is possible \cite{ESL}. 
+Another common heuristics for this problem (often called just $k$-medoids) is similar to that of $k$-means by assigning each point to their closest center and then greedily updating the center within each cluster \cite{Park}. The algorithm repeats this until the solution becomes stable and is more computationally efficient than PAM \cite{Park}. Additionally, Velmurugan and Santhanam showed that on uniform and normally distributed data the $k$-medoids algorithm was empirically faster than that of $k$-means \cite{Velmurugan}. 
+
+If we relax the constraint to have exactly $k$ clusters, then a recent algorithm called affinity propogation has shown lower error and computation time than the algorithms above \cite{Frey}. Instead of specifying a number of clusters, the user inputs ``preferences'' on the data points to be cluster centers. This algorithm relies on passing messages between data points. For each pair of data points $i, k \in X$, ``availability'' $a(i,k)$ represents the evidence for having $i$ choose $k$ to be it's cluster center and ``responsibility'' $r(i,k)$ reflects how well-suited $k$ is to serve $i$. These are messages are then updated iteratively. Once the messages converge (this is not guaranteed) then $\max_{k \in X} a(i,k) + r(i,k)$ will identify the cluster center for $i$, and these decisions will be consistent \cite{Frey}.
+
+The $k$-median problem is also a fundamental problem in approximation algorithms. The problem is formulated as above: choose $k$ cluster centers from a set $X$ so as to minimize the sum of distances from each point to their closest center. The best known approximation algorithm for this problem guarantees a solution within a factor of 2.592 of the optimal solution \cite{Wu}. However, this algorithm uses linear programming and is computationally intensive compared to the local search and greedy algorithms above. On the other hand, it is known that a local search algorithm that considers swaps of size $\leq p$ is a $(3 + \frac{2}{p})$-approximation algorithm \cite{Arya}. Note that for $p=1$, this is the same as PAM. As far as we know, nobody has implemented this algorithm on clustering data to compare the relative trade-off of solution quality and computation time as $p$ increases.  
+
+Additionally, center-based clustering in general can be seen as minimizing a supermodular decreasing function subject to a cardinality constraint, a problem related to maximizing a submodular function that is well-studied in approximation algorithms. Furthermore, the approximation algorithms in this area are constructed using local-search or greedy methods and are therefore computationally tractable on large data. In addition, using supermodular functions means our distance measure does not have to satisfy the triangle inequality, which can be useful when considering non-vector data. 
+
+While there exist many other methods for clustering such as spectral clustering and mixture models \cite{Murphy}, we will restrict the comparison of our proposed algorithm to the center-based algorithms above which are widely used and relate in objective function.
+
+\subsection{Hierarchical Clustering}
+
+In hierarchical clustering, on the other hand, we do not specify a number of clusters. Instead, we want to find a hierarchy of clusters so that the clusters at each level are formed by merging clusters at a lower level. This gives a bigger picture about the dissimilarity between different groups of points and can allow the user to choose a ``natural'' level of clustering \cite{ESL}. 
+
+There are two main basic methods for hierarchical clustering: agglomerative clustering and divisive clustering. In agglomerative clustering we start with each data point in its own cluster. We then repeatedly merge two clusters to form the next level until the data is in a single cluster. 
+
+There are three choices of criteria for choosing which clusters to merge, which reflect the relative benefits of $k$-means, $k$-median, and $k$-center. 
+In single linkage clustering (also called nearest neighbor), we measure the distance between two clusters to be the smallest pairwise distance and then merge the two closest clusters. The main potential drawback to this method is that two points within a cluster can be very far apart. Complete linkage clustering on the other hand measures the distance between two clusters to be the largest pairwise distance and then merges the two closest clusters. While points within a single cluster will be quite similar using this metric, points may not belong to their closest cluster. 
+Lastly, there is group average linkage which looks at the average pairwise distance between clusters and merges the two closest clusters. This strikes a balance between the closeness and compactness of the two techniques above and gives more reasonable results in practice \cite{ESL}. 
+
+The other basic method for clustering is divisive clustering which starts with all points in a single cluster and repeatedly divides a cluster into two parts either using a $k$-means or $k$-medoids algorithm with $k=2$ or by greedily separating the cluster so that all points are closer to their part of separated cluster. The cluster to split is chosen to be the cluster with highest diameter or average dissimilarity. This method has not been studied nearly as much as agglomerative clustering \cite{ESL} but has had relative success in classifying document datasets \cite{Zhao}. 
+
+Hierarchical clustering has also been studied in approximation algorithms. In this problem, we need to identify a hierarchy of clusters with their corresponding cluster centers so as to minimize the ratio of the cost of our solution on any level with $k$ clusters to the optimal $k$-median solution. Here, the cost of our solution is given by the sum of the distance from each point to its cluster center (i.e. the $k$-median objective we described above). The hierarchical $k$-median problem was originally introduced by Plaxton who gave a 238.88 approximation algorithm \cite{Plaxton}. This was improved by Lin et al.~\cite{Lin} who gave an incremental approximation algorithm framework. In particular, their approach relies on a black box $k$-median solver and then uses these solutions for $k=1, \ldots, n$ to construct a hierarchical clustering by increasing the cost by at most a factor of $20.71$ (or a factor of $10.03$ when randomized). Using the $(3+\frac{2}{p})$-approximation algorithm as the black-box, this translates into a $20.71 (3+\frac{2}{p})$-approximation algorithm (or $10.03 (3+\frac{2}{p})$ when randomized). These ratios can be improved by using a Lagrangian multiplier preserving $2$-approximation algorithm but the local search algorithm performed comparably in experimental tests \cite{Nagarajan}.
+
+Again, several algorithms have been built upon agglomerative clustering to incorporate non-spherical cluster shapes and categorical data such as the CURE, ROCK, and Chameleon algorithms \cite{Guha_CURE, Guha_ROCK, Karypis} but do not relate as much to our proposed algorithm in objective.
+
+\section{Partitional Clustering Approximation Algorithms}
+
+\subsection{Local Search with Multiswaps}
+In the $k$-median problem, we have a set $X$ and a distance metric $d(i,j)$ for all $i,j \in X$. The goal is to find a set $S \subseteq X$ such that $|S| \leq k$ so as to minimize 
+\[ f(S) = \sum_{ i\in X} \min_{j \in S} d(i,j). \]
+Consider a local search algorithm with starts with a random subset $S$ of $k$ points. In any iteration, the algorithm looks for a set $A \subseteq S$ and a set $B \subseteq X -S$ such that $|A| = |B| \leq p$ and
+\[ f(S- B \cup A) \geq f(S). \]
+If the algorithm finds such a set, it swaps out $B$ from $S$ and adds $A$. If no such set exists, the algorithm outputs $S$. Note that for $p$ independent of $k$ and $n$ and if we ensure that the algorithm makes at least $\delta = \varepsilon/n$ progress in each iteration, this is a polynomial-time algorithm. Furthermore, the local search algorithm outputs $S \subseteq X$ such that $|S| = k$ and
+\[ f(S) \leq \left (3 + \frac{2}{p}+\varepsilon \right ) f(O) \]
+for all $O \subseteq X$. Therefore, there is a trade-off between the computation time of this algorithm and the guaranteed quality of the solution. 
+
+\subsection{Supermodular Function Minimization}
+Given a set $X$, a function $f:2^{X} \mapsto \mathbb{R}$ is supermodular, if for all $T \subseteq S \subseteq X$ and $j \notin S$, 
+\[ f(T \cup \{j\}) - f(T) \leq f(S \cup \{j\}) - f(S). \]
+Furthermore, $f$ is non-increasing if for all $T \subseteq S \subseteq X$, $f(S) \leq f(T)$. 
+
+Suppose we have a set of data $X$ of which we want to choose a subset $S$ such that $|S| \leq k$ so as to minimize 
+\[ f(S) = \sum_{i \in X} \min_{j \in S} d(i,j) ,\]
+where we can think of $d$ as some measure of dissimilarity (for example squared distance or absolute distance). For completeness, we define $f(\emptyset) = \min_{j \in S} f(\{j\})$. 
+Note that this generalizes the $k$-median problem and can capture a variant of $k$-means in which we are restricted to choosing data points as centers.
+
+It is clear that $f$ is non-increasing since for all $T \subseteq S \subseteq X$ and $i \in X$, $\min_{j \in S} d(i,j) \leq \min_{j \in T} d(i,j)$. Furthermore, for $j \notin S$, adding $j$ to $T$ will decrease the sum of the distances more than adding $j$ to $S$ so $f$ is supermodular. In general, there is no known approximation algorithm for minimizing a non-increasing supermodular function subject to a cardinality constraint. However, if we can place some properties on the ``steepnesss'' of $f$ then there is a known optimal approximation algorithm \cite{Sviridenko}.
+
+As in \cite{Sviridenko}, we define the \emph{total curvature} $c$ of a non-increasing supermodular function $f$ as 
+\[ c = 1 - \min_{j \in X}  \frac{ f(X) - f(X- \{j\})}{ f(\{j\}) - f(\emptyset)}.\]
+Then, for every $\varepsilon >0$ and $c \in [0,1)$, there exists a local search algorithm that produces a set $S \subseteq X$ such that $|S| \leq k$ in polynomial time such that 
+\[ f(S) \leq \left( 1 + \frac{c}{1-c} \cdot e^{-1} + \frac{1}{1-c} \cdot O(\varepsilon) \right) f(O) \]
+for all $O \subseteq X$ such that $|O| \leq k$, with high probability \cite{Sviridenko}. Note that $c$ will vary depending on our dataset so while in some cases we may have a very good approximation ratio it can worsen as our distances become non-smooth (for example distances that do not form a metric). 
+
+This algorithm first defines linear and submodular functions on $X$:
+\begin{align*}
+l(A) &= \sum_{j \in A} f(\{j\}) - f(\emptyset), \\
+g(A) & = - l(A) - f(X \setminus A).
+\end{align*}
+Furthermore, we let $\hat{v}_g = \max_{j \in X} g(\{j\})$, $\hat{v}_l = \max_{j \in X} |l(\{j\})|$, and $\hat{v} = \max(\hat{v}_g , \hat{v}_l)$. 
+
+Given a set $A \subseteq X$, we consider a two-step random sampling. We first draw a value $p \in [0,1]$ using the density function $\frac{{e}^p}{e-1}$. Then, we choose a subset $B \in A$ by selecting each $x \in A$ to be in $B$ independently with probability $p$. The expected value of $g(B)$ is given by
+\[  h(A) = \sum_{B \subseteq A} g(B) \cdot \int_{0}^1 \frac{e^p}{e-1} \cdot p^{|B|-1} (1-p)^{|A|-|B|} dp. \]
+Then, we define a potential function
+\[ \psi(A) = (1-e^{-1}) h(A) + l(A). \]
+
+We are now ready to describe how the algorithm works. The algorithm sets $\delta = \frac{\varepsilon}{n}$ to be the minimum step size and starts with a set $S$ of size $k$. Then, while there exists $a \in S$ and $b \in X \setminus S$ such that 
+\[ \psi(S -a +b) \geq \psi(S) + \delta, \]
+the algorithm removes $a$ from $S$ and adds $b$. 
+
+Note that $\psi$ requires summing an exponential number of terms. However, we can estimate $h(A)$ (and therefore $\psi(A)$) by randomly sampling $g(B)$ in the above fashion. If $\hat{\psi}(A)$ is an estimate of $\psi(A)$ sampled from $\Omega (\varepsilon^{-2} n^4 \ln^4 n \ln M)$ samples, then 
+\[ Pr[ | \hat{\psi}(A) - \psi(A) | \geq \delta ] = O(M^{-1}). \]
+By setting $M$ large enough (polynomially large), the algorithm will converge in polynomial time and will return a solution satisying the above guarantee with high probability \cite{Sviridenko}. 
+ 
+\subsection{Implementation}
+
+\subsection{Results}
+
+\section{Hierarchical Clustering Approximation Algorithms}
+Again, suppose we have a set $X$ and a distance metric $d(i,j)$ for all $i,j \in X$. In the hierarchical setting, we will represent a solution to the $k$-median problem as a pair $(S, a)$ where $S \subseteq X$ such that $|S| \leq k$ and $a$ is an assignment function that maps each $i \in X$ to a center in $S$. Therefore, for any $i \in S$, $a^{-1}(i)$ will be all points in the cluster centered at $i$. We define
+\[ \mathrm{cost}(S,a) := \sum_{i \in X} d(i, a(i)) . \]
+
+Given solution pairs $(S_1, a_1)$ and $(S_2, a_2)$, we say that $(S_1, a_1)$ is \emph{nested} in $(S_2, a_2)$ if 
+\begin{enumerate}
+\item $S_1 \subset S_2$, 
+\item  $\forall  j \in X$, if $a_2(j) \in S_1$, then $a_1(j) = a_2(j)$, and 
+\item $\forall j, k \in X$, if $a_2(j) = a_2(k)$, then $a_1(j) = a_1(k)$.
+\end{enumerate}
+ A solution to the hierarchical clustering problem is therefore a chain of nested solutions. However, we want this solution to stay close to the optimal $k$-median solutions when looking at any level of the algorithm.  
+Consider any $k$-median algorithm $\mathcal{A}$, such as the algorithms above. After running $\mathcal{A}$ for all potential values of $k$, Lin et al.~\cite{Lin} introduce  augmentation step that will nest these clusterings so that they fit into the hierarchical framework and only increase the costs by a bounded factor. 
+
+First, we set $i=1$, $S_0 = \emptyset$, $\beta = 3+\sqrt{3}$, and $\beta_0 = 1$ (for the randomized algorithm we switch $\beta = 6.355$ and set $\beta_0 = \beta^X$, where $X$ is chosen from a uniform distribution on $[0,1]$). Let $V_i$ be the solutions generated from running $\mathcal{A}$ for $k=n-i+1$ for $i=1, \ldots, n$. The cost of these solutions is determined by assigning each point to the nearest cluster center. We then order these solutions according to their cost into buckets of the form $[0,\beta_0], (\beta_0, \beta_0 \beta], (\beta_0 \beta, \beta_0 \beta^2], \ldots $. 
+
+From each non-empty bucket, pick the solution with the smallest number of cluster centers and let these solutions be $\overline{V}_1, \overline{V}_2, \ldots \overline{V}_r = V_n$. We then inductively build up our nested solutions in the following manner. Given $(S_{i-1}, a_{i-1})$ and $\overline{V}_i$, we define $S_{i+1}$ by iteratively adding the closest point $j \in S_{i-1}$ to $i$ for all $i \in \overline{V}_i$. Note that $|S_{i}| \leq |\overline{V}_i|$. 
+
+We then define an assignment $a_i$. For each $j \in X$ such that $a_{i-1}(j) \in S_{i}$, we set $a_i(j) = a_{i-1}(j)$. Otherwise, we set $a_i(j)$ to be the facility $i \in S_i$ such that assigning all points in $a_{i-1}^{-1}(j)$ (i.e. all points in $j$'s cluster in $S_{i-1}$) would have minimum cost. Using this assignment, $(a_i, S_i)$ is nested in $(a_{i-1}, S_{i-1})$. 
+
+We continue this nesting until $|S_i| = 1$ and we have reached the top level of the hierarchy. After forming this hierarchical clustering, for any $k \in 1, \ldots, n$ \cite{Lin} guarantee that the cost of $S_i$ is at most $20.71$ times the cost of $V_k$ where $|S_{i-1}| \geq n-k+1 \geq |S_{i}|$ (in the randomized case the expected cost of $S_i$ is at most $10.03$ times the cost of $V_k$).
+
+We can test this hierarchical framework for both the multiswap and supermodular local search algorithms above. 
+
+\subsection{Implementation}
+
+\subsection{Results}
+
+\
+\label{submission}
+
+% In the unusual situation where you want a paper to appear in the
+% references without citing it in the main text, use \nocite
+
+\bibliography{projectBib}
+\bibliographystyle{icml2014}
+
+\end{document} 
+
+
+% This document was modified from the file originally made available by
+% Pat Langley and Andrea Danyluk for ICML-2K. This version was
+% created by Lise Getoor and Tobias Scheffer, it was slightly modified  
+% from the 2010 version by Thorsten Joachims & Johannes Fuernkranz, 
+% slightly modified from the 2009 version by Kiri Wagstaff and 
+% Sam Roweis's 2008 version, which is slightly modified from 
+% Prasad Tadepalli's 2007 version which is a lightly 
+% changed version of the previous year's version by Andrew Moore, 
+% which was in turn edited from those of Kristian Kersting and 
+% Codrina Lauth. Alex Smola contributed to the algorithmic style files.  
