@@ -5,3 +5,7 @@
 *.synctex.gz
 *.bbl
 *.blg
+.Python
+bin/
+include/
+lib/
