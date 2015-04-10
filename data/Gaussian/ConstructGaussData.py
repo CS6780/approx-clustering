@@ -30,7 +30,6 @@ def ConstructGaussian(dim, k, noisy, n):
                 f.write(str(x[l])+" ")
             f.write("\n")
 
-    f.write("Size: "+str(total))
     f.close()
 
     
