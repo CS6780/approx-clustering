@@ -18,7 +18,7 @@ import random
 
 np.random.seed(17)
 
-H_PERC = 10000
+H_PERC = 100
 
 EPSILON =80
 N = 20
@@ -66,7 +66,6 @@ def without(S, x):
 def curvatureValue(X, j, fX, fEmpty):
   num = (fX - f(without(X,j),X))
   denom = (f(frozenset([j]),X)-fEmpty)
-  print num, denom
   if denom == 0: 
     return float("inf")
   else:
@@ -77,7 +76,6 @@ def totalCurvature(X):
   #expects X to be a frozenset
   fX = f(X,X)
   fEmpty = f(frozenset(),X)
-  print fX, fEmpty
   vals = [curvatureValue(X,j, fX, fEmpty) for j in X]
   return 1- min(vals)
 
@@ -147,7 +145,7 @@ def supermodular(X):
   while True:
     newS = updateS(S,Sc,X)
     if newS == S:
-      print "Same value!"
+      print "Finished with f(S) = ", f(Sc, X)
       return Sc
     else:
       S = newS
@@ -155,7 +153,7 @@ def supermodular(X):
 
 print supermodular(toFrozenSet(X))
 
-
+print "curvature is ", totalCurvature(toFrozenSet(X))
 
 
 
