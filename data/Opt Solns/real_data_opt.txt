@@ -1,0 +1,2 @@
+iris.data 98.21367694321837
+soybean-small.data 113.80476948323104
