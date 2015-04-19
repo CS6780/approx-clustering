@@ -7,15 +7,16 @@ from sklearn.datasets.samples_generator import make_blobs
 from sklearn.metrics.pairwise import pairwise_distances
 
 def cluster(distances, k=3):
-
     m = distances.shape[0] # number of points
 
     # Pick k random medoids.
-    curr_medoids = np.array([-1]*k)
+    curr_medoids = np.array([random.randint(0, m - 1) for _ in range(k)])
     while not len(np.unique(curr_medoids)) == k:
         curr_medoids = np.array([random.randint(0, m - 1) for _ in range(k)])
+
     old_medoids = np.array([-1]*k) # Doesn't matter what we initialize these to.
     new_medoids = np.array([-1]*k)
+    clusters = assign_points_to_clusters(curr_medoids, distances)
    
     # Until the medoids stop updating, do the following:
     while not ((old_medoids == curr_medoids).all()):
@@ -51,7 +52,7 @@ if __name__ == '__main__':
                                 random_state=999)
     distances = pairwise_distances(X)
 
-    clusters, curr_medoids = cluster(distances, k=3)
+    clusters, curr_medoids = cluster(distances, k=1)
     print(curr_medoids)
 
 
