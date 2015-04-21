@@ -3,9 +3,6 @@
 import numpy as np
 import random
 
-from sklearn.datasets.samples_generator import make_blobs
-from sklearn.metrics.pairwise import pairwise_distances
-
 def cluster(distances, k=3):
     m = distances.shape[0] # number of points
 
@@ -45,15 +42,6 @@ def compute_new_medoid(cluster, distances):
     cluster_distances = np.ma.masked_array(data=distances, mask=mask, fill_value=10e9)
     costs = cluster_distances.sum(axis=1)
     return costs.argmin(axis=0, fill_value=10e9)
-
-if __name__ == '__main__':
-    centers = [[1, 1], [-1, -1], [1, -1]]
-    X, labels_true = make_blobs(n_samples=300, centers=centers, cluster_std=0.5,
-                                random_state=999)
-    distances = pairwise_distances(X)
-
-    clusters, curr_medoids = cluster(distances, k=1)
-    print(curr_medoids)
 
 
 

@@ -41,7 +41,7 @@ def LoadData(filepath, cluster_loc = 1, split = 1):
         if cluster[-1:] == "\n":
             cluster = cluster[:-1]
 
-        if clusterDict.has_key(cluster):
+        if cluster in clusterDict:
             y[i] = clusterDict[cluster]
         else:
             y[i] = k
