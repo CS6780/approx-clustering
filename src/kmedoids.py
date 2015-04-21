@@ -3,12 +3,6 @@
 import numpy as np
 import random
 
-from sklearn.datasets.samples_generator import make_blobs
-from sklearn.metrics.pairwise import pairwise_distances
-from sklearn.metrics import adjusted_mutual_info_score
-
-from LoadData import LoadData
-
 def cluster(distances, k=3):
     m = distances.shape[0] # number of points
 
@@ -48,18 +42,6 @@ def compute_new_medoid(cluster, distances):
     cluster_distances = np.ma.masked_array(data=distances, mask=mask, fill_value=10e9)
     costs = cluster_distances.sum(axis=1)
     return costs.argmin(axis=0, fill_value=10e9)
-
-if __name__ == '__main__':
-    # centers = [[1, 1], [-1, -1], [1, -1]]
-    # X, labels_true = make_blobs(n_samples=300, centers=centers, cluster_std=0.5,
-    #                             random_state=999)
-    # X, y, n, k = LoadData("data/Gaussian/Gauss_10_5_0.txt")
-    X, y, n, k = LoadData("data/Real Data Sets/iris.data.txt", cluster_loc=0, split=0)
-    distances = pairwise_distances(X)
-
-    clusters, curr_medoids = cluster(distances, k=k)
-    print(clusters, curr_medoids)
-    print(adjusted_mutual_info_score(y, clusters))
 
 
 
