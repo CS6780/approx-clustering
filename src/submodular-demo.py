@@ -1,13 +1,4 @@
-"""
-=================================================
-Demo of affinity propagation clustering algorithm
-=================================================
-Reference:
-Brendan J. Frey and Delbert Dueck, "Clustering by Passing Messages
-Between Data Points", Science Feb. 2007
-"""
 
-from sklearn.cluster import AffinityPropagation
 from sklearn import metrics
 from sklearn.datasets.samples_generator import make_blobs
 from sklearn.datasets import load_digits
@@ -21,7 +12,7 @@ np.random.seed(17)
 H_PERC = 100
 
 EPSILON =80
-N = 20
+N = 10
 delta = EPSILON/N
 
 ##############################################################################
@@ -133,8 +124,6 @@ def updateS(S,Sc, X):
           print "old ", psiS, " new ", psiNew, "difference ", psiNew - psiS
           print "old fvalue ", f(Sc, X), "f value ", f(newSc,X)
           return newS
-  print "no change"
-  print "final f value ", f(Sc,X)
   return S
           
 
@@ -151,7 +140,27 @@ def supermodular(X):
       S = newS
       Sc = X.difference(S)
 
-print supermodular(toFrozenSet(X))
+def supermodular_list(data):
+  L = list(data)
+  print data
+  print L
+  centers = supermodular(toFrozenSet(data))
+  print centers
+  closestCenter =[]
+
+  for x in L:
+    currentCenter = 0
+    currentDistance = float("inf")
+    for y in centers:
+      if(d(x,y)<currentDistance):
+        currentCenter=y
+        currentDistance=d(x,y)
+    closestCenter+=[currentCenter]
+  return closestCenter
+
+
+# print supermodular(toFrozenSet(X))
+print supermodular_list(X)
 
 print "curvature is ", totalCurvature(toFrozenSet(X))
 
