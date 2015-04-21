@@ -7,21 +7,19 @@ import numpy as np
 import math
 import random
 
-np.random.seed(17)
+# np.random.seed(17)
 
-H_PERC = 100
+# H_PERC = 100
 
-EPSILON =80
-N = 10
-delta = EPSILON/N
+
 
 ##############################################################################
 # Generate sample data
-centers = [[1, 1], [-1, -1], [1, -1]]
-X, labels_true = make_blobs(n_samples=N, centers=centers, cluster_std=0.5,
-                            random_state=999)
+# centers = [[1, 1], [-1, -1], [1, -1]]
+# X, labels_true = make_blobs(n_samples=10, centers=centers, cluster_std=0.5,
+#                             random_state=999)
 
-k = len(centers)
+
 ##############################################################################
 # Define Functions
 def toFrozenSet(X):
@@ -91,19 +89,19 @@ def drawB(A):
   return frozenset(B)
 
 HDict ={}
-def estimateH(A,X):
+def estimateH(A,X, h_perc):
   if A in HDict:
     return HDict[A]
   Sum = 0
-  for x in range(H_PERC):
+  for x in range(h_perc):
     Sum+= g(drawB(A),X)
-  HDict[A] = Sum/H_PERC
-  return Sum/H_PERC
+  HDict[A] = Sum/h_perc
+  return Sum/h_perc
 
-def psi(A,X):
-  return (1-1/math.e)*estimateH(A,X) + l(A,X)
+def psi(A,X, h_perc):
+  return (1-1/math.e)*estimateH(A,X,h_perc) + l(A,X)
 
-def initialS(X):
+def initialS(X, k, N):
   i = N-k
   S = set()
   for x in X:
@@ -113,13 +111,14 @@ def initialS(X):
     i-=1
   return frozenset(S)
 
-def updateS(S,Sc, X):
-  psiS = psi(S, X)
+def updateS(S,Sc, X, epsilon,h_perc):
+  delta = epsilon/len(X)
+  psiS = psi(S, X,h_perc)
   for a in S:
       for b in Sc:
         newS = S.difference([a]).union([b])
         newSc = Sc.difference([b]).union([a])
-        psiNew = psi(newS,X)
+        psiNew = psi(newS,X,h_perc)
         if psiNew>= psiS+delta:
           print "old ", psiS, " new ", psiNew, "difference ", psiNew - psiS
           print "old fvalue ", f(Sc, X), "f value ", f(newSc,X)
@@ -127,12 +126,12 @@ def updateS(S,Sc, X):
   return S
           
 
-def supermodular(X):
-  S = initialS(X)
+def supermodular(X, k, epsilon,h_perc=100):
+  S = initialS(X, k, len(X))
   Sc = X.difference(S)
   print "initial f ", f(Sc,X)
   while True:
-    newS = updateS(S,Sc,X)
+    newS = updateS(S,Sc,X, epsilon,h_perc)
     if newS == S:
       print "Finished with f(S) = ", f(Sc, X)
       return Sc
@@ -140,11 +139,11 @@ def supermodular(X):
       S = newS
       Sc = X.difference(S)
 
-def supermodular_list(data):
+def supermodular_list(data, k, epsilon, h_perc=100):
   L = list(data)
   print data
   print L
-  centers = supermodular(toFrozenSet(data))
+  centers = supermodular(toFrozenSet(data), k, epsilon, h_perc)
   print centers
   closestCenter =[]
 
@@ -160,7 +159,7 @@ def supermodular_list(data):
 
 
 # print supermodular(toFrozenSet(X))
-print supermodular_list(X)
+print supermodular_list(X,3,80)
 
 print "curvature is ", totalCurvature(toFrozenSet(X))
 
