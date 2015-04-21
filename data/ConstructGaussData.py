@@ -5,8 +5,8 @@ import os
 
 def ConstructGaussian(dim, k, noisy, n):
     directory = os.getcwd()
-    filename = "\\Gauss_"+str(dim)+"_"+str(k)+"_"+str(noisy)+".txt"
-    f = open(directory+filename, 'w')
+    filename = "\\Gaussian2\\Gauss_"+str(dim)+"_"+str(k)+"_"+str(noisy)+".txt"
+    f = open(directory+filename, 'w+')
     
     identity = np.zeros((dim,dim))
     for i in range(dim):

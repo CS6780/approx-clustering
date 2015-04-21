@@ -5,6 +5,10 @@
 *.synctex.gz
 *.bbl
 *.blg
+*.pyc
+*.nav
+*.snm
+*.toc
 .Python
 bin/
 include/
