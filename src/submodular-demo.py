@@ -126,7 +126,7 @@ def updateS(S,Sc, X, epsilon,h_perc):
   return S
           
 
-def supermodular(X, k, epsilon,h_perc=100):
+def supermodular(X, k, epsilon=10,h_perc=100):
   S = initialS(X, k, len(X))
   Sc = X.difference(S)
   print "initial f ", f(Sc,X)
@@ -139,7 +139,7 @@ def supermodular(X, k, epsilon,h_perc=100):
       S = newS
       Sc = X.difference(S)
 
-def supermodular_list(data, k, epsilon, h_perc=100):
+def supermodular_list(data, k, epsilon=10, h_perc=100):
   L = list(data)
   print data
   print L
@@ -159,9 +159,9 @@ def supermodular_list(data, k, epsilon, h_perc=100):
 
 
 # print supermodular(toFrozenSet(X))
-print supermodular_list(X,3,80)
+# print supermodular_list(X,3,80)
 
-print "curvature is ", totalCurvature(toFrozenSet(X))
+# print "curvature is ", totalCurvature(toFrozenSet(X))
 
 
 
