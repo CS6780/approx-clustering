@@ -120,8 +120,8 @@ def updateS(S,Sc, X, epsilon,h_perc):
         newSc = Sc.difference([b]).union([a])
         psiNew = psi(newS,X,h_perc)
         if psiNew>= psiS+delta:
-          print "old ", psiS, " new ", psiNew, "difference ", psiNew - psiS
-          print "old fvalue ", f(Sc, X), "f value ", f(newSc,X)
+          print("old ", psiS, " new ", psiNew, "difference ", psiNew - psiS)
+          print("old fvalue ", f(Sc, X), "f value ", f(newSc,X))
           return newS
   return S
 
@@ -129,19 +129,20 @@ def centersToIndex(X, centers):
   centersDic = {}
   for c in centers:
     for i in range(len(X)):
-      if c == x:
+      if c == X:
         centersDic[c] = i
         break
+  return centersDic
 
 
 def supermodular(X, k, epsilon=10,h_perc=100):
   S = initialS(X, k, len(X))
   Sc = X.difference(S)
-  print "initial f ", f(Sc,X)
+  print("initial f ", f(Sc,X))
   while True:
     newS = updateS(S,Sc,X, epsilon,h_perc)
     if newS == S:
-      print "Finished with f(S) = ", f(Sc, X)
+      print("Finished with f(S) = ", f(Sc, X))
       return Sc
     else:
       S = newS
@@ -149,8 +150,8 @@ def supermodular(X, k, epsilon=10,h_perc=100):
 
 def supermodular_list(data, k, epsilon=10, h_perc=100):
   L = list(data)
-  print data
-  print L
+  # print data
+  # print L
   centers = supermodular(toFrozenSet(data), k, epsilon, h_perc)
   centersDic = centersToIndex(L, centers)
   closestCenter =[]
@@ -176,46 +177,3 @@ def supermodular_list(data, k, epsilon=10, h_perc=100):
 # print totalCurvature(toFrozenSet(X))
 # print D
 # print X
-
-
-##############################################################################
-# Compute Affinity Propagation
-# af = AffinityPropagation(preference=-50).fit(X)
-# cluster_centers_indices = af.cluster_centers_indices_
-# labels = af.labels_
-
-# n_clusters_ = len(cluster_centers_indices)
-
-# print('Estimated number of clusters: %d' % n_clusters_)
-# print("Homogeneity: %0.3f" % metrics.homogeneity_score(labels_true, labels))
-# print("Completeness: %0.3f" % metrics.completeness_score(labels_true, labels))
-# print("V-measure: %0.3f" % metrics.v_measure_score(labels_true, labels))
-# print("Adjusted Rand Index: %0.3f"
-#       % metrics.adjusted_rand_score(labels_true, labels))
-# print("Adjusted Mutual Information: %0.3f"
-#       % metrics.adjusted_mutual_info_score(labels_true, labels))
-# print("Silhouette Coefficient: %0.3f"
-#       % metrics.silhouette_score(X, labels, metric='sqeuclidean'))
-
-# ##############################################################################
-# # Plot result
-# import matplotlib.pyplot as plt
-# from itertools import cycle
-
-# plt.close('all')
-# plt.figure(1)
-# plt.clf()
-
-# colors = cycle('bgrcmykbgrcmykbgrcmykbgrcmyk')
-# for k, col in zip(range(n_clusters_), colors):
-#     class_members = labels == k
-#     cluster_center = X[cluster_centers_indices[k]]
-#     plt.plot(X[class_members, 0], X[class_members, 1], col + '.')
-#     plt.plot(cluster_center[0], cluster_center[1], 'o', markerfacecolor=col,
-#              markeredgecolor='k', markersize=14)
-#     for x in X[class_members]:
-#         plt.plot([cluster_center[0], x[0]], [cluster_center[1], x[1]], col)
-
-# plt.title('Estimated number of clusters: %d' % n_clusters_)
-# plt.savefig("affinity-propogation-demo.png")
-# plt.clf()

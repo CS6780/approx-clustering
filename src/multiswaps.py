@@ -30,7 +30,7 @@ def search_for_swap(medoids, distances, p=2, epsilon=0):
             new_medoids = swap(medoids, A, B)
             if objective(new_medoids, distances) < prev_objective - epsilon:
                 improvement = True
-                print("Improvement: %f" % (prev_objective - objective(new_medoids, distances)))
+                # print("Improvement: %f" % (prev_objective - objective(new_medoids, distances)))
                 return new_medoids, improvement
     return medoids, improvement
 

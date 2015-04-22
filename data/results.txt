@@ -17,7 +17,7 @@ Soybeans:
 
 
 Iris:
-    K-Medoids, N=30
+    K-Medoids, N=10
         K-Medoids Average: Objective: 103.468710 AMI: 0.710847
         K-Medoids Best Case: Objective: 98.213677 AMI: 0.787285
         K-Medoids Worst Case: Objective: 125.745638 AMI: 0.527855

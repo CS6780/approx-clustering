@@ -4,6 +4,7 @@ import multiswaps
 import kmedoids
 import submodular_demo
 from LoadData import LoadData
+from LoadpMedian import LoadpMedian
 
 from sklearn.metrics.pairwise import pairwise_distances
 from sklearn.metrics import adjusted_mutual_info_score
@@ -31,26 +32,29 @@ def test_clustering(cluster_alg, distances, labels_true, N=10):
 
 if __name__ == '__main__':
     X, y, n, k = LoadData("data/Real Data Sets/soybean-small.data.txt", cluster_loc=0, split=0)
+    # X, y, n, k = LoadData("data/Real Data Sets/iris.data.txt", cluster_loc=0, split=0)
+    # X, y, n, k = LoadData("data/Gaussian2/Gauss_7_5_5.txt", cluster_loc=1, split=1)
     distances = pairwise_distances(X)
+    # distances, n, k = LoadpMedian("data/p-median Instances/pmed1.txt")
 
-    p = 3
-    multi_swaps = lambda: multiswaps.cluster(distances, k, p, epsilon=1)
-    avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami = test_clustering(multi_swaps, distances, y, N=10)
-    print("%s-swap Average: Objective: %f AMI: %f" % (p, avg_obj, avg_ami))
-    print("%s-swap Best Case: Objective: %f AMI: %f" % (p, min_obj, max_ami))
-    print("%s-swap Worst Case: Objective: %f AMI: %f" % (p, max_obj, min_ami))
+    # for p in [1,2]: #[1,2,3]:
+    #     multi_swaps = lambda: multiswaps.cluster(distances, k, p, epsilon=1)
+    #     avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami = test_clustering(multi_swaps, distances, y, N=10)
+    #     print("%s-swap Average: Objective: %f AMI: %f" % (p, avg_obj, avg_ami))
+    #     print("%s-swap Best Case: Objective: %f AMI: %f" % (p, min_obj, max_ami))
+    #     print("%s-swap Worst Case: Objective: %f AMI: %f" % (p, max_obj, min_ami))
 
     # k_medoids = lambda: kmedoids.cluster(distances, k=k)
-    # avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami = test_clustering(k_medoids, distances, y, N=100)
+    # avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami = test_clustering(k_medoids, distances, y, N=10)
     # print("K-Medoids Average: Objective: %f AMI: %f" % (avg_obj, avg_ami))
     # print("K-Medoids Best Case: Objective: %f AMI: %f" % (min_obj, max_ami))
     # print("K-Medoids Worst Case: Objective: %f AMI: %f" % (max_obj, min_ami))
 
-    # super_modular = lambda: (submodular_demo.supermodular_list(distances), None)
-    # avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami = test_clustering(super_modular, distances, y, N=1)
-    # print("K-Medoids Average: Objective: %f AMI: %f" % (avg_obj, avg_ami))
-    # print("K-Medoids Best Case: Objective: %f AMI: %f" % (min_obj, max_ami))
-    # print("K-Medoids Worst Case: Objective: %f AMI: %f" % (max_obj, min_ami))
+    super_modular = lambda: (submodular_demo.supermodular_list(X, k, h_perc=1), None)
+    avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami = test_clustering(super_modular, distances, y, N=1)
+    print("K-Medoids Average: Objective: %f AMI: %f" % (avg_obj, avg_ami))
+    print("K-Medoids Best Case: Objective: %f AMI: %f" % (min_obj, max_ami))
+    print("K-Medoids Worst Case: Objective: %f AMI: %f" % (max_obj, min_ami))
 
 
 
