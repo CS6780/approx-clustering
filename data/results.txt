@@ -22,6 +22,14 @@ Iris:
         K-Medoids Best Case: Objective: 98.213677 AMI: 0.787285
         K-Medoids Worst Case: Objective: 125.745638 AMI: 0.527855
 
+    Multiswaps, N=10, epsilon=1
+        1-swap Average: Objective: 99.251868 AMI: 0.750206
+        1-swap Best Case: Objective: 98.213677 AMI: 0.766709
+        1-swap Worst Case: Objective: 100.222739 AMI: 0.748372
+        2-swap Average: Objective: 99.107967 AMI: 0.751131
+        2-swap Best Case: Objective: 98.951095 AMI: 0.775961
+        2-swap Worst Case: Objective: 99.125397 AMI: 0.748372
+
 Gauss_7_5_5:
     K-Medoids, N=10
         K-Medoids Average: Objective: 430.989182 AMI: 0.787099
