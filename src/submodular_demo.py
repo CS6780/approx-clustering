@@ -124,7 +124,15 @@ def updateS(S,Sc, X, epsilon,h_perc):
           print "old fvalue ", f(Sc, X), "f value ", f(newSc,X)
           return newS
   return S
-          
+
+def centersToIndex(X, centers):
+  centersDic = {}
+  for c in centers:
+    for i in range(len(X)):
+      if c == x:
+        centersDic[c] = i
+        break
+
 
 def supermodular(X, k, epsilon=10,h_perc=100):
   S = initialS(X, k, len(X))
@@ -144,9 +152,8 @@ def supermodular_list(data, k, epsilon=10, h_perc=100):
   print data
   print L
   centers = supermodular(toFrozenSet(data), k, epsilon, h_perc)
-  print centers
+  centersDic = centersToIndex(L, centers)
   closestCenter =[]
-
   for x in L:
     currentCenter = 0
     currentDistance = float("inf")
@@ -154,7 +161,7 @@ def supermodular_list(data, k, epsilon=10, h_perc=100):
       if(d(x,y)<currentDistance):
         currentCenter=y
         currentDistance=d(x,y)
-    closestCenter+=[currentCenter]
+    closestCenter+=[centersDic[currentCenter]]
   return closestCenter
 
 
