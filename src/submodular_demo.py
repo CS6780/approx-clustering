@@ -14,10 +14,7 @@ import random
 
 
 ##############################################################################
-# Generate sample data
-# centers = [[1, 1], [-1, -1], [1, -1]]
-# X, labels_true = make_blobs(n_samples=10, centers=centers, cluster_std=0.5,
-#                             random_state=999)
+
 
 
 ##############################################################################
@@ -129,9 +126,10 @@ def centersToIndex(X, centers):
   centersDic = {}
   for c in centers:
     for i in range(len(X)):
-      if c == x:
+      if c == tuple(X[i]):
         centersDic[c] = i
         break
+  return centersDic
 
 
 def supermodular(X, k, epsilon=10,h_perc=100):
@@ -149,8 +147,6 @@ def supermodular(X, k, epsilon=10,h_perc=100):
 
 def supermodular_list(data, k, epsilon=10, h_perc=100):
   L = list(data)
-  print data
-  print L
   centers = supermodular(toFrozenSet(data), k, epsilon, h_perc)
   centersDic = centersToIndex(L, centers)
   closestCenter =[]
@@ -164,8 +160,11 @@ def supermodular_list(data, k, epsilon=10, h_perc=100):
     closestCenter+=[centersDic[currentCenter]]
   return closestCenter
 
-
-# print supermodular(toFrozenSet(X))
+# Generate sample data
+# centers = [[1, 1], [-1, -1], [1, -1]]
+# X, labels_true = make_blobs(n_samples=10, centers=centers, cluster_std=0.5,
+#                             random_state=999)
+# # print supermodular(toFrozenSet(X))
 # print supermodular_list(X,3,80)
 
 # print "curvature is ", totalCurvature(toFrozenSet(X))
