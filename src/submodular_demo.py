@@ -35,8 +35,8 @@ def f(S,X):
     return D[S]
   if S == frozenset():
     values = [f(frozenset([a]), X) for a in X]
-    D[S]= min(values)
-    return min(values)
+    D[S]= max(values)
+    return max(values)
   Sum = 0
   for x in X:
     if x not in S:
@@ -52,6 +52,7 @@ def without(S, x):
 def curvatureValue(X, j, fX, fEmpty):
   num = (fX - f(without(X,j),X))
   denom = (f(frozenset([j]),X)-fEmpty)
+  print num, denom
   if denom == 0: 
     return float("inf")
   else:
@@ -63,12 +64,13 @@ def totalCurvature(X):
   fX = f(X,X)
   fEmpty = f(frozenset(),X)
   vals = [curvatureValue(X,j, fX, fEmpty) for j in X]
+  print vals
   return 1- min(vals)
 
 def l(A, X):
   fEmpty = f(frozenset(),X)
   vals = [f(frozenset([j]), X) for j in A]
-  return sum(vals)-fEmpty
+  return sum(vals)-fEmpty*len(A)
 
 def g(A,X):
   return -l(A,X) - f(X.difference(A),X)
@@ -146,6 +148,9 @@ def supermodular(X, k, epsilon=10,h_perc=100):
       Sc = X.difference(S)
 
 def supermodular_list(data, k, epsilon=10, h_perc=100):
+  c = totalCurvature(toFrozenSet(data))
+  print "curvature is ", c
+  print "ratio is (", (1 + c/(1-c)*math.e), " + ", (1/(1-c)), "O(epsilon))"
   L = list(data)
   centers = supermodular(toFrozenSet(data), k, epsilon, h_perc)
   centersDic = centersToIndex(L, centers)
@@ -161,13 +166,13 @@ def supermodular_list(data, k, epsilon=10, h_perc=100):
   return closestCenter
 
 # Generate sample data
-# centers = [[1, 1], [-1, -1], [1, -1]]
-# X, labels_true = make_blobs(n_samples=10, centers=centers, cluster_std=0.5,
-#                             random_state=999)
-# # print supermodular(toFrozenSet(X))
-# print supermodular_list(X,3,80)
+centers = [[1, 1], [-1, -1], [1, -1]]
+X, labels_true = make_blobs(n_samples=10, centers=centers, cluster_std=0.5,
+                            random_state=999)
+# print supermodular(toFrozenSet(X))
+print supermodular_list(X,3,80)
 
-# print "curvature is ", totalCurvature(toFrozenSet(X))
+print "curvature is ", totalCurvature(toFrozenSet(X))
 
 
 
