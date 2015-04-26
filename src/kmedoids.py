@@ -3,20 +3,25 @@
 import numpy as np
 import random
 
-def cluster(distances, k=3):
+def cluster(distances, k=3, max_iter=1000):
     m = distances.shape[0] # number of points
 
     # Pick k random medoids.
     curr_medoids = np.array([random.randint(0, m - 1) for _ in range(k)])
-    while not len(np.unique(curr_medoids)) == k:
+    i = 0
+    while (len(np.unique(curr_medoids)) < k) and (i<max_iter):
+        i+=1
+        if i > max_iter:
+            curr_medoids = np.array([i for i in range(k)])
         curr_medoids = np.array([random.randint(0, m - 1) for _ in range(k)])
 
     old_medoids = np.array([-1]*k) # Doesn't matter what we initialize these to.
     new_medoids = np.array([-1]*k)
     clusters = assign_points_to_clusters(curr_medoids, distances)
+    i = 0
    
     # Until the medoids stop updating, do the following:
-    while not ((old_medoids == curr_medoids).all()):
+    while not ((old_medoids == curr_medoids).all()) and i < max_iter:
         # Assign each point to cluster with closest medoid.
         clusters = assign_points_to_clusters(curr_medoids, distances)
 
@@ -27,6 +32,7 @@ def cluster(distances, k=3):
 
         old_medoids[:] = curr_medoids[:]
         curr_medoids[:] = new_medoids[:]
+        i += 1
 
     return clusters, curr_medoids
 

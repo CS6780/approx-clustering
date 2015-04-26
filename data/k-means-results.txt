@@ -1,0 +1,145 @@
+soybean-small.data 
+K-Means Average: Time: 0.015063 AMI: 0.685649 
+K-Means Best Case: Time: 0.010029 AMI: 0.685649 
+K-Means Worst Case: Time: 0.053439 AMI: 0.685649 
+
+iris.data 
+K-Means Average: Time: 0.012924 AMI: 0.748372 
+K-Means Best Case: Time: 0.011058 AMI: 0.748372 
+K-Means Worst Case: Time: 0.014968 AMI: 0.748372 
+
+Gauss_3_10_0.txt 
+K-Means Average: Time: 0.040941 AMI: 0.693414 
+K-Means Best Case: Time: 0.035330 AMI: 0.703719 
+K-Means Worst Case: Time: 0.058985  AMI: 0.678141 
+
+Gauss_3_10_10.txt 
+K-Means Average: Time: 0.050386 AMI: 0.668578 
+K-Means Best Case: Time: 0.047373 AMI: 0.672955 
+K-Means Worst Case: Time: 0.056073  AMI: 0.657049 
+
+Gauss_3_10_5.txt 
+K-Means Average: Time: 0.047619 AMI: 0.533649 
+K-Means Best Case: Time: 0.043178 AMI: 0.542847 
+K-Means Worst Case: Time: 0.052176  AMI: 0.517415 
+
+Gauss_3_50_0.txt 
+K-Means Average: Time: 0.153587 AMI: 0.504412 
+K-Means Best Case: Time: 0.128098 AMI: 0.533042 
+K-Means Worst Case: Time: 0.179057  AMI: 0.481090 
+
+Gauss_3_50_10.txt 
+K-Means Average: Time: 0.153485 AMI: 0.420859 
+K-Means Best Case: Time: 0.124086 AMI: 0.433355 
+K-Means Worst Case: Time: 0.188238  AMI: 0.404098 
+
+Gauss_3_50_5.txt 
+K-Means Average: Time: 0.151058 AMI: 0.406809 
+K-Means Best Case: Time: 0.137809 AMI: 0.417786 
+K-Means Worst Case: Time: 0.176497  AMI: 0.391919 
+
+Gauss_3_5_0.txt 
+K-Means Average: Time: 0.024483 AMI: 0.884466 
+K-Means Best Case: Time: 0.020671 AMI: 0.884466 
+K-Means Worst Case: Time: 0.029682  AMI: 0.884466 
+
+Gauss_3_5_10.txt 
+K-Means Average: Time: 0.032612 AMI: 0.680103 
+K-Means Best Case: Time: 0.026907 AMI: 0.681028 
+K-Means Worst Case: Time: 0.039006  AMI: 0.677945 
+
+Gauss_3_5_5.txt 
+K-Means Average: Time: 0.032188 AMI: 0.700106 
+K-Means Best Case: Time: 0.025069 AMI: 0.703820 
+K-Means Worst Case: Time: 0.039580  AMI: 0.696710 
+
+Gauss_5_10_0.txt 
+K-Means Average: Time: 0.043874 AMI: 0.974129 
+K-Means Best Case: Time: 0.033419 AMI: 0.977559 
+K-Means Worst Case: Time: 0.056149  AMI: 0.972580 
+
+Gauss_5_10_10.txt 
+K-Means Average: Time: 0.044631 AMI: 0.878389 
+K-Means Best Case: Time: 0.030828 AMI: 0.879775 
+K-Means Worst Case: Time: 0.060551  AMI: 0.872193 
+
+Gauss_5_10_5.txt 
+K-Means Average: Time: 0.054005 AMI: 0.783247 
+K-Means Best Case: Time: 0.046831 AMI: 0.799198 
+K-Means Worst Case: Time: 0.057659  AMI: 0.750866 
+
+Gauss_5_50_0.txt 
+K-Means Average: Time: 0.142350 AMI: 0.723223 
+K-Means Best Case: Time: 0.116220 AMI: 0.752555 
+K-Means Worst Case: Time: 0.168831  AMI: 0.712616 
+
+Gauss_5_50_10.txt 
+K-Means Average: Time: 0.148550 AMI: 0.669099 
+K-Means Best Case: Time: 0.118514 AMI: 0.688861 
+K-Means Worst Case: Time: 0.169248  AMI: 0.645918 
+
+Gauss_5_50_5.txt 
+K-Means Average: Time: 0.137060 AMI: 0.645918 
+K-Means Best Case: Time: 0.110111 AMI: 0.671971 
+K-Means Worst Case: Time: 0.171075  AMI: 0.604396 
+
+Gauss_5_5_0.txt 
+K-Means Average: Time: 0.025916 AMI: 0.990053 
+K-Means Best Case: Time: 0.018830 AMI: 0.990053 
+K-Means Worst Case: Time: 0.039438  AMI: 0.990053 
+
+Gauss_5_5_10.txt 
+K-Means Average: Time: 0.024779 AMI: 0.832940 
+K-Means Best Case: Time: 0.020694 AMI: 0.842145 
+K-Means Worst Case: Time: 0.031182  AMI: 0.829711 
+
+Gauss_5_5_5.txt 
+K-Means Average: Time: 0.024852 AMI: 0.741273 
+K-Means Best Case: Time: 0.022144 AMI: 0.749073 
+K-Means Worst Case: Time: 0.026903  AMI: 0.732870 
+
+Gauss_7_10_0.txt 
+K-Means Average: Time: 0.044747 AMI: 0.995473 
+K-Means Best Case: Time: 0.035804 AMI: 0.995473 
+K-Means Worst Case: Time: 0.050422  AMI: 0.995473 
+
+Gauss_7_10_10.txt 
+K-Means Average: Time: 0.048081 AMI: 0.890352 
+K-Means Best Case: Time: 0.035326 AMI: 0.905865 
+K-Means Worst Case: Time: 0.059950  AMI: 0.875396 
+
+Gauss_7_10_5.txt 
+K-Means Average: Time: 0.040422 AMI: 0.987697 
+K-Means Best Case: Time: 0.027600 AMI: 0.994393 
+K-Means Worst Case: Time: 0.060331  AMI: 0.927435 
+
+Gauss_7_50_0.txt 
+K-Means Average: Time: 0.142548 AMI: 0.866682 
+K-Means Best Case: Time: 0.127214 AMI: 0.883606 
+K-Means Worst Case: Time: 0.157013  AMI: 0.852807 
+
+Gauss_7_50_10.txt 
+K-Means Average: Time: 0.148948 AMI: 0.828726 
+K-Means Best Case: Time: 0.122946 AMI: 0.846992 
+K-Means Worst Case: Time: 0.175785  AMI: 0.805835 
+
+Gauss_7_50_5.txt 
+K-Means Average: Time: 0.146681 AMI: 0.851543 
+K-Means Best Case: Time: 0.132416 AMI: 0.883672 
+K-Means Worst Case: Time: 0.163267  AMI: 0.836025 
+
+Gauss_7_5_0.txt 
+K-Means Average: Time: 0.019445 AMI: 1.000000 
+K-Means Best Case: Time: 0.015000 AMI: 1.000000 
+K-Means Worst Case: Time: 0.026105  AMI: 1.000000 
+
+Gauss_7_5_10.txt 
+K-Means Average: Time: 0.017761 AMI: 0.979090 
+K-Means Best Case: Time: 0.014987 AMI: 0.979090 
+K-Means Worst Case: Time: 0.025902  AMI: 0.979090 
+
+Gauss_7_5_5.txt 
+K-Means Average: Time: 0.030832 AMI: 0.847419 
+K-Means Best Case: Time: 0.025904 AMI: 0.847662 
+K-Means Worst Case: Time: 0.034429  AMI: 0.846867 
+
