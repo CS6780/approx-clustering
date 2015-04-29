@@ -3,9 +3,11 @@ Soybeans:
         1-swap Average: Objective: 115.019370 AMI: 0.718350
         1-swap Best Case: Objective: 113.804769 AMI: 0.759006
         1-swap Worst Case: Objective: 118.151913 AMI: 0.689036
+
         2-swap Average: Objective: 114.712590 AMI: 0.719499
         2-swap Best Case: Objective: 113.804769 AMI: 0.721336
         2-swap Worst Case: Objective: 130.219746 AMI: 0.666249
+
         3-swap Average: Objective: 116.341281 AMI: 0.715272
         3-swap Best Case: Objective: 113.804769 AMI: 0.721336
         3-swap Worst Case: Objective: 130.317149 AMI: 0.666249
@@ -26,6 +28,7 @@ Iris:
         1-swap Average: Objective: 99.251868 AMI: 0.750206
         1-swap Best Case: Objective: 98.213677 AMI: 0.766709
         1-swap Worst Case: Objective: 100.222739 AMI: 0.748372
+        
         2-swap Average: Objective: 99.107967 AMI: 0.751131
         2-swap Best Case: Objective: 98.951095 AMI: 0.775961
         2-swap Worst Case: Objective: 99.125397 AMI: 0.748372

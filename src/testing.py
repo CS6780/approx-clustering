@@ -50,11 +50,14 @@ if __name__ == '__main__':
     # print("K-Medoids Best Case: Objective: %f AMI: %f" % (min_obj, max_ami))
     # print("K-Medoids Worst Case: Objective: %f AMI: %f" % (max_obj, min_ami))
 
-    super_modular = lambda: (submodular_demo.supermodular_list(X, k, h_perc=1), None)
-    avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami = test_clustering(super_modular, distances, y, N=1)
-    print("K-Medoids Average: Objective: %f AMI: %f" % (avg_obj, avg_ami))
-    print("K-Medoids Best Case: Objective: %f AMI: %f" % (min_obj, max_ami))
-    print("K-Medoids Worst Case: Objective: %f AMI: %f" % (max_obj, min_ami))
+    # for i in range(2):
+    #     submodular_demo.supermodular_list(X, k, h_perc=10)
+
+    super_modular = lambda: (submodular_demo.supermodular_list(X, k, h_perc=35), None)
+    avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami = test_clustering(super_modular, distances, y, N=3)
+    print("SuperModular Average: Objective: %f AMI: %f" % (avg_obj, avg_ami))
+    print("SuperModular Best Case: Objective: %f AMI: %f" % (min_obj, max_ami))
+    print("SuperModular Worst Case: Objective: %f AMI: %f" % (max_obj, min_ami))
 
 
 
