@@ -1,0 +1,174 @@
+soybean-small.data 
+Affinity Prop: num clusters: 4.000000 
+Affinity Prop Average: Time: 0.013079 AMI: 0.721336 
+Affinity Prop Best Case: Time: 0.002408 AMI: 0.721336 
+Affinity Prop Worst Case: Time: 0.071804 AMI: 0.721336 
+
+iris.data 
+Affinity Prop: num clusters: 3.000000 
+Affinity Prop Average: Time: 0.026892 AMI: 0.797547 
+Affinity Prop Best Case: Time: 0.020443 AMI: 0.797547 
+Affinity Prop Worst Case: Time: 0.032150 AMI: 0.797547 
+
+Gauss_3_10_0.txt 
+Affinity Prop: num clusters: 4.000000 
+Affinity Prop Average: Time: 0.661971 AMI: 0.507827 
+Affinity Prop Best Case: Time: 0.578743 AMI: 0.507827 
+Affinity Prop Worst Case: Time: 0.747085 AMI: 0.507827 
+
+Gauss_3_10_10.txt 
+Affinity Prop: num clusters: 4.000000 
+Affinity Prop Average: Time: 0.323470 AMI: 0.455685 
+Affinity Prop Best Case: Time: 0.296487 AMI: 0.455685 
+Affinity Prop Worst Case: Time: 0.390283 AMI: 0.455685 
+
+Gauss_3_10_5.txt 
+Affinity Prop: num clusters: 2.000000 
+Affinity Prop Average: Time: 0.571218 AMI: 0.152582 
+Affinity Prop Best Case: Time: 0.525528 AMI: 0.152582 
+Affinity Prop Worst Case: Time: 0.600732 AMI: 0.152582 
+
+Gauss_3_50_0.txt 
+Affinity Prop: num clusters: 4.000000 
+Affinity Prop Average: Time: 0.470922 AMI: 0.250662 
+Affinity Prop Best Case: Time: 0.413778 AMI: 0.250662 
+Affinity Prop Worst Case: Time: 0.519185 AMI: 0.250662 
+
+Gauss_3_50_10.txt 
+Affinity Prop: num clusters: 4.000000 
+Affinity Prop Average: Time: 0.327426 AMI: 0.243755 
+Affinity Prop Best Case: Time: 0.289322 AMI: 0.243755 
+Affinity Prop Worst Case: Time: 0.370247 AMI: 0.243755 
+
+Gauss_3_50_5.txt 
+Affinity Prop: num clusters: 4.000000 
+Affinity Prop Average: Time: 0.340186 AMI: 0.249086 
+Affinity Prop Best Case: Time: 0.303953 AMI: 0.249086 
+Affinity Prop Worst Case: Time: 0.370085 AMI: 0.249086 
+
+Gauss_3_5_0.txt 
+Affinity Prop: num clusters: 4.000000 
+Affinity Prop Average: Time: 0.234941 AMI: 0.698231 
+Affinity Prop Best Case: Time: 0.222141 AMI: 0.698231 
+Affinity Prop Worst Case: Time: 0.255448 AMI: 0.698231 
+
+Gauss_3_5_10.txt 
+Affinity Prop: num clusters: 2.000000 
+Affinity Prop Average: Time: 0.465824 AMI: 0.263164 
+Affinity Prop Best Case: Time: 0.413638 AMI: 0.263164 
+Affinity Prop Worst Case: Time: 0.535530 AMI: 0.263164 
+
+Gauss_3_5_5.txt 
+Affinity Prop: num clusters: 3.000000 
+Affinity Prop Average: Time: 0.740290 AMI: 0.545423 
+Affinity Prop Best Case: Time: 0.676348 AMI: 0.545423 
+Affinity Prop Worst Case: Time: 0.790566 AMI: 0.545423 
+
+Gauss_5_10_0.txt 
+Affinity Prop: num clusters: 7.000000 
+Affinity Prop Average: Time: 0.683139 AMI: 0.794324 
+Affinity Prop Best Case: Time: 0.631379 AMI: 0.794324 
+Affinity Prop Worst Case: Time: 0.844103 AMI: 0.794324 
+
+Gauss_5_10_10.txt 
+Affinity Prop: num clusters: 7.000000 
+Affinity Prop Average: Time: 0.343673 AMI: 0.716821 
+Affinity Prop Best Case: Time: 0.307330 AMI: 0.716821 
+Affinity Prop Worst Case: Time: 0.402316 AMI: 0.716821 
+
+Gauss_5_10_5.txt 
+Affinity Prop: num clusters: 5.000000 
+Affinity Prop Average: Time: 0.367015 AMI: 0.634838 
+Affinity Prop Best Case: Time: 0.343438 AMI: 0.634838 
+Affinity Prop Worst Case: Time: 0.392052 AMI: 0.634838 
+
+Gauss_5_50_0.txt 
+Affinity Prop: num clusters: 5.000000 
+Affinity Prop Average: Time: 0.156712 AMI: 0.286263 
+Affinity Prop Best Case: Time: 0.137810 AMI: 0.286263 
+Affinity Prop Worst Case: Time: 0.176483 AMI: 0.286263 
+
+Gauss_5_50_10.txt 
+Affinity Prop: num clusters: 7.000000 
+Affinity Prop Average: Time: 0.209748 AMI: 0.353773 
+Affinity Prop Best Case: Time: 0.185024 AMI: 0.353773 
+Affinity Prop Worst Case: Time: 0.229702 AMI: 0.353773 
+
+Gauss_5_50_5.txt 
+Affinity Prop: num clusters: 5.000000 
+Affinity Prop Average: Time: 0.179795 AMI: 0.317277 
+Affinity Prop Best Case: Time: 0.157864 AMI: 0.317277 
+Affinity Prop Worst Case: Time: 0.198679 AMI: 0.317277 
+
+Gauss_5_5_0.txt 
+Affinity Prop: num clusters: 4.000000 
+Affinity Prop Average: Time: 1.792500 AMI: 0.735162 
+Affinity Prop Best Case: Time: 1.479519 AMI: 0.735162 
+Affinity Prop Worst Case: Time: 2.142242 AMI: 0.735162 
+
+Gauss_5_5_10.txt 
+Affinity Prop: num clusters: 3.000000 
+Affinity Prop Average: Time: 0.110874 AMI: 0.698852 
+Affinity Prop Best Case: Time: 0.091630 AMI: 0.698852 
+Affinity Prop Worst Case: Time: 0.125092 AMI: 0.698852 
+
+Gauss_5_5_5.txt 
+Affinity Prop: num clusters: 3.000000 
+Affinity Prop Average: Time: 0.116927 AMI: 0.803062 
+Affinity Prop Best Case: Time: 0.104217 AMI: 0.803062 
+Affinity Prop Worst Case: Time: 0.140038 AMI: 0.803062 
+
+Gauss_7_10_0.txt 
+Affinity Prop: num clusters: 7.000000 
+Affinity Prop Average: Time: 0.386425 AMI: 0.852135 
+Affinity Prop Best Case: Time: 0.342300 AMI: 0.852135 
+Affinity Prop Worst Case: Time: 0.429711 AMI: 0.852135 
+
+Gauss_7_10_10.txt 
+Affinity Prop: num clusters: 8.000000 
+Affinity Prop Average: Time: 0.317128 AMI: 0.918317 
+Affinity Prop Best Case: Time: 0.285504 AMI: 0.918317 
+Affinity Prop Worst Case: Time: 0.344364 AMI: 0.918317 
+
+Gauss_7_10_5.txt 
+Affinity Prop: num clusters: 8.000000 
+Affinity Prop Average: Time: 0.163248 AMI: 0.892656 
+Affinity Prop Best Case: Time: 0.143999 AMI: 0.892656 
+Affinity Prop Worst Case: Time: 0.209889 AMI: 0.892656 
+
+Gauss_7_50_0.txt 
+Affinity Prop: num clusters: 7.000000 
+Affinity Prop Average: Time: 0.155333 AMI: 0.389709 
+Affinity Prop Best Case: Time: 0.129128 AMI: 0.389709 
+Affinity Prop Worst Case: Time: 0.173250 AMI: 0.389709 
+
+Gauss_7_50_10.txt 
+Affinity Prop: num clusters: 9.000000 
+Affinity Prop Average: Time: 0.219006 AMI: 0.417853 
+Affinity Prop Best Case: Time: 0.195495 AMI: 0.417853 
+Affinity Prop Worst Case: Time: 0.255809 AMI: 0.417853 
+
+Gauss_7_50_5.txt 
+Affinity Prop: num clusters: 7.000000 
+Affinity Prop Average: Time: 0.105839 AMI: 0.340629 
+Affinity Prop Best Case: Time: 0.084293 AMI: 0.340629 
+Affinity Prop Worst Case: Time: 0.123331 AMI: 0.340629 
+
+Gauss_7_5_0.txt 
+Affinity Prop: num clusters: 5.000000 
+Affinity Prop Average: Time: 0.392726 AMI: 1.000000 
+Affinity Prop Best Case: Time: 0.361881 AMI: 1.000000 
+Affinity Prop Worst Case: Time: 0.423545 AMI: 1.000000 
+
+Gauss_7_5_10.txt 
+Affinity Prop: num clusters: 5.000000 
+Affinity Prop Average: Time: 0.258767 AMI: 0.985923 
+Affinity Prop Best Case: Time: 0.226131 AMI: 0.985923 
+Affinity Prop Worst Case: Time: 0.290882 AMI: 0.985923 
+
+Gauss_7_5_5.txt 
+Affinity Prop: num clusters: 4.000000 
+Affinity Prop Average: Time: 0.386852 AMI: 0.958438 
+Affinity Prop Best Case: Time: 0.338947 AMI: 0.958438 
+Affinity Prop Worst Case: Time: 0.413242 AMI: 0.958438 
+

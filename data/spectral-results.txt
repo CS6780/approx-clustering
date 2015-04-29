@@ -1,0 +1,145 @@
+soybean-small.data 
+Spectral Average: Time: 0.060926 AMI: 0.178493 
+Spectral Best Case: Time: 0.017647 AMI: 0.178493 
+Spectral Worst Case: Time: 0.393575 AMI: 0.178493 
+
+iris.data 
+Spectral Average: Time: 0.023096 AMI: 0.757363 
+Spectral Best Case: Time: 0.014713 AMI: 0.757363 
+Spectral Worst Case: Time: 0.052407 AMI: 0.757363 
+
+Gauss_3_10_0.txt 
+Spectral Average: Time: 0.082994 AMI: 0.641412 
+Spectral Best Case: Time: 0.069304 AMI: 0.653380 
+Spectral Worst Case: Time: 0.102167 AMI: 0.635162 
+
+Gauss_3_10_10.txt 
+Spectral Average: Time: 0.105653 AMI: 0.560251 
+Spectral Best Case: Time: 0.087781 AMI: 0.579995 
+Spectral Worst Case: Time: 0.121323 AMI: 0.549922 
+
+Gauss_3_10_5.txt 
+Spectral Average: Time: 0.099631 AMI: 0.465880 
+Spectral Best Case: Time: 0.082843 AMI: 0.478538 
+Spectral Worst Case: Time: 0.117321 AMI: 0.457169 
+
+Gauss_3_50_0.txt 
+Spectral Average: Time: 0.324174 AMI: 0.497755 
+Spectral Best Case: Time: 0.256952 AMI: 0.514849 
+Spectral Worst Case: Time: 0.473926 AMI: 0.479606 
+
+Gauss_3_50_10.txt 
+Spectral Average: Time: 0.265198 AMI: 0.423702 
+Spectral Best Case: Time: 0.232180 AMI: 0.442503 
+Spectral Worst Case: Time: 0.290449 AMI: 0.409964 
+
+Gauss_3_50_5.txt 
+Spectral Average: Time: 0.252567 AMI: 0.411981 
+Spectral Best Case: Time: 0.227452 AMI: 0.424799 
+Spectral Worst Case: Time: 0.281153 AMI: 0.402420 
+
+Gauss_3_5_0.txt 
+Spectral Average: Time: 0.056451 AMI: 0.886868 
+Spectral Best Case: Time: 0.044534 AMI: 0.886868 
+Spectral Worst Case: Time: 0.062615 AMI: 0.886868 
+
+Gauss_3_5_10.txt 
+Spectral Average: Time: 0.054894 AMI: 0.618494 
+Spectral Best Case: Time: 0.045637 AMI: 0.618969 
+Spectral Worst Case: Time: 0.071110 AMI: 0.616595 
+
+Gauss_3_5_5.txt 
+Spectral Average: Time: 0.076278 AMI: 0.619791 
+Spectral Best Case: Time: 0.063484 AMI: 0.619791 
+Spectral Worst Case: Time: 0.087986 AMI: 0.619791 
+
+Gauss_5_10_0.txt 
+Spectral Average: Time: 0.100156 AMI: 0.972107 
+Spectral Best Case: Time: 0.089774 AMI: 0.972107 
+Spectral Worst Case: Time: 0.109662 AMI: 0.972107 
+
+Gauss_5_10_10.txt 
+Spectral Average: Time: 0.091634 AMI: 0.829406 
+Spectral Best Case: Time: 0.072462 AMI: 0.842490 
+Spectral Worst Case: Time: 0.101325 AMI: 0.827952 
+
+Gauss_5_10_5.txt 
+Spectral Average: Time: 0.094556 AMI: 0.736067 
+Spectral Best Case: Time: 0.077462 AMI: 0.763523 
+Spectral Worst Case: Time: 0.118656 AMI: 0.715510 
+
+Gauss_5_50_0.txt 
+Spectral Average: Time: 0.211011 AMI: 0.668928 
+Spectral Best Case: Time: 0.184148 AMI: 0.692310 
+Spectral Worst Case: Time: 0.244782 AMI: 0.652829 
+
+Gauss_5_50_10.txt 
+Spectral Average: Time: 0.219394 AMI: 0.639487 
+Spectral Best Case: Time: 0.199387 AMI: 0.670905 
+Spectral Worst Case: Time: 0.235713 AMI: 0.616139 
+
+Gauss_5_50_5.txt 
+Spectral Average: Time: 0.195687 AMI: 0.595681 
+Spectral Best Case: Time: 0.166525 AMI: 0.622206 
+Spectral Worst Case: Time: 0.242096 AMI: 0.562786 
+
+Gauss_5_5_0.txt 
+Spectral Average: Time: 0.079251 AMI: 0.990053 
+Spectral Best Case: Time: 0.068790 AMI: 0.990053 
+Spectral Worst Case: Time: 0.099969 AMI: 0.990053 
+
+Gauss_5_5_10.txt 
+Spectral Average: Time: 0.042456 AMI: 0.830243 
+Spectral Best Case: Time: 0.034520 AMI: 0.836865 
+Spectral Worst Case: Time: 0.048740 AMI: 0.829508 
+
+Gauss_5_5_5.txt 
+Spectral Average: Time: 0.055569 AMI: 0.713196 
+Spectral Best Case: Time: 0.041537 AMI: 0.713196 
+Spectral Worst Case: Time: 0.072081 AMI: 0.713196 
+
+Gauss_7_10_0.txt 
+Spectral Average: Time: 0.071379 AMI: 0.995473 
+Spectral Best Case: Time: 0.060796 AMI: 0.995473 
+Spectral Worst Case: Time: 0.079577 AMI: 0.995473 
+
+Gauss_7_10_10.txt 
+Spectral Average: Time: 0.089766 AMI: 0.810207 
+Spectral Best Case: Time: 0.074348 AMI: 0.816376 
+Spectral Worst Case: Time: 0.102764 AMI: 0.801984 
+
+Gauss_7_10_5.txt 
+Spectral Average: Time: 0.062999 AMI: 0.994393 
+Spectral Best Case: Time: 0.055593 AMI: 0.994393 
+Spectral Worst Case: Time: 0.077645 AMI: 0.994393 
+
+Gauss_7_50_0.txt 
+Spectral Average: Time: 0.199214 AMI: 0.833815 
+Spectral Best Case: Time: 0.172653 AMI: 0.846630 
+Spectral Worst Case: Time: 0.223398 AMI: 0.822781 
+
+Gauss_7_50_10.txt 
+Spectral Average: Time: 0.230943 AMI: 0.761021 
+Spectral Best Case: Time: 0.197057 AMI: 0.776803 
+Spectral Worst Case: Time: 0.263657 AMI: 0.744760 
+
+Gauss_7_50_5.txt 
+Spectral Average: Time: 0.211863 AMI: 0.808009 
+Spectral Best Case: Time: 0.193717 AMI: 0.822481 
+Spectral Worst Case: Time: 0.229700 AMI: 0.786149 
+
+Gauss_7_5_0.txt 
+Spectral Average: Time: 0.053857 AMI: 1.000000 
+Spectral Best Case: Time: 0.047382 AMI: 1.000000 
+Spectral Worst Case: Time: 0.061603 AMI: 1.000000 
+
+Gauss_7_5_10.txt 
+Spectral Average: Time: 0.051993 AMI: 0.962979 
+Spectral Best Case: Time: 0.046328 AMI: 0.962979 
+Spectral Worst Case: Time: 0.062666 AMI: 0.962979 
+
+Gauss_7_5_5.txt 
+Spectral Average: Time: 0.077977 AMI: 0.831879 
+Spectral Best Case: Time: 0.066874 AMI: 0.831879 
+Spectral Worst Case: Time: 0.094757 AMI: 0.831879 
+

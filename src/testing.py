@@ -1,5 +1,5 @@
 import numpy as np
-
+import timeit
 import multiswaps
 import kmedoids
 import submodular_demo
@@ -14,35 +14,41 @@ def objective(distances, assignment):
     return np.sum([ distances[i, assignment[i]] for i in range(n) ])
 
 def test_clustering(cluster_alg, distances, labels_true, N=10):
+    time_results = []
     obj_results = []
     ami_results = []
     for _ in range(N):
+        start_time = timeit.default_timer()
         assignment, _ = cluster_alg()
+        time_results.append(timeit.default_timer()-start_time)
         obj_results.append(objective(distances, assignment))
-        ami_results.append(adjusted_mutual_info_score(y, assignment))
+        ami_results.append(adjusted_mutual_info_score(labels_true, assignment))
 
+    avg_tim = np.mean(time_results)
     avg_obj = np.mean(obj_results)
     avg_ami = np.mean(ami_results)
+    min_tim = np.min(time_results)
     min_obj = np.min(obj_results)
     min_ami = np.min(ami_results)
+    max_tim = np.max(time_results)
     max_obj = np.max(obj_results)
     max_ami = np.max(ami_results)
 
-    return avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami
+    return avg_tim, avg_obj, avg_ami, min_tim, min_obj, min_ami, \
+           max_tim, max_obj, max_ami
 
 if __name__ == '__main__':
+    
     X, y, n, k = LoadData("data/Real Data Sets/soybean-small.data.txt", cluster_loc=0, split=0)
-    # X, y, n, k = LoadData("data/Real Data Sets/iris.data.txt", cluster_loc=0, split=0)
-    # X, y, n, k = LoadData("data/Gaussian2/Gauss_7_5_5.txt", cluster_loc=1, split=1)
     distances = pairwise_distances(X)
-    # distances, n, k = LoadpMedian("data/p-median Instances/pmed1.txt")
 
-    # for p in [1,2]: #[1,2,3]:
-    #     multi_swaps = lambda: multiswaps.cluster(distances, k, p, epsilon=1)
-    #     avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami = test_clustering(multi_swaps, distances, y, N=10)
-    #     print("%s-swap Average: Objective: %f AMI: %f" % (p, avg_obj, avg_ami))
-    #     print("%s-swap Best Case: Objective: %f AMI: %f" % (p, min_obj, max_ami))
-    #     print("%s-swap Worst Case: Objective: %f AMI: %f" % (p, max_obj, min_ami))
+    # p = 3
+    # multi_swaps = lambda: multiswaps.cluster(distances, k, p, epsilon=1)
+    # avg_tim, avg_obj, avg_ami, min_tim, min_obj, min_ami, max_tim, \
+    #          max_obj, max_ami = test_clustering(multi_swaps, distances, y, N=10)
+    # print("%s-swap Average: Time: %f Objective: %f AMI: %f" % (p, avg_tim, avg_obj, avg_ami))
+    # print("%s-swap Best Case: Time: %f Objective: %f AMI: %f" % (p, min_tim, min_obj, max_ami))
+    # print("%s-swap Worst Case: Time: %f Objective: %f AMI: %f" % (p, max_tim, max_obj, min_ami))
 
     # k_medoids = lambda: kmedoids.cluster(distances, k=k)
     # avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami = test_clustering(k_medoids, distances, y, N=10)
@@ -53,8 +59,8 @@ if __name__ == '__main__':
     # for i in range(2):
     #     submodular_demo.supermodular_list(X, k, h_perc=10)
 
-    super_modular = lambda: (submodular_demo.supermodular_list(X, k, h_perc=35), None)
-    avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami = test_clustering(super_modular, distances, y, N=3)
+    super_modular = lambda: (submodular_demo.supermodular_list(X, k, h_perc=10), None)
+    _, avg_obj, avg_ami, _, min_obj, min_ami, _, max_obj, max_ami = test_clustering(super_modular, distances, y, N=3)
     print("SuperModular Average: Objective: %f AMI: %f" % (avg_obj, avg_ami))
     print("SuperModular Best Case: Objective: %f AMI: %f" % (min_obj, max_ami))
     print("SuperModular Worst Case: Objective: %f AMI: %f" % (max_obj, min_ami))
