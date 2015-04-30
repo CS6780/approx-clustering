@@ -3,18 +3,22 @@
 import numpy as np
 import random
 
-def cluster(distances, k=3, max_iter=1000):
+def cluster(distances, k=3, max_iter=1000, warm_start = None):
     m = distances.shape[0] # number of points
 
     # Pick k random medoids.
-    curr_medoids = np.array([random.randint(0, m - 1) for _ in range(k)])
-    i = 0
-    while (len(np.unique(curr_medoids)) < k) and (i<max_iter):
-        i+=1
-        if i > max_iter:
-            curr_medoids = np.array([i for i in range(k)])
+    if warm_start is None:
         curr_medoids = np.array([random.randint(0, m - 1) for _ in range(k)])
-
+        i = 0
+        while (len(np.unique(curr_medoids)) < k):
+            i+=1
+            if i > max_iter:
+                curr_medoids = np.array([i for i in range(k)])
+                break
+            curr_medoids = np.array([random.randint(0, m - 1) for _ in range(k)])
+    else:
+        curr_medoids = warm_start
+        
     old_medoids = np.array([-1]*k) # Doesn't matter what we initialize these to.
     new_medoids = np.array([-1]*k)
     clusters = assign_points_to_clusters(curr_medoids, distances)
