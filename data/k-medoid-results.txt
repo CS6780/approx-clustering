@@ -1,341 +1,345 @@
 soybean-small.data 
-1-swap Average: Time: 0.190314 Objective: 114.980470 AMI: 0.7174921-swap Best Case: Time: 0.072111 Objective: 113.804769 AMI: 0.7213361-swap Worst Case: Time: 0.300995 Objective: 117.824284 AMI: 0.698712
+K-Medoids Average: Time: 0.001950 Objective: 132.769652 AMI: 0.550228 
+K-Medoids Best Case: Time: 0.001310 Objective: 113.804769 AMI: 0.789273 
+K-Medoids Worst Case: Time: 0.002855 Objective: 146.150533 AMI: 0.392991 
+
 iris.data 
-1-swap Average: Time: 1.954504 Objective: 98.952033 AMI: 0.7520941-swap Best Case: Time: 0.684351 Objective: 98.213677 AMI: 0.7855911-swap Worst Case: Time: 3.195904 Objective: 100.635254 AMI: 0.748372
-ective: 123.669293 AMI: 0.551399 
+K-Medoids Average: Time: 0.003009 Objective: 106.123810 AMI: 0.689818 
+K-Medoids Best Case: Time: 0.001757 Objective: 98.213677 AMI: 0.775961 
+K-Medoids Worst Case: Time: 0.005966 Objective: 125.745638 AMI: 0.527855 
 
 Gauss_3_10_0.txt 
-K-Medoids Average: Time: 0.084048 Objective: 154.277435 AMI: 0.683193 
-K-Medoids Best Case: Time: 0.031457 Objective: 148.942451 AMI: 0.728844 
-K-Medoids Worst Case: Time: 0.110557 Objective: 166.531956 AMI: 0.634972 
+K-Medoids Average: Time: 0.094819 Objective: 150.695611 AMI: 0.698629 
+K-Medoids Best Case: Time: 0.072073 Objective: 148.431071 AMI: 0.715648 
+K-Medoids Worst Case: Time: 0.140404 Objective: 153.703720 AMI: 0.677453 
 
 Gauss_3_10_10.txt 
-K-Medoids Average: Time: 0.111891 Objective: 210.252970 AMI: 0.624812 
-K-Medoids Best Case: Time: 0.065532 Objective: 203.510671 AMI: 0.656927 
-K-Medoids Worst Case: Time: 0.181837 Objective: 215.441503 AMI: 0.610178 
+K-Medoids Average: Time: 0.153128 Objective: 212.757717 AMI: 0.615639 
+K-Medoids Best Case: Time: 0.096105 Objective: 203.244161 AMI: 0.666666 
+K-Medoids Worst Case: Time: 0.179402 Objective: 226.311637 AMI: 0.596860 
 
 Gauss_3_10_5.txt 
-K-Medoids Average: Time: 0.092844 Objective: 152.633690 AMI: 0.514512 
-K-Medoids Best Case: Time: 0.050950 Objective: 146.208374 AMI: 0.539161 
-K-Medoids Worst Case: Time: 0.188816 Objective: 159.181526 AMI: 0.463380 
+K-Medoids Average: Time: 0.116683 Objective: 151.396369 AMI: 0.515629 
+K-Medoids Best Case: Time: 0.073877 Objective: 144.128263 AMI: 0.543710 
+K-Medoids Worst Case: Time: 0.168196 Objective: 168.513759 AMI: 0.438732 
 
 Gauss_3_50_0.txt 
-K-Medoids Average: Time: 0.391556 Objective: 120.155319 AMI: 0.489256 
-K-Medoids Best Case: Time: 0.306849 Objective: 117.122032 AMI: 0.504752 
-K-Medoids Worst Case: Time: 0.538211 Objective: 128.109014 AMI: 0.466340 
+K-Medoids Average: Time: 0.434616 Objective: 120.637248 AMI: 0.498014 
+K-Medoids Best Case: Time: 0.352057 Objective: 117.770672 AMI: 0.515061 
+K-Medoids Worst Case: Time: 0.528503 Objective: 126.097944 AMI: 0.479424 
 
 Gauss_3_50_10.txt 
-K-Medoids Average: Time: 0.310491 Objective: 105.506818 AMI: 0.402077 
-K-Medoids Best Case: Time: 0.295508 Objective: 103.092421 AMI: 0.430163 
-K-Medoids Worst Case: Time: 0.356007 Objective: 107.741754 AMI: 0.376345 
+K-Medoids Average: Time: 0.300618 Objective: 106.635942 AMI: 0.405906 
+K-Medoids Best Case: Time: 0.204197 Objective: 104.002723 AMI: 0.423458 
+K-Medoids Worst Case: Time: 0.403408 Objective: 109.347635 AMI: 0.384366 
 
 Gauss_3_50_5.txt 
-K-Medoids Average: Time: 0.354944 Objective: 105.699966 AMI: 0.392989 
-K-Medoids Best Case: Time: 0.251545 Objective: 100.035219 AMI: 0.414505 
-K-Medoids Worst Case: Time: 0.571794 Objective: 111.355027 AMI: 0.370106 
+K-Medoids Average: Time: 0.375760 Objective: 105.774735 AMI: 0.401753 
+K-Medoids Best Case: Time: 0.209200 Objective: 103.637083 AMI: 0.416265 
+K-Medoids Worst Case: Time: 0.499008 Objective: 109.588101 AMI: 0.393070 
 
 Gauss_3_5_0.txt 
-K-Medoids Average: Time: 0.048928 Objective: 223.668160 AMI: 0.732938 
-K-Medoids Best Case: Time: 0.032663 Objective: 194.811251 AMI: 0.877529 
-K-Medoids Worst Case: Time: 0.085811 Objective: 295.763602 AMI: 0.421559 
+K-Medoids Average: Time: 0.065642 Objective: 225.880077 AMI: 0.729185 
+K-Medoids Best Case: Time: 0.036846 Objective: 194.811251 AMI: 0.877529 
+K-Medoids Worst Case: Time: 0.139606 Objective: 292.641004 AMI: 0.415409 
 
 Gauss_3_5_10.txt 
-K-Medoids Average: Time: 0.040202 Objective: 161.428202 AMI: 0.661957 
-K-Medoids Best Case: Time: 0.028834 Objective: 158.360784 AMI: 0.700967 
-K-Medoids Worst Case: Time: 0.063031 Objective: 165.159932 AMI: 0.628219 
+K-Medoids Average: Time: 0.047498 Objective: 165.628126 AMI: 0.620329 
+K-Medoids Best Case: Time: 0.025006 Objective: 158.376093 AMI: 0.685818 
+K-Medoids Worst Case: Time: 0.081561 Objective: 186.190454 AMI: 0.490405 
 
 Gauss_3_5_5.txt 
-K-Medoids Average: Time: 0.092347 Objective: 236.188430 AMI: 0.658047 
-K-Medoids Best Case: Time: 0.042915 Objective: 225.639534 AMI: 0.707291 
-K-Medoids Worst Case: Time: 0.207233 Objective: 259.514923 AMI: 0.576083 
+K-Medoids Average: Time: 0.099484 Objective: 238.218716 AMI: 0.637027 
+K-Medoids Best Case: Time: 0.065734 Objective: 225.701259 AMI: 0.698065 
+K-Medoids Worst Case: Time: 0.149561 Objective: 252.685665 AMI: 0.556639 
 
 Gauss_5_10_0.txt 
-K-Medoids Average: Time: 0.150527 Objective: 384.752975 AMI: 0.852204 
-K-Medoids Best Case: Time: 0.071115 Objective: 359.113859 AMI: 0.932722 
-K-Medoids Worst Case: Time: 0.213422 Objective: 412.688156 AMI: 0.791528 
+K-Medoids Average: Time: 0.179603 Objective: 396.940426 AMI: 0.858458 
+K-Medoids Best Case: Time: 0.083430 Objective: 363.158958 AMI: 0.931809 
+K-Medoids Worst Case: Time: 0.290206 Objective: 464.488838 AMI: 0.717915 
 
 Gauss_5_10_10.txt 
-K-Medoids Average: Time: 0.096574 Objective: 320.060595 AMI: 0.819653 
-K-Medoids Best Case: Time: 0.068856 Objective: 295.540277 AMI: 0.887936 
-K-Medoids Worst Case: Time: 0.146732 Objective: 336.854578 AMI: 0.763287 
+K-Medoids Average: Time: 0.116844 Objective: 336.655433 AMI: 0.795261 
+K-Medoids Best Case: Time: 0.080582 Objective: 296.682119 AMI: 0.894481 
+K-Medoids Worst Case: Time: 0.188182 Objective: 375.632898 AMI: 0.698536 
 
 Gauss_5_10_5.txt 
-K-Medoids Average: Time: 0.089404 Objective: 286.428861 AMI: 0.672438 
-K-Medoids Best Case: Time: 0.062082 Objective: 273.512307 AMI: 0.725287 
-K-Medoids Worst Case: Time: 0.187071 Objective: 305.962518 AMI: 0.609318 
+K-Medoids Average: Time: 0.108548 Objective: 291.645857 AMI: 0.677186 
+K-Medoids Best Case: Time: 0.073131 Objective: 278.005216 AMI: 0.729220 
+K-Medoids Worst Case: Time: 0.145976 Objective: 364.271540 AMI: 0.618116 
 
 Gauss_5_50_0.txt 
-K-Medoids Average: Time: 0.329062 Objective: 205.641739 AMI: 0.672407 
-K-Medoids Best Case: Time: 0.215272 Objective: 199.852717 AMI: 0.697733 
-K-Medoids Worst Case: Time: 0.426142 Objective: 210.924610 AMI: 0.648353 
+K-Medoids Average: Time: 0.388998 Objective: 206.094729 AMI: 0.667671 
+K-Medoids Best Case: Time: 0.237119 Objective: 198.958028 AMI: 0.710092 
+K-Medoids Worst Case: Time: 0.486929 Objective: 214.560328 AMI: 0.621091 
 
 Gauss_5_50_10.txt 
-K-Medoids Average: Time: 0.340663 Objective: 252.592618 AMI: 0.617106 
-K-Medoids Best Case: Time: 0.236194 Objective: 248.395482 AMI: 0.652629 
-K-Medoids Worst Case: Time: 0.422285 Objective: 255.192424 AMI: 0.596237 
+K-Medoids Average: Time: 0.417456 Objective: 249.118317 AMI: 0.626457 
+K-Medoids Best Case: Time: 0.270995 Objective: 244.823874 AMI: 0.641252 
+K-Medoids Worst Case: Time: 0.569192 Objective: 257.806919 AMI: 0.595669 
 
 Gauss_5_50_5.txt 
-K-Medoids Average: Time: 0.283683 Objective: 194.847990 AMI: 0.617382 
-K-Medoids Best Case: Time: 0.237340 Objective: 189.871756 AMI: 0.641416 
-K-Medoids Worst Case: Time: 0.396562 Objective: 200.611451 AMI: 0.585885 
+K-Medoids Average: Time: 0.301918 Objective: 193.923850 AMI: 0.621076 
+K-Medoids Best Case: Time: 0.197446 Objective: 190.651127 AMI: 0.653649 
+K-Medoids Worst Case: Time: 0.391665 Objective: 199.142124 AMI: 0.597662 
 
 Gauss_5_5_0.txt 
-K-Medoids Average: Time: 0.080370 Objective: 390.731775 AMI: 0.852011 
-K-Medoids Best Case: Time: 0.048271 Objective: 352.137554 AMI: 0.994392 
-K-Medoids Worst Case: Time: 0.148519 Objective: 449.892909 AMI: 0.690034 
+K-Medoids Average: Time: 0.079976 Objective: 388.982460 AMI: 0.857508 
+K-Medoids Best Case: Time: 0.044979 Objective: 352.137554 AMI: 0.994392 
+K-Medoids Worst Case: Time: 0.135316 Objective: 449.159897 AMI: 0.690036 
 
 Gauss_5_5_10.txt 
-K-Medoids Average: Time: 0.028281 Objective: 227.800268 AMI: 0.721209 
-K-Medoids Best Case: Time: 0.016708 Objective: 218.715598 AMI: 0.771847 
-K-Medoids Worst Case: Time: 0.041427 Objective: 241.629663 AMI: 0.670271 
+K-Medoids Average: Time: 0.026539 Objective: 227.741819 AMI: 0.717119 
+K-Medoids Best Case: Time: 0.014612 Objective: 215.292325 AMI: 0.765155 
+K-Medoids Worst Case: Time: 0.040579 Objective: 237.574387 AMI: 0.657069 
 
 Gauss_5_5_5.txt 
-K-Medoids Average: Time: 0.022730 Objective: 208.478193 AMI: 0.668401 
-K-Medoids Best Case: Time: 0.011440 Objective: 204.873954 AMI: 0.797367 
-K-Medoids Worst Case: Time: 0.046840 Objective: 212.011327 AMI: 0.618567 
+K-Medoids Average: Time: 0.031776 Objective: 209.073257 AMI: 0.687224 
+K-Medoids Best Case: Time: 0.019734 Objective: 202.273924 AMI: 0.795844 
+K-Medoids Worst Case: Time: 0.053528 Objective: 216.742718 AMI: 0.606156 
 
 Gauss_7_10_0.txt 
-K-Medoids Average: Time: 0.081282 Objective: 392.669664 AMI: 0.871405 
-K-Medoids Best Case: Time: 0.046536 Objective: 357.967210 AMI: 0.954492 
-K-Medoids Worst Case: Time: 0.108936 Objective: 455.495120 AMI: 0.738287 
+K-Medoids Average: Time: 0.096766 Objective: 397.312635 AMI: 0.868571 
+K-Medoids Best Case: Time: 0.064493 Objective: 373.797120 AMI: 0.911549 
+K-Medoids Worst Case: Time: 0.160300 Objective: 424.201527 AMI: 0.805512 
 
 Gauss_7_10_10.txt 
-K-Medoids Average: Time: 0.079459 Objective: 379.622564 AMI: 0.839979 
-K-Medoids Best Case: Time: 0.060103 Objective: 354.604037 AMI: 0.883394 
-K-Medoids Worst Case: Time: 0.104656 Objective: 432.802538 AMI: 0.768433 
+K-Medoids Average: Time: 0.099802 Objective: 379.731007 AMI: 0.844757 
+K-Medoids Best Case: Time: 0.045640 Objective: 354.946352 AMI: 0.892501 
+K-Medoids Worst Case: Time: 0.146199 Objective: 513.569462 AMI: 0.596809 
 
 Gauss_7_10_5.txt 
-K-Medoids Average: Time: 0.065241 Objective: 336.875190 AMI: 0.870237 
-K-Medoids Best Case: Time: 0.048215 Objective: 326.035877 AMI: 0.898186 
-K-Medoids Worst Case: Time: 0.088670 Objective: 400.640291 AMI: 0.784534 
+K-Medoids Average: Time: 0.073053 Objective: 349.483674 AMI: 0.852698 
+K-Medoids Best Case: Time: 0.036319 Objective: 315.378947 AMI: 0.938429 
+K-Medoids Worst Case: Time: 0.106383 Objective: 423.083095 AMI: 0.740219 
 
 Gauss_7_50_0.txt 
-K-Medoids Average: Time: 0.360844 Objective: 284.011121 AMI: 0.783204 
-K-Medoids Best Case: Time: 0.284558 Objective: 272.581151 AMI: 0.824867 
-K-Medoids Worst Case: Time: 0.572445 Objective: 299.494146 AMI: 0.738016 
+K-Medoids Average: Time: 0.401346 Objective: 283.780506 AMI: 0.784186 
+K-Medoids Best Case: Time: 0.320858 Objective: 271.806355 AMI: 0.827475 
+K-Medoids Worst Case: Time: 0.566134 Objective: 305.212605 AMI: 0.727321 
 
 Gauss_7_50_10.txt 
-K-Medoids Average: Time: 0.342016 Objective: 324.429238 AMI: 0.752987 
-K-Medoids Best Case: Time: 0.266950 Objective: 315.168280 AMI: 0.788572 
-K-Medoids Worst Case: Time: 0.403599 Objective: 337.648994 AMI: 0.707591 
+K-Medoids Average: Time: 0.426259 Objective: 330.236572 AMI: 0.742144 
+K-Medoids Best Case: Time: 0.357666 Objective: 319.313827 AMI: 0.802779 
+K-Medoids Worst Case: Time: 0.570084 Objective: 343.884870 AMI: 0.708218 
 
 Gauss_7_50_5.txt 
-K-Medoids Average: Time: 0.279109 Objective: 285.023188 AMI: 0.739725 
-K-Medoids Best Case: Time: 0.195901 Objective: 278.078859 AMI: 0.798053 
-K-Medoids Worst Case: Time: 0.330415 Objective: 292.266763 AMI: 0.703453 
+K-Medoids Average: Time: 0.327094 Objective: 289.622782 AMI: 0.727481 
+K-Medoids Best Case: Time: 0.219394 Objective: 276.595662 AMI: 0.765473 
+K-Medoids Worst Case: Time: 0.442011 Objective: 300.782370 AMI: 0.689229 
 
 Gauss_7_5_0.txt 
-K-Medoids Average: Time: 0.038073 Objective: 386.964067 AMI: 0.920378 
-K-Medoids Best Case: Time: 0.033737 Objective: 349.436194 AMI: 1.000000 
-K-Medoids Worst Case: Time: 0.050430 Objective: 459.061835 AMI: 0.752171 
+K-Medoids Average: Time: 0.051648 Objective: 424.149998 AMI: 0.851748 
+K-Medoids Best Case: Time: 0.034704 Objective: 349.436194 AMI: 1.000000 
+K-Medoids Worst Case: Time: 0.072652 Objective: 460.948183 AMI: 0.769474 
 
 Gauss_7_5_10.txt 
-K-Medoids Average: Time: 0.036875 Objective: 405.011840 AMI: 0.843553 
-K-Medoids Best Case: Time: 0.019625 Objective: 355.914704 AMI: 0.979090 
-K-Medoids Worst Case: Time: 0.061246 Objective: 493.851570 AMI: 0.621802 
+K-Medoids Average: Time: 0.042688 Objective: 410.217118 AMI: 0.838851 
+K-Medoids Best Case: Time: 0.022890 Objective: 355.914704 AMI: 0.979090 
+K-Medoids Worst Case: Time: 0.057502 Objective: 547.064809 AMI: 0.602386 
 
 Gauss_7_5_5.txt 
-K-Medoids Average: Time: 0.040719 Objective: 430.863737 AMI: 0.780300 
-K-Medoids Best Case: Time: 0.027192 Objective: 368.710529 AMI: 0.906524 
-K-Medoids Worst Case: Time: 0.062497 Objective: 744.541949 AMI: 0.294212 
+K-Medoids Average: Time: 0.047134 Objective: 384.559314 AMI: 0.859895 
+K-Medoids Best Case: Time: 0.031400 Objective: 369.831316 AMI: 0.908239 
+K-Medoids Worst Case: Time: 0.071656 Objective: 474.003909 AMI: 0.742852 
 
 pmed1.txt 
-K-Medoids Average: Time: 0.003014 Objective: 6341.100000 
-K-Medoids Best Case: Time: 0.001781 Objective: 5868.000000 
-K-Medoids Worst Case: Time: 0.005257 Objective: 7121.000000 
+K-Medoids Average: Time: 0.003177 Objective: 6477.000000 
+K-Medoids Best Case: Time: 0.001939 Objective: 5996.000000 
+K-Medoids Worst Case: Time: 0.005614 Objective: 6810.000000 
 
 pmed10.txt 
-K-Medoids Average: Time: 0.668159 Objective: 2104.500000 
-K-Medoids Best Case: Time: 0.648872 Objective: 1906.000000 
-K-Medoids Worst Case: Time: 0.687824 Objective: 2346.000000 
+K-Medoids Average: Time: 0.732921 Objective: 1835.000000 
+K-Medoids Best Case: Time: 0.721731 Objective: 1835.000000 
+K-Medoids Worst Case: Time: 0.765392 Objective: 1835.000000 
 
 pmed11.txt 
-K-Medoids Average: Time: 0.009706 Objective: 8274.600000 
-K-Medoids Best Case: Time: 0.005457 Objective: 7717.000000 
-K-Medoids Worst Case: Time: 0.015977 Objective: 8870.000000 
+K-Medoids Average: Time: 0.012436 Objective: 8243.600000 
+K-Medoids Best Case: Time: 0.005931 Objective: 7882.000000 
+K-Medoids Worst Case: Time: 0.022126 Objective: 8874.000000 
 
 pmed12.txt 
-K-Medoids Average: Time: 0.019700 Objective: 7484.000000 
-K-Medoids Best Case: Time: 0.009336 Objective: 7197.000000 
-K-Medoids Worst Case: Time: 0.029461 Objective: 7939.000000 
+K-Medoids Average: Time: 0.018553 Objective: 7586.900000 
+K-Medoids Best Case: Time: 0.010527 Objective: 7292.000000 
+K-Medoids Worst Case: Time: 0.026672 Objective: 8126.000000 
 
 pmed13.txt 
-K-Medoids Average: Time: 0.097384 Objective: 5185.100000 
-K-Medoids Best Case: Time: 0.064496 Objective: 4919.000000 
-K-Medoids Worst Case: Time: 0.129970 Objective: 5560.000000 
+K-Medoids Average: Time: 0.068511 Objective: 5287.300000 
+K-Medoids Best Case: Time: 0.046557 Objective: 5040.000000 
+K-Medoids Worst Case: Time: 0.091210 Objective: 5568.000000 
 
 pmed14.txt 
-K-Medoids Average: Time: 0.153059 Objective: 3678.700000 
-K-Medoids Best Case: Time: 0.116756 Objective: 3572.000000 
-K-Medoids Worst Case: Time: 0.243262 Objective: 3821.000000 
+K-Medoids Average: Time: 0.223814 Objective: 3689.800000 
+K-Medoids Best Case: Time: 0.091682 Objective: 3577.000000 
+K-Medoids Worst Case: Time: 0.339753 Objective: 3819.000000 
 
 pmed15.txt 
-K-Medoids Average: Time: 1.065067 Objective: 2745.300000 
-K-Medoids Best Case: Time: 1.011754 Objective: 2536.000000 
-K-Medoids Worst Case: Time: 1.228883 Objective: 2981.000000 
+K-Medoids Average: Time: 1.096885 Objective: 2783.000000 
+K-Medoids Best Case: Time: 1.086435 Objective: 2783.000000 
+K-Medoids Worst Case: Time: 1.132462 Objective: 2783.000000 
 
 pmed16.txt 
-K-Medoids Average: Time: 0.017996 Objective: 9086.900000 
-K-Medoids Best Case: Time: 0.012646 Objective: 8287.000000 
-K-Medoids Worst Case: Time: 0.031643 Objective: 10522.000000 
+K-Medoids Average: Time: 0.025144 Objective: 8666.600000 
+K-Medoids Best Case: Time: 0.015061 Objective: 8363.000000 
+K-Medoids Worst Case: Time: 0.038402 Objective: 9132.000000 
 
 pmed17.txt 
-K-Medoids Average: Time: 0.053476 Objective: 7812.600000 
-K-Medoids Best Case: Time: 0.024036 Objective: 7356.000000 
-K-Medoids Worst Case: Time: 0.082504 Objective: 8143.000000 
+K-Medoids Average: Time: 0.058121 Objective: 8043.700000 
+K-Medoids Best Case: Time: 0.040054 Objective: 7585.000000 
+K-Medoids Worst Case: Time: 0.079094 Objective: 8578.000000 
 
 pmed18.txt 
-K-Medoids Average: Time: 0.197704 Objective: 5742.200000 
-K-Medoids Best Case: Time: 0.182432 Objective: 5376.000000 
-K-Medoids Worst Case: Time: 0.274038 Objective: 6154.000000 
+K-Medoids Average: Time: 0.259645 Objective: 5620.800000 
+K-Medoids Best Case: Time: 0.154452 Objective: 5317.000000 
+K-Medoids Worst Case: Time: 0.408120 Objective: 5918.000000 
 
 pmed19.txt 
-K-Medoids Average: Time: 0.834196 Objective: 3495.800000 
-K-Medoids Best Case: Time: 0.423298 Objective: 3405.000000 
-K-Medoids Worst Case: Time: 1.172074 Objective: 3599.000000 
+K-Medoids Average: Time: 1.019345 Objective: 3588.600000 
+K-Medoids Best Case: Time: 0.609409 Objective: 3383.000000 
+K-Medoids Worst Case: Time: 1.186358 Objective: 3871.000000 
 
 pmed2.txt 
-K-Medoids Average: Time: 0.006398 Objective: 4878.600000 
-K-Medoids Best Case: Time: 0.003450 Objective: 4331.000000 
-K-Medoids Worst Case: Time: 0.010012 Objective: 5412.000000 
+K-Medoids Average: Time: 0.006922 Objective: 4740.500000 
+K-Medoids Best Case: Time: 0.005414 Objective: 4337.000000 
+K-Medoids Worst Case: Time: 0.009032 Objective: 5431.000000 
 
 pmed20.txt 
-K-Medoids Average: Time: 1.820654 Objective: 2865.800000 
-K-Medoids Best Case: Time: 1.757523 Objective: 2684.000000 
-K-Medoids Worst Case: Time: 2.062466 Objective: 3095.000000 
+K-Medoids Average: Time: 1.794720 Objective: 2685.000000 
+K-Medoids Best Case: Time: 1.758656 Objective: 2685.000000 
+K-Medoids Worst Case: Time: 1.978268 Objective: 2685.000000 
 
 pmed21.txt 
-K-Medoids Average: Time: 0.032987 Objective: 9975.700000 
-K-Medoids Best Case: Time: 0.019014 Objective: 9247.000000 
-K-Medoids Worst Case: Time: 0.048792 Objective: 10626.000000 
+K-Medoids Average: Time: 0.032650 Objective: 10011.900000 
+K-Medoids Best Case: Time: 0.019521 Objective: 9363.000000 
+K-Medoids Worst Case: Time: 0.040405 Objective: 10852.000000 
 
 pmed22.txt 
-K-Medoids Average: Time: 0.064694 Objective: 9736.100000 
-K-Medoids Best Case: Time: 0.035753 Objective: 9200.000000 
-K-Medoids Worst Case: Time: 0.125122 Objective: 10417.000000 
+K-Medoids Average: Time: 0.078607 Objective: 9679.300000 
+K-Medoids Best Case: Time: 0.040767 Objective: 9255.000000 
+K-Medoids Worst Case: Time: 0.120745 Objective: 10054.000000 
 
 pmed23.txt 
-K-Medoids Average: Time: 0.441777 Objective: 5393.900000 
-K-Medoids Best Case: Time: 0.345715 Objective: 5161.000000 
-K-Medoids Worst Case: Time: 0.521684 Objective: 5599.000000 
+K-Medoids Average: Time: 0.512268 Objective: 5317.400000 
+K-Medoids Best Case: Time: 0.390543 Objective: 5096.000000 
+K-Medoids Worst Case: Time: 0.694748 Objective: 5449.000000 
 
 pmed24.txt 
-K-Medoids Average: Time: 1.639462 Objective: 3862.500000 
-K-Medoids Best Case: Time: 1.069203 Objective: 3634.000000 
-K-Medoids Worst Case: Time: 2.005302 Objective: 4096.000000 
+K-Medoids Average: Time: 1.786107 Objective: 3764.500000 
+K-Medoids Best Case: Time: 1.016837 Objective: 3635.000000 
+K-Medoids Worst Case: Time: 1.998963 Objective: 3790.000000 
 
 pmed25.txt 
-K-Medoids Average: Time: 2.894202 Objective: 2933.500000 
-K-Medoids Best Case: Time: 2.478548 Objective: 2726.000000 
-K-Medoids Worst Case: Time: 3.552838 Objective: 3113.000000 
+K-Medoids Average: Time: 3.143336 Objective: 2649.000000 
+K-Medoids Best Case: Time: 3.134156 Objective: 2649.000000 
+K-Medoids Worst Case: Time: 3.163435 Objective: 2649.000000 
 
 pmed26.txt 
-K-Medoids Average: Time: 0.040246 Objective: 10573.200000 
-K-Medoids Best Case: Time: 0.027868 Objective: 10208.000000 
-K-Medoids Worst Case: Time: 0.047150 Objective: 11210.000000 
+K-Medoids Average: Time: 0.050255 Objective: 10636.800000 
+K-Medoids Best Case: Time: 0.032155 Objective: 10354.000000 
+K-Medoids Worst Case: Time: 0.080775 Objective: 11105.000000 
 
 pmed27.txt 
-K-Medoids Average: Time: 0.117777 Objective: 9169.000000 
-K-Medoids Best Case: Time: 0.077822 Objective: 8834.000000 
-K-Medoids Worst Case: Time: 0.235329 Objective: 9590.000000 
+K-Medoids Average: Time: 0.126516 Objective: 9246.700000 
+K-Medoids Best Case: Time: 0.059998 Objective: 8698.000000 
+K-Medoids Worst Case: Time: 0.332111 Objective: 9770.000000 
 
 pmed28.txt 
-K-Medoids Average: Time: 0.800496 Objective: 5382.800000 
-K-Medoids Best Case: Time: 0.604545 Objective: 5127.000000 
-K-Medoids Worst Case: Time: 1.807972 Objective: 5678.000000 
+K-Medoids Average: Time: 0.873776 Objective: 5255.800000 
+K-Medoids Best Case: Time: 0.699393 Objective: 5093.000000 
+K-Medoids Worst Case: Time: 1.217495 Objective: 5433.000000 
 
 pmed29.txt 
-K-Medoids Average: Time: 2.454503 Objective: 3978.100000 
-K-Medoids Best Case: Time: 2.241879 Objective: 3760.000000 
-K-Medoids Worst Case: Time: 2.844959 Objective: 4097.000000 
+K-Medoids Average: Time: 2.841820 Objective: 3831.000000 
+K-Medoids Best Case: Time: 2.831646 Objective: 3831.000000 
+K-Medoids Worst Case: Time: 2.863167 Objective: 3831.000000 
 
 pmed3.txt 
-K-Medoids Average: Time: 0.007067 Objective: 4768.700000 
-K-Medoids Best Case: Time: 0.004999 Objective: 4513.000000 
-K-Medoids Worst Case: Time: 0.009879 Objective: 5242.000000 
+K-Medoids Average: Time: 0.006669 Objective: 4934.100000 
+K-Medoids Best Case: Time: 0.003623 Objective: 4374.000000 
+K-Medoids Worst Case: Time: 0.010756 Objective: 5771.000000 
 
 pmed30.txt 
-K-Medoids Average: Time: 4.472908 Objective: 3209.900000 
-K-Medoids Best Case: Time: 3.766108 Objective: 3050.000000 
-K-Medoids Worst Case: Time: 5.311775 Objective: 3373.000000 
+K-Medoids Average: Time: 5.289147 Objective: 2895.000000 
+K-Medoids Best Case: Time: 5.247438 Objective: 2895.000000 
+K-Medoids Worst Case: Time: 5.408182 Objective: 2895.000000 
 
 pmed31.txt 
-K-Medoids Average: Time: 0.060048 Objective: 10951.800000 
-K-Medoids Best Case: Time: 0.039600 Objective: 10238.000000 
-K-Medoids Worst Case: Time: 0.099024 Objective: 11591.000000 
+K-Medoids Average: Time: 0.072809 Objective: 10909.900000 
+K-Medoids Best Case: Time: 0.047966 Objective: 10434.000000 
+K-Medoids Worst Case: Time: 0.120929 Objective: 11323.000000 
 
 pmed32.txt 
-K-Medoids Average: Time: 0.140418 Objective: 10753.300000 
-K-Medoids Best Case: Time: 0.110076 Objective: 10222.000000 
-K-Medoids Worst Case: Time: 0.185336 Objective: 11963.000000 
+K-Medoids Average: Time: 0.152750 Objective: 10410.700000 
+K-Medoids Best Case: Time: 0.125372 Objective: 9450.000000 
+K-Medoids Worst Case: Time: 0.211605 Objective: 11054.000000 
 
 pmed33.txt 
-K-Medoids Average: Time: 1.399022 Objective: 5574.800000 
-K-Medoids Best Case: Time: 1.244691 Objective: 5405.000000 
-K-Medoids Worst Case: Time: 1.508586 Objective: 5939.000000 
+K-Medoids Average: Time: 1.472259 Objective: 5557.200000 
+K-Medoids Best Case: Time: 1.193317 Objective: 5339.000000 
+K-Medoids Worst Case: Time: 1.803733 Objective: 5795.000000 
 
 pmed34.txt 
-K-Medoids Average: Time: 3.755460 Objective: 4067.200000 
-K-Medoids Best Case: Time: 3.202159 Objective: 3778.000000 
-K-Medoids Worst Case: Time: 4.680987 Objective: 4462.000000 
+K-Medoids Average: Time: 3.666930 Objective: 3986.000000 
+K-Medoids Best Case: Time: 3.612849 Objective: 3986.000000 
+K-Medoids Worst Case: Time: 3.748691 Objective: 3986.000000 
 
 pmed35.txt 
-K-Medoids Average: Time: 0.090543 Objective: 11141.000000 
-K-Medoids Best Case: Time: 0.054488 Objective: 10664.000000 
-K-Medoids Worst Case: Time: 0.137178 Objective: 11821.000000 
+K-Medoids Average: Time: 0.113337 Objective: 11260.200000 
+K-Medoids Best Case: Time: 0.073392 Objective: 10636.000000 
+K-Medoids Worst Case: Time: 0.204278 Objective: 12073.000000 
 
 pmed36.txt 
-K-Medoids Average: Time: 0.192738 Objective: 11420.500000 
-K-Medoids Best Case: Time: 0.100354 Objective: 10856.000000 
-K-Medoids Worst Case: Time: 0.303701 Objective: 12298.000000 
+K-Medoids Average: Time: 0.222096 Objective: 11308.100000 
+K-Medoids Best Case: Time: 0.116869 Objective: 10653.000000 
+K-Medoids Worst Case: Time: 0.350498 Objective: 12356.000000 
 
 pmed37.txt 
-K-Medoids Average: Time: 2.107384 Objective: 6016.000000 
-K-Medoids Best Case: Time: 1.570368 Objective: 5643.000000 
-K-Medoids Worst Case: Time: 2.357879 Objective: 6373.000000 
+K-Medoids Average: Time: 2.440938 Objective: 5850.700000 
+K-Medoids Best Case: Time: 1.841189 Objective: 5749.000000 
+K-Medoids Worst Case: Time: 3.202427 Objective: 6032.000000 
 
 pmed38.txt 
-K-Medoids Average: Time: 0.125460 Objective: 11891.000000 
-K-Medoids Best Case: Time: 0.073306 Objective: 11325.000000 
-K-Medoids Worst Case: Time: 0.185084 Objective: 12382.000000 
+K-Medoids Average: Time: 0.132628 Objective: 11751.800000 
+K-Medoids Best Case: Time: 0.081485 Objective: 11474.000000 
+K-Medoids Worst Case: Time: 0.213091 Objective: 12176.000000 
 
 pmed39.txt 
-K-Medoids Average: Time: 0.278229 Objective: 10661.500000 
-K-Medoids Best Case: Time: 0.201019 Objective: 10423.000000 
-K-Medoids Worst Case: Time: 0.407481 Objective: 11051.000000 
+K-Medoids Average: Time: 0.267550 Objective: 10622.600000 
+K-Medoids Best Case: Time: 0.203692 Objective: 10317.000000 
+K-Medoids Worst Case: Time: 0.412881 Objective: 10925.000000 
 
 pmed4.txt 
-K-Medoids Average: Time: 0.012237 Objective: 3650.600000 
-K-Medoids Best Case: Time: 0.009729 Objective: 3242.000000 
-K-Medoids Worst Case: Time: 0.017048 Objective: 4027.000000 
+K-Medoids Average: Time: 0.012459 Objective: 3520.600000 
+K-Medoids Best Case: Time: 0.010528 Objective: 3261.000000 
+K-Medoids Worst Case: Time: 0.016993 Objective: 3681.000000 
 
 pmed40.txt 
-K-Medoids Average: Time: 3.261076 Objective: 6013.600000 
-K-Medoids Best Case: Time: 2.392965 Objective: 5733.000000 
-K-Medoids Worst Case: Time: 4.226382 Objective: 6254.000000 
+K-Medoids Average: Time: 3.526932 Objective: 6087.900000 
+K-Medoids Best Case: Time: 2.699891 Objective: 5939.000000 
+K-Medoids Worst Case: Time: 4.108821 Objective: 6264.000000 
 
 pmed5.txt 
-K-Medoids Average: Time: 0.052508 Objective: 1883.300000 
-K-Medoids Best Case: Time: 0.019216 Objective: 1753.000000 
-K-Medoids Worst Case: Time: 0.114972 Objective: 2066.000000 
+K-Medoids Average: Time: 0.038107 Objective: 1860.500000 
+K-Medoids Best Case: Time: 0.027260 Objective: 1638.000000 
+K-Medoids Worst Case: Time: 0.060845 Objective: 2283.000000 
 
 pmed6.txt 
-K-Medoids Average: Time: 0.004868 Objective: 8673.400000 
-K-Medoids Best Case: Time: 0.003129 Objective: 8097.000000 
-K-Medoids Worst Case: Time: 0.006307 Objective: 9319.000000 
+K-Medoids Average: Time: 0.006516 Objective: 8528.100000 
+K-Medoids Best Case: Time: 0.005119 Objective: 7951.000000 
+K-Medoids Worst Case: Time: 0.008937 Objective: 8955.000000 
 
 pmed7.txt 
-K-Medoids Average: Time: 0.011971 Objective: 6139.600000 
-K-Medoids Best Case: Time: 0.008763 Objective: 5776.000000 
-K-Medoids Worst Case: Time: 0.020059 Objective: 6926.000000 
+K-Medoids Average: Time: 0.011713 Objective: 6340.600000 
+K-Medoids Best Case: Time: 0.007968 Objective: 5953.000000 
+K-Medoids Worst Case: Time: 0.018777 Objective: 6949.000000 
 
 pmed8.txt 
-K-Medoids Average: Time: 0.025859 Objective: 5302.000000 
-K-Medoids Best Case: Time: 0.016536 Objective: 4743.000000 
-K-Medoids Worst Case: Time: 0.038881 Objective: 6241.000000 
+K-Medoids Average: Time: 0.027003 Objective: 5241.400000 
+K-Medoids Best Case: Time: 0.020685 Objective: 4979.000000 
+K-Medoids Worst Case: Time: 0.032865 Objective: 5529.000000 
 
 pmed9.txt 
-K-Medoids Average: Time: 0.053672 Objective: 3539.700000 
-K-Medoids Best Case: Time: 0.043678 Objective: 3318.000000 
-K-Medoids Worst Case: Time: 0.059078 Objective: 3875.000000 
+K-Medoids Average: Time: 0.064175 Objective: 3414.400000 
+K-Medoids Best Case: Time: 0.048300 Objective: 3233.000000 
+K-Medoids Worst Case: Time: 0.107495 Objective: 3755.000000 
 

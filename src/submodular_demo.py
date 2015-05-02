@@ -19,31 +19,6 @@ import random
 ##############################################################################
 # Define Functions
   
-# Curvature Calculation
-
-def curvatureValue(X, j, fX, fEmpty, distances, FDict = {}):
-    n = distances.shape[0]
-    Xj = X.difference([j])
-    
-    num = (fX - f(Xj,distances,FDict))
-    denom = (f(frozenset([j]),distances,FDict)-fEmpty)
-    
-    if denom == 0: 
-        return float("inf")
-    else:
-        return num/float(denom)
-
-
-def totalCurvature(distances, F = {}):
-    n = distances.shape[0]
-    X = frozenset([i for i in range(n)])
-  
-    fX = f(X,distances,F)
-    fEmpty = f(frozenset(),distances,F)
-    vals = [curvatureValue(X,j, fX, fEmpty, distances,F) for j in X]
-    return 1- min(vals)
-
-
 
 # Find closest median in S to i
 def find_closest_median(i, S, distances):
@@ -59,8 +34,9 @@ def find_closest_median(i, S, distances):
 
 # Returns the objective function for S
 def f(S, distances, F):
-    if S in F:
-        return F[S]
+    if F is not None:
+        if S in F:
+            return F[S]
     
     n = distances.shape[0]
     if S == frozenset():
@@ -71,9 +47,33 @@ def f(S, distances, F):
             if x not in S:
                 distx = [distances[x][s] for s in S]
                 Sum+=min(distx)
-            
-    F[S] = Sum
+    if F is not None:      
+        F[S] = Sum
     return Sum
+
+# Curvature Calculation
+
+def curvatureValue(X, j, fX, fEmpty, distances, FDict = None):
+    n = distances.shape[0]
+    Xj = X.difference([j])
+    
+    num = (fX - f(Xj,distances,FDict))
+    denom = (f(frozenset([j]),distances,FDict)-fEmpty)
+    
+    if denom == 0: 
+        return float("inf")
+    else:
+        return num/float(denom)
+
+
+def totalCurvature(distances, F = None):
+    n = distances.shape[0]
+    X = frozenset([i for i in range(n)])
+  
+    fX = f(X,distances,F)
+    fEmpty = f(frozenset(),distances,F)
+    vals = [curvatureValue(X,j, fX, fEmpty, distances,F) for j in X]
+    return 1- min(vals)
 
 # The linear part of the submodular function
 def l(A, distances, F):
@@ -146,7 +146,7 @@ def updateS(S, psiOld, distances, sorted_distances, H, F, delta, h_perc):
             # print "old ", psiOld, " new ", psiNew, "difference ", psiNew - psiOld
             return newS, psiNew, True
         
-    return S, psiOld, False
+    return list(S), psiOld, False
 
 # find a random initial set represented as a frozenset
 def initialS(k,n,max_iter=1000):
@@ -161,7 +161,7 @@ def initialS(k,n,max_iter=1000):
 
 
 # supermodular looks for a locally optimal solution with a potential function
-def supermodular(distances, k, warm_start= None, epsilon=5, h_perc=50, \
+def cluster(distances, k, warm_start= None, epsilon=5, h_perc=50, \
                  max_iter=100):
     # Find Initial S
     n = distances.shape[0]
@@ -202,18 +202,18 @@ def supermodular(distances, k, warm_start= None, epsilon=5, h_perc=50, \
                 bestS = S
                 
     Sc = X.difference(bestS)
-    print "Finished with f(S) = ", bestF
+    # print "Finished with f(S) = ", bestF
     clusters = [find_closest_median(i,Sc,distances) for i in range(n)]
     curvature = totalCurvature(distances, FDict)
 
-    return Sc, clusters, curvature
+    return clusters, Sc
 
 if __name__ == '__main__':
     centers = [[1, 1], [-1, -1], [1, -1]]
     X, labels_true = make_blobs(n_samples=100, centers=centers, cluster_std=0.5,
                             random_state=999)
     distances = pairwise_distances(X)
-    print supermodular(distances,3,None,10,100,100)
+    print cluster(distances,3,None,10,100,100)
 
     print "curvature is ", totalCurvature(distances)
 

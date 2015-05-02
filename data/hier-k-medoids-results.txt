@@ -1,0 +1,216 @@
+soybean-small.data 
+Average: Time: 0.208568 F-Score: 0.772297 Approx: 1.585250 
+Best Case: Time: 0.194227 F-Score: 0.883865 Approx: 2.000000 
+Worst Case: Time: 0.241176 F-Score: 0.704369 Approx: 1.412550 
+
+iris.data 
+Average: Time: 3.160549 F-Score: 0.887656 Approx: 2560631.459341 
+Best Case: Time: 3.053331 F-Score: 0.928403 Approx: 3556309.446378 
+Worst Case: Time: 3.446720 F-Score: 0.829912 Approx: 1605758.720300 
+
+Gauss_3_10_0.txt 
+Average: Time: 239.752091 F-Score: 0.501828 Approx: 5.467972 
+Best Case: Time: 226.493918 F-Score: 0.530112 Approx: 8.917219 
+Worst Case: Time: 253.411888 F-Score: 0.466966 Approx: 3.444694 
+
+Gauss_3_10_10.txt 
+Average: Time: 441.047518 F-Score: 0.446662 Approx: 8.368446 
+Best Case: Time: 430.189511 F-Score: 0.476237 Approx: 16.306095 
+Worst Case: Time: 474.866347 F-Score: 0.400789 Approx: 5.453661 
+
+Gauss_3_10_5.txt 
+Average: Time: 242.851080 F-Score: 0.454967 Approx: 6.273211 
+Best Case: Time: 236.775373 F-Score: 0.479296 Approx: 8.115141 
+Worst Case: Time: 249.255499 F-Score: 0.427605 Approx: 4.022555 
+
+Gauss_3_50_0.txt 
+Average: Time: 226.643718 F-Score: 0.544539 Approx: 5.640718 
+Best Case: Time: 221.852403 F-Score: 0.575829 Approx: 10.713206 
+Worst Case: Time: 230.684408 F-Score: 0.531262 Approx: 3.386097 
+
+Gauss_3_50_10.txt 
+Average: Time: 131.893085 F-Score: 0.508846 Approx: 9.047136 
+Best Case: Time: 128.233477 F-Score: 0.535507 Approx: 24.803204 
+Worst Case: Time: 135.236334 F-Score: 0.480452 Approx: 5.139829 
+
+Gauss_3_50_5.txt 
+Average: Time: 149.924910 F-Score: 0.490626 Approx: 4.996619 
+Best Case: Time: 145.442192 F-Score: 0.526051 Approx: 7.980287 
+Worst Case: Time: 158.615634 F-Score: 0.459109 Approx: 3.218757 
+
+Gauss_3_5_0.txt 
+Average: Time: 398.150463 F-Score: 0.715878 Approx: 16.936261 
+Best Case: Time: 387.025698 F-Score: 0.733695 Approx: 32.001103 
+Worst Case: Time: 406.548160 F-Score: 0.695562 Approx: 7.497000 
+
+Gauss_3_5_10.txt 
+Average: Time: 175.193165 F-Score: 0.504463 Approx: 5.747004 
+Best Case: Time: 171.966842 F-Score: 0.554541 Approx: 7.983416 
+Worst Case: Time: 178.201558 F-Score: 0.465765 Approx: 3.220306 
+
+Gauss_3_5_5.txt 
+Average: Time: 673.493441 F-Score: 0.455914 Approx: 15.354760 
+Best Case: Time: 663.496828 F-Score: 0.474302 Approx: 23.135323 
+Worst Case: Time: 685.368357 F-Score: 0.433064 Approx: 7.764575 
+
+Gauss_5_10_0.txt 
+Average: Time: 1113.752719 F-Score: 0.785837 Approx: 3.367480 
+Best Case: Time: 1095.146903 F-Score: 0.854236 Approx: 4.305209 
+Worst Case: Time: 1124.804275 F-Score: 0.728590 Approx: 2.225282 
+
+Gauss_5_10_10.txt 
+Average: Time: 475.686883 F-Score: 0.711107 Approx: 4.840373 
+Best Case: Time: 464.511484 F-Score: 0.754915 Approx: 12.705305 
+Worst Case: Time: 488.416402 F-Score: 0.649743 Approx: 2.893165 
+
+Gauss_5_10_5.txt 
+Average: Time: 383.854143 F-Score: 0.589203 Approx: 3.420232 
+Best Case: Time: 374.347657 F-Score: 0.651468 Approx: 4.747458 
+Worst Case: Time: 389.878239 F-Score: 0.495290 Approx: 2.367838 
+
+Gauss_5_50_0.txt 
+Average: Time: 181.007577 F-Score: 0.543208 Approx: 2.615506 
+Best Case: Time: 176.984319 F-Score: 0.584703 Approx: 3.438014 
+Worst Case: Time: 185.198812 F-Score: 0.517243 Approx: 2.170223 
+
+Gauss_5_50_10.txt 
+Average: Time: 238.846733 F-Score: 0.512433 Approx: 3.192793 
+Best Case: Time: 235.977232 F-Score: 0.535930 Approx: 6.476412 
+Worst Case: Time: 242.319615 F-Score: 0.494662 Approx: 2.219874 
+
+Gauss_5_50_5.txt 
+Average: Time: 128.269722 F-Score: 0.539116 Approx: 3.209542 
+Best Case: Time: 126.593637 F-Score: 0.558623 Approx: 5.255357 
+Worst Case: Time: 132.311234 F-Score: 0.525120 Approx: 2.137743 
+
+Gauss_5_5_0.txt 
+Average: Time: 1216.934581 F-Score: 0.884984 Approx: 5.106805 
+Best Case: Time: 1207.306490 F-Score: 0.961803 Approx: 6.139328 
+Worst Case: Time: 1234.392577 F-Score: 0.812671 Approx: 3.641733 
+
+Gauss_5_5_10.txt 
+Average: Time: 113.276946 F-Score: 0.679483 Approx: 4.170928 
+Best Case: Time: 108.248659 F-Score: 0.693123 Approx: 7.335970 
+Worst Case: Time: 116.863175 F-Score: 0.665601 Approx: 3.271662 
+
+Gauss_5_5_5.txt 
+Average: Time: 106.618672 F-Score: 0.591418 Approx: 6.459187 
+Best Case: Time: 103.760495 F-Score: 0.612364 Approx: 9.551600 
+Worst Case: Time: 108.648619 F-Score: 0.551364 Approx: 4.745453 
+
+Gauss_7_10_0.txt 
+Average: Time: 476.533999 F-Score: 0.834390 Approx: 3.023192 
+Best Case: Time: 464.318895 F-Score: 0.907087 Approx: 3.510451 
+Worst Case: Time: 484.431198 F-Score: 0.739875 Approx: 2.143075 
+
+Gauss_7_10_10.txt 
+Average: Time: 360.676037 F-Score: 0.826369 Approx: 2.905395 
+Best Case: Time: 353.049268 F-Score: 0.888972 Approx: 6.385064 
+Worst Case: Time: 366.207777 F-Score: 0.747028 Approx: 2.063664 
+
+Gauss_7_10_5.txt 
+Average: Time: 227.257244 F-Score: 0.796847 Approx: 3.672788 
+Best Case: Time: 222.581430 F-Score: 0.845985 Approx: 7.733274 
+Worst Case: Time: 231.325252 F-Score: 0.729363 Approx: 2.272321 
+
+Gauss_7_50_0.txt 
+Average: Time: 186.454798 F-Score: 0.625255 Approx: 2.646914 
+Best Case: Time: 180.738004 F-Score: 0.669079 Approx: 3.581062 
+Worst Case: Time: 192.191711 F-Score: 0.595728 Approx: 1.797403 
+
+Gauss_7_50_10.txt 
+Average: Time: 233.029862 F-Score: 0.658502 Approx: 2.307643 
+Best Case: Time: 227.357492 F-Score: 0.700196 Approx: 3.699525 
+Worst Case: Time: 238.326432 F-Score: 0.626326 Approx: 1.894269 
+
+Gauss_7_50_5.txt 
+Average: Time: 155.781180 F-Score: 0.602426 Approx: 2.395132 
+Best Case: Time: 152.733909 F-Score: 0.619662 Approx: 3.189620 
+Worst Case: Time: 160.524724 F-Score: 0.579512 Approx: 1.866458 
+
+Gauss_7_5_0.txt 
+Average: Time: 457.466891 F-Score: 0.889859 Approx: 2.800711 
+Best Case: Time: 446.761638 F-Score: 0.942811 Approx: 3.752402 
+Worst Case: Time: 468.172610 F-Score: 0.777010 Approx: 2.048083 
+
+Gauss_7_5_10.txt 
+Average: Time: 341.057197 F-Score: 0.907305 Approx: 3.623997 
+Best Case: Time: 335.592580 F-Score: 0.930658 Approx: 6.319009 
+Worst Case: Time: 346.813272 F-Score: 0.845472 Approx: 2.333234 
+
+Gauss_7_5_5.txt 
+Average: Time: 494.932645 F-Score: 0.889021 Approx: 2.982324 
+Best Case: Time: 487.155429 F-Score: 0.989884 Approx: 3.441345 
+Worst Case: Time: 509.416936 F-Score: 0.873192 Approx: 2.236068 
+
+pmed1.txt 
+Average: Time: 1.164308 Approx: 17.060833 
+Best Case: Time: 1.070134 Approx: 39.000000 
+Worst Case: Time: 1.215947 Approx: 10.083333 
+
+pmed10.txt 
+Average: Time: 7.142091 Approx: 12.698624 
+Best Case: Time: 6.870029 Approx: 30.000000 
+Worst Case: Time: 7.601420 Approx: 4.782609 
+
+pmed11.txt 
+Average: Time: 26.143953 Approx: 10.303271 
+Best Case: Time: 25.363237 Approx: 16.000000 
+Worst Case: Time: 27.263602 Approx: 6.935484 
+
+pmed12.txt 
+Average: Time: 25.955189 Approx: 9.812698 
+Best Case: Time: 25.252545 Approx: 16.000000 
+Worst Case: Time: 26.676678 Approx: 5.500000 
+
+pmed13.txt 
+Average: Time: 26.060040 Approx: 9.964326 
+Best Case: Time: 25.439518 Approx: 17.000000 
+Worst Case: Time: 27.164958 Approx: 5.526316 
+
+pmed14.txt 
+Average: Time: 26.834668 Approx: 12.507939 
+Best Case: Time: 26.331492 Approx: 18.500000 
+Worst Case: Time: 27.487505 Approx: 6.125000 
+
+pmed15.txt 
+Average: Time: 25.673522 Approx: 10.025268 
+Best Case: Time: 24.696149 Approx: 17.000000 
+Worst Case: Time: 26.965267 Approx: 5.000000 
+
+pmed16.txt 
+Average: Time: 118.701240 Approx: 6.503740 
+Best Case: Time: 116.019611 Approx: 9.500000 
+Worst Case: Time: 121.015240 Approx: 4.260870 
+
+pmed17.txt 
+Average: Time: 118.771571 Approx: 6.830110 
+Best Case: Time: 114.980315 Approx: 13.000000 
+Worst Case: Time: 121.909026 Approx: 4.666667 
+
+pmed18.txt 
+Average: Time: 119.079756 Approx: 7.484524 
+Best Case: Time: 117.101735 Approx: 11.000000 
+Worst Case: Time: 122.121008 Approx: 4.857143 
+
+pmed19.txt 
+Average: Time: 121.364268 Approx: 7.256401 
+Best Case: Time: 119.231492 Approx: 13.000000 
+Worst Case: Time: 123.268313 Approx: 4.310345 
+
+pmed2.txt 
+Average: Time: 1.163659 Approx: 19.790952 
+Best Case: Time: 1.100822 Approx: 35.000000 
+Worst Case: Time: 1.200436 Approx: 8.000000 
+
+pmed20.txt 
+Average: Time: 121.901334 Approx: 7.209708 
+Best Case: Time: 119.766801 Approx: 11.000000 
+Worst Case: Time: 127.113491 Approx: 5.000000 
+
+pmed21.txt 
+Average: Time: 283.884174 Approx: 7.237546 
+Best Case: Time: 275.696337 Approx: 16.000000 
+Worst Case: Time: 292.909141 Approx: 3.886364 
+
+pm
