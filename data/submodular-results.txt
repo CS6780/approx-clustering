@@ -1,0 +1,345 @@
+soybean-small.data 
+Supermodular Average: Time: 1.178551 Objective: 136.413687 AMI: 0.612445 
+Supermodular Best Case: Time: 0.759087 Objective: 125.018953 AMI: 0.773849 
+Supermodular Worst Case: Time: 1.920197 Objective: 150.678251 AMI: 0.315047 
+
+iris.data 
+Supermodular Average: Time: 9.788163 Objective: 135.034108 AMI: 0.700161 
+Supermodular Best Case: Time: 6.864011 Objective: 114.501116 AMI: 0.898925 
+Supermodular Worst Case: Time: 12.598723 Objective: 164.942778 AMI: 0.521068 
+
+Gauss_3_10_0.txt 
+Supermodular Average: Time: 121.550695 Objective: 205.764558 AMI: 0.619329 
+Supermodular Best Case: Time: 65.464649 Objective: 168.708972 AMI: 0.694147 
+Supermodular Worst Case: Time: 174.837043 Objective: 243.273777 AMI: 0.532364 
+
+Gauss_3_10_10.txt 
+Supermodular Average: Time: 149.352214 Objective: 274.770037 AMI: 0.515677 
+Supermodular Best Case: Time: 90.349741 Objective: 249.348786 AMI: 0.549065 
+Supermodular Worst Case: Time: 247.173179 Objective: 325.470325 AMI: 0.435046 
+
+Gauss_3_10_5.txt 
+Supermodular Average: Time: 101.071968 Objective: 189.179381 AMI: 0.446209 
+Supermodular Best Case: Time: 68.839455 Objective: 170.280995 AMI: 0.513601 
+Supermodular Worst Case: Time: 146.703424 Objective: 218.635560 AMI: 0.396827 
+
+Gauss_3_50_0.txt 
+Supermodular Average: Time: 175.827270 Objective: 146.864860 AMI: 0.474530 
+Supermodular Best Case: Time: 112.639609 Objective: 138.847518 AMI: 0.495852 
+Supermodular Worst Case: Time: 275.383713 Objective: 155.326771 AMI: 0.450606 
+
+Gauss_3_50_10.txt 
+Supermodular Average: Time: 132.118545 Objective: 125.205882 AMI: 0.390065 
+Supermodular Best Case: Time: 74.762412 Objective: 114.741441 AMI: 0.427633 
+Supermodular Worst Case: Time: 195.785510 Objective: 128.540825 AMI: 0.366794 
+
+Gauss_3_50_5.txt 
+Supermodular Average: Time: 127.640149 Objective: 124.853932 AMI: 0.396361 
+Supermodular Best Case: Time: 80.370765 Objective: 117.774684 AMI: 0.424617 
+Supermodular Worst Case: Time: 192.057731 Objective: 130.980535 AMI: 0.355439 
+
+Gauss_3_5_0.txt 
+Supermodular Average: Time: 131.305433 Objective: 288.452996 AMI: 0.678347 
+Supermodular Best Case: Time: 83.620827 Objective: 245.375222 AMI: 0.846810 
+Supermodular Worst Case: Time: 263.505687 Objective: 382.540839 AMI: 0.564624 
+
+Gauss_3_5_10.txt 
+Supermodular Average: Time: 80.438879 Objective: 217.860626 AMI: 0.503996 
+Supermodular Best Case: Time: 51.508338 Objective: 186.373494 AMI: 0.586716 
+Supermodular Worst Case: Time: 163.292694 Objective: 267.859105 AMI: 0.298531 
+
+Gauss_3_5_5.txt 
+Supermodular Average: Time: 195.012576 Objective: 315.620040 AMI: 0.544870 
+Supermodular Best Case: Time: 113.191099 Objective: 271.371123 AMI: 0.638914 
+Supermodular Worst Case: Time: 266.442526 Objective: 409.246748 AMI: 0.451385 
+
+Gauss_5_10_0.txt 
+Supermodular Average: Time: 227.746863 Objective: 560.141543 AMI: 0.731559 
+Supermodular Best Case: Time: 145.636994 Objective: 521.979859 AMI: 0.812779 
+Supermodular Worst Case: Time: 428.094266 Objective: 597.244593 AMI: 0.637601 
+
+Gauss_5_10_10.txt 
+Supermodular Average: Time: 127.614470 Objective: 426.037659 AMI: 0.704262 
+Supermodular Best Case: Time: 99.294776 Objective: 373.311588 AMI: 0.833078 
+Supermodular Worst Case: Time: 169.063602 Objective: 474.778306 AMI: 0.658975 
+
+Gauss_5_10_5.txt 
+Supermodular Average: Time: 134.136651 Objective: 375.226609 AMI: 0.575432 
+Supermodular Best Case: Time: 84.487059 Objective: 332.947475 AMI: 0.655220 
+Supermodular Worst Case: Time: 186.879143 Objective: 446.111984 AMI: 0.415398 
+
+Gauss_5_50_0.txt 
+Supermodular Average: Time: 139.817769 Objective: 238.914755 AMI: 0.621673 
+Supermodular Best Case: Time: 97.670867 Objective: 232.144920 AMI: 0.655733 
+Supermodular Worst Case: Time: 295.204125 Objective: 248.091011 AMI: 0.570607 
+
+Gauss_5_50_10.txt 
+Supermodular Average: Time: 170.430808 Objective: 296.877718 AMI: 0.545748 
+Supermodular Best Case: Time: 100.800773 Objective: 284.714180 AMI: 0.584044 
+Supermodular Worst Case: Time: 270.516302 Objective: 305.794167 AMI: 0.512940 
+
+Gauss_5_50_5.txt 
+Supermodular Average: Time: 97.335870 Objective: 226.629949 AMI: 0.569571 
+Supermodular Best Case: Time: 75.716666 Objective: 217.444290 AMI: 0.603329 
+Supermodular Worst Case: Time: 166.601461 Objective: 235.741955 AMI: 0.541359 
+
+Gauss_5_5_0.txt 
+Supermodular Average: Time: 230.345492 Objective: 554.795050 AMI: 0.719274 
+Supermodular Best Case: Time: 149.922365 Objective: 472.009012 AMI: 0.862152 
+Supermodular Worst Case: Time: 330.368634 Objective: 711.697193 AMI: 0.592308 
+
+Gauss_5_5_10.txt 
+Supermodular Average: Time: 69.348776 Objective: 292.600415 AMI: 0.662860 
+Supermodular Best Case: Time: 43.375683 Objective: 244.363417 AMI: 0.763464 
+Supermodular Worst Case: Time: 102.133096 Objective: 357.786649 AMI: 0.512300 
+
+Gauss_5_5_5.txt 
+Supermodular Average: Time: 75.262370 Objective: 280.557622 AMI: 0.656794 
+Supermodular Best Case: Time: 40.838537 Objective: 223.959675 AMI: 0.837449 
+Supermodular Worst Case: Time: 111.006351 Objective: 351.277690 AMI: 0.503018 
+
+Gauss_7_10_0.txt 
+Supermodular Average: Time: 185.521074 Objective: 527.672149 AMI: 0.784647 
+Supermodular Best Case: Time: 97.679606 Objective: 454.152675 AMI: 0.914548 
+Supermodular Worst Case: Time: 317.790480 Objective: 589.444793 AMI: 0.668878 
+
+Gauss_7_10_10.txt 
+Supermodular Average: Time: 168.962170 Objective: 551.791126 AMI: 0.723592 
+Supermodular Best Case: Time: 106.372507 Objective: 441.637683 AMI: 0.864928 
+Supermodular Worst Case: Time: 258.820384 Objective: 649.600416 AMI: 0.507900 
+
+Gauss_7_10_5.txt 
+Supermodular Average: Time: 136.188659 Objective: 472.938454 AMI: 0.732022 
+Supermodular Best Case: Time: 78.471194 Objective: 418.314969 AMI: 0.819545 
+Supermodular Worst Case: Time: 251.457478 Objective: 572.653037 AMI: 0.669009 
+
+Gauss_7_50_0.txt 
+Supermodular Average: Time: 152.957777 Objective: 339.547623 AMI: 0.692990 
+Supermodular Best Case: Time: 88.306902 Objective: 314.201628 AMI: 0.728854 
+Supermodular Worst Case: Time: 209.726167 Objective: 366.290902 AMI: 0.652316 
+
+Gauss_7_50_10.txt 
+Supermodular Average: Time: 163.651007 Objective: 401.435495 AMI: 0.645262 
+Supermodular Best Case: Time: 100.938972 Objective: 387.110589 AMI: 0.689609 
+Supermodular Worst Case: Time: 253.917479 Objective: 434.124467 AMI: 0.586406 
+
+Gauss_7_50_5.txt 
+Supermodular Average: Time: 136.495995 Objective: 339.359373 AMI: 0.647215 
+Supermodular Best Case: Time: 81.456296 Objective: 329.020277 AMI: 0.688548 
+Supermodular Worst Case: Time: 191.651367 Objective: 349.171355 AMI: 0.605401 
+
+Gauss_7_5_0.txt 
+Supermodular Average: Time: 185.865271 Objective: 555.457313 AMI: 0.773076 
+Supermodular Best Case: Time: 92.555538 Objective: 504.411119 AMI: 0.842756 
+Supermodular Worst Case: Time: 353.504854 Objective: 599.866660 AMI: 0.680345 
+
+Gauss_7_5_10.txt 
+Supermodular Average: Time: 154.099916 Objective: 531.442670 AMI: 0.720447 
+Supermodular Best Case: Time: 83.216122 Objective: 425.777480 AMI: 0.955912 
+Supermodular Worst Case: Time: 284.444970 Objective: 683.395325 AMI: 0.539489 
+
+Gauss_7_5_5.txt 
+Supermodular Average: Time: 130.185162 Objective: 544.487099 AMI: 0.744454 
+Supermodular Best Case: Time: 90.750801 Objective: 438.654630 AMI: 0.951530 
+Supermodular Worst Case: Time: 214.386758 Objective: 664.360155 AMI: 0.433397 
+
+pmed1.txt 
+Supermodular Average: Time: 5.041827 Objective: 8198.500000 
+Supermodular Best Case: Time: 3.481305 Objective: 6711.000000 
+Supermodular Worst Case: Time: 7.314340 Objective: 9806.000000 
+
+pmed10.txt 
+Supermodular Average: Time: 39.781580 Objective: 2307.900000 
+Supermodular Best Case: Time: 20.637382 Objective: 2168.000000 
+Supermodular Worst Case: Time: 67.002016 Objective: 2472.000000 
+
+pmed11.txt 
+Supermodular Average: Time: 41.972849 Objective: 10532.500000 
+Supermodular Best Case: Time: 25.334730 Objective: 9428.000000 
+Supermodular Worst Case: Time: 54.265644 Objective: 12023.000000 
+
+pmed12.txt 
+Supermodular Average: Time: 45.718887 Objective: 9073.200000 
+Supermodular Best Case: Time: 27.571829 Objective: 8104.000000 
+Supermodular Worst Case: Time: 87.331260 Objective: 10380.000000 
+
+pmed13.txt 
+Supermodular Average: Time: 69.101218 Objective: 6323.300000 
+Supermodular Best Case: Time: 50.419369 Objective: 5992.000000 
+Supermodular Worst Case: Time: 94.536905 Objective: 6601.000000 
+
+pmed14.txt 
+Supermodular Average: Time: 76.295826 Objective: 4463.000000 
+Supermodular Best Case: Time: 46.092267 Objective: 4230.000000 
+Supermodular Worst Case: Time: 125.293552 Objective: 4673.000000 
+
+pmed15.txt 
+Supermodular Average: Time: 100.231827 Objective: 2866.400000 
+Supermodular Best Case: Time: 58.599958 Objective: 2807.000000 
+Supermodular Worst Case: Time: 149.644363 Objective: 2956.000000 
+
+pmed16.txt 
+Supermodular Average: Time: 87.065993 Objective: 10876.200000 
+Supermodular Best Case: Time: 46.667274 Objective: 9820.000000 
+Supermodular Worst Case: Time: 190.636948 Objective: 12237.000000 
+
+pmed17.txt 
+Supermodular Average: Time: 97.099772 Objective: 9510.800000 
+Supermodular Best Case: Time: 50.745453 Objective: 8947.000000 
+Supermodular Worst Case: Time: 187.534115 Objective: 10275.000000 
+
+pmed18.txt 
+Supermodular Average: Time: 134.690918 Objective: 6801.200000 
+Supermodular Best Case: Time: 72.334289 Objective: 6613.000000 
+Supermodular Worst Case: Time: 217.509341 Objective: 7119.000000 
+
+pmed19.txt 
+Supermodular Average: Time: 153.473052 Objective: 4373.600000 
+Supermodular Best Case: Time: 93.604471 Objective: 4205.000000 
+Supermodular Worst Case: Time: 329.386938 Objective: 4518.000000 
+
+pmed2.txt 
+Supermodular Average: Time: 6.368215 Objective: 6080.400000 
+Supermodular Best Case: Time: 3.695410 Objective: 5616.000000 
+Supermodular Worst Case: Time: 10.828535 Objective: 6466.000000 
+
+pmed20.txt 
+Supermodular Average: Time: 174.951397 Objective: 3095.000000 
+Supermodular Best Case: Time: 118.151627 Objective: 2925.000000 
+Supermodular Worst Case: Time: 243.966778 Objective: 3269.000000 
+
+pmed21.txt 
+Supermodular Average: Time: 109.418538 Objective: 12642.600000 
+Supermodular Best Case: Time: 64.336099 Objective: 11607.000000 
+Supermodular Worst Case: Time: 293.942743 Objective: 14012.000000 
+
+pmed22.txt 
+Supermodular Average: Time: 113.084419 Objective: 11764.400000 
+Supermodular Best Case: Time: 72.983046 Objective: 10782.000000 
+Supermodular Worst Case: Time: 200.009677 Objective: 12711.000000 
+
+pmed23.txt 
+Supermodular Average: Time: 199.832053 Objective: 6560.300000 
+Supermodular Best Case: Time: 111.273970 Objective: 6035.000000 
+Supermodular Worst Case: Time: 345.694456 Objective: 6888.000000 
+
+pmed24.txt 
+Supermodular Average: Time: 245.887526 Objective: 4496.300000 
+Supermodular Best Case: Time: 153.527939 Objective: 4319.000000 
+Supermodular Worst Case: Time: 345.720535 Objective: 4805.000000 
+
+pmed25.txt 
+Supermodular Average: Time: 451.888093 Objective: 3128.000000 
+Supermodular Best Case: Time: 272.615897 Objective: 3010.000000 
+Supermodular Worst Case: Time: 737.804034 Objective: 3256.000000 
+
+pmed26.txt 
+Supermodular Average: Time: 159.779253 Objective: 13065.600000 
+Supermodular Best Case: Time: 120.455375 Objective: 11887.000000 
+Supermodular Worst Case: Time: 261.223195 Objective: 14436.000000 
+
+pmed27.txt 
+Supermodular Average: Time: 183.444197 Objective: 11298.900000 
+Supermodular Best Case: Time: 128.232065 Objective: 10709.000000 
+Supermodular Worst Case: Time: 286.232828 Objective: 12078.000000 
+
+pmed28.txt 
+Supermodular Average: Time: 263.269057 Objective: 6234.300000 
+Supermodular Best Case: Time: 164.597770 Objective: 6062.000000 
+Supermodular Worst Case: Time: 472.997418 Objective: 6576.000000 
+
+pmed29.txt 
+Supermodular Average: Time: 424.333111 Objective: 4540.300000 
+Supermodular Best Case: Time: 242.303603 Objective: 4399.000000 
+Supermodular Worst Case: Time: 846.872999 Objective: 4713.000000 
+
+pmed3.txt 
+Supermodular Average: Time: 7.453793 Objective: 6128.100000 
+Supermodular Best Case: Time: 4.784183 Objective: 5650.000000 
+Supermodular Worst Case: Time: 11.266434 Objective: 6738.000000 
+
+pmed30.txt 
+Supermodular Average: Time: 570.968529 Objective: 3268.900000 
+Supermodular Best Case: Time: 337.810125 Objective: 3086.000000 
+Supermodular Worst Case: Time: 1153.761308 Objective: 3478.000000 
+
+pmed31.txt 
+Supermodular Average: Time: 225.606135 Objective: 13476.300000 
+Supermodular Best Case: Time: 133.248531 Objective: 12608.000000 
+Supermodular Worst Case: Time: 367.104981 Objective: 14412.000000 
+
+pmed32.txt 
+Supermodular Average: Time: 249.541718 Objective: 12499.700000 
+Supermodular Best Case: Time: 143.716795 Objective: 11742.000000 
+Supermodular Worst Case: Time: 480.419474 Objective: 13694.000000 
+
+pmed33.txt 
+Supermodular Average: Time: 440.057658 Objective: 6731.900000 
+Supermodular Best Case: Time: 234.748721 Objective: 6485.000000 
+Supermodular Worst Case: Time: 840.470991 Objective: 6971.000000 
+
+pmed34.txt 
+Supermodular Average: Time: 591.707021 Objective: 4638.500000 
+Supermodular Best Case: Time: 452.399197 Objective: 4391.000000 
+Supermodular Worst Case: Time: 782.594297 Objective: 4831.000000 
+
+pmed35.txt 
+Supermodular Average: Time: 298.326127 Objective: 13436.200000 
+Supermodular Best Case: Time: 185.944984 Objective: 11796.000000 
+Supermodular Worst Case: Time: 457.160415 Objective: 14333.000000 
+
+pmed36.txt 
+Supermodular Average: Time: 259.846537 Objective: 13254.000000 
+Supermodular Best Case: Time: 180.754094 Objective: 12318.000000 
+Supermodular Worst Case: Time: 455.162238 Objective: 14478.000000 
+
+pmed37.txt 
+Supermodular Average: Time: 571.044713 Objective: 7278.400000 
+Supermodular Best Case: Time: 351.981157 Objective: 6986.000000 
+Supermodular Worst Case: Time: 1277.441712 Objective: 7614.000000 
+
+pmed38.txt 
+Supermodular Average: Time: 349.850433 Objective: 14250.800000 
+Supermodular Best Case: Time: 223.373542 Objective: 12790.000000 
+Supermodular Worst Case: Time: 496.501139 Objective: 16314.000000 
+
+pmed39.txt 
+Supermodular Average: Time: 419.800393 Objective: 13383.100000 
+Supermodular Best Case: Time: 242.281329 Objective: 11979.000000 
+Supermodular Worst Case: Time: 799.470355 Objective: 15537.000000 
+
+pmed4.txt 
+Supermodular Average: Time: 7.954677 Objective: 4552.000000 
+Supermodular Best Case: Time: 4.257226 Objective: 4033.000000 
+Supermodular Worst Case: Time: 15.993938 Objective: 5282.000000 
+
+pmed40.txt 
+Supermodular Average: Time: 849.852277 Objective: 7295.700000 
+Supermodular Best Case: Time: 500.801982 Objective: 7044.000000 
+Supermodular Worst Case: Time: 1728.239652 Objective: 7600.000000 
+
+pmed5.txt 
+Supermodular Average: Time: 8.297884 Objective: 2277.700000 
+Supermodular Best Case: Time: 5.111649 Objective: 2067.000000 
+Supermodular Worst Case: Time: 11.862397 Objective: 2497.000000 
+
+pmed6.txt 
+Supermodular Average: Time: 19.286240 Objective: 10063.000000 
+Supermodular Best Case: Time: 12.304966 Objective: 8906.000000 
+Supermodular Worst Case: Time: 31.031497 Objective: 10976.000000 
+
+pmed7.txt 
+Supermodular Average: Time: 23.863970 Objective: 7698.500000 
+Supermodular Best Case: Time: 12.754672 Objective: 7113.000000 
+Supermodular Worst Case: Time: 41.601012 Objective: 8496.000000 
+
+pmed8.txt 
+Supermodular Average: Time: 27.159421 Objective: 6616.600000 
+Supermodular Best Case: Time: 15.522160 Objective: 6102.000000 
+Supermodular Worst Case: Time: 44.289798 Objective: 6938.000000 
+
+pmed9.txt 
+Supermodular Average: Time: 28.959393 Objective: 4263.100000 
+Supermodular Best Case: Time: 20.083380 Objective: 3971.000000 
+Supermodular Worst Case: Time: 40.293303 Objective: 4692.000000 
+

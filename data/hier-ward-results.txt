@@ -1,0 +1,87 @@
+soybean-small.data 
+Average: Time: 0.000232 F-Score: 0.510134 
+
+iris.data 
+Average: Time: 0.003002 F-Score: 0.500000 
+
+Gauss_3_10_0.txt 
+Average: Time: 0.067132 F-Score: 0.264859 
+
+Gauss_3_10_10.txt 
+Average: Time: 0.103366 F-Score: 0.218312 
+
+Gauss_3_10_5.txt 
+Average: Time: 0.069934 F-Score: 0.237311 
+
+Gauss_3_50_0.txt 
+Average: Time: 0.058464 F-Score: 0.380017 
+
+Gauss_3_50_10.txt 
+Average: Time: 0.040524 F-Score: 0.355560 
+
+Gauss_3_50_5.txt 
+Average: Time: 0.042180 F-Score: 0.378753 
+
+Gauss_3_5_0.txt 
+Average: Time: 0.092838 F-Score: 0.385812 
+
+Gauss_3_5_10.txt 
+Average: Time: 0.051154 F-Score: 0.384910 
+
+Gauss_3_5_5.txt 
+Average: Time: 0.137591 F-Score: 0.394646 
+
+Gauss_5_10_0.txt 
+Average: Time: 0.196629 F-Score: 0.220132 
+
+Gauss_5_10_10.txt 
+Average: Time: 0.120406 F-Score: 0.260019 
+
+Gauss_5_10_5.txt 
+Average: Time: 0.096507 F-Score: 0.288689 
+
+Gauss_5_50_0.txt 
+Average: Time: 0.050556 F-Score: 0.476496 
+
+Gauss_5_50_10.txt 
+Average: Time: 0.071847 F-Score: 0.464408 
+
+Gauss_5_50_5.txt 
+Average: Time: 0.038990 F-Score: 0.479115 
+
+Gauss_5_5_0.txt 
+Average: Time: 0.213847 F-Score: 0.376740 
+
+Gauss_5_5_10.txt 
+Average: Time: 0.035234 F-Score: 0.430887 
+
+Gauss_5_5_5.txt 
+Average: Time: 0.060366 F-Score: 0.516458 
+
+Gauss_7_10_0.txt 
+Average: Time: 0.109076 F-Score: 0.264607 
+
+Gauss_7_10_10.txt 
+Average: Time: 0.098959 F-Score: 0.279051 
+
+Gauss_7_10_5.txt 
+Average: Time: 0.062269 F-Score: 0.298150 
+
+Gauss_7_50_0.txt 
+Average: Time: 0.053589 F-Score: 0.576828 
+
+Gauss_7_50_10.txt 
+Average: Time: 0.062078 F-Score: 0.531317 
+
+Gauss_7_50_5.txt 
+Average: Time: 0.051544 F-Score: 0.525253 
+
+Gauss_7_5_0.txt 
+Average: Time: 0.112975 F-Score: 0.360111 
+
+Gauss_7_5_10.txt 
+Average: Time: 0.083555 F-Score: 0.355573 
+
+Gauss_7_5_5.txt 
+Average: Time: 0.120641 F-Score: 0.415352 
+
