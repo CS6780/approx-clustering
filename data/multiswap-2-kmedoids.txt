@@ -1,0 +1,346 @@
+soybean-small.data 
+2-swap Average: Time: 0.049323 Objective: 115.147865 AMI: 0.708173
+2-swap Best Case: Time: 0.027018 Objective: 113.804769 AMI: 0.721336
+2-swap Worst Case: Time: 0.079374 Objective: 117.712791 AMI: 0.664278
+
+iris.data 
+2-swap Average: Time: 0.229418 Objective: 98.561311 AMI: 0.757146
+2-swap Best Case: Time: 0.165167 Objective: 98.213677 AMI: 0.775961
+2-swap Worst Case: Time: 0.284637 Objective: 99.477763 AMI: 0.748372
+
+Gauss_3_5_0.txt 
+2-swap Average: Time: 4.138237 Objective: 194.871856 AMI: 0.875817
+2-swap Best Case: Time: 3.341922 Objective: 194.811251 AMI: 0.877529
+2-swap Worst Case: Time: 5.678257 Objective: 194.897829 AMI: 0.875082
+
+Gauss_3_5_5.txt 
+2-swap Average: Time: 5.319606 Objective: 225.523520 AMI: 0.689874
+2-swap Best Case: Time: 4.401528 Objective: 225.371333 AMI: 0.707139
+2-swap Worst Case: Time: 6.425972 Objective: 225.697219 AMI: 0.669366
+
+Gauss_3_5_10.txt 
+2-swap Average: Time: 3.023646 Objective: 159.381343 AMI: 0.658664
+2-swap Best Case: Time: 2.131106 Objective: 158.261881 AMI: 0.685818
+2-swap Worst Case: Time: 3.996430 Objective: 161.623663 AMI: 0.616077
+
+Gauss_3_10_0.txt 
+2-swap Average: Time: 6.299698 Objective: 147.906228 AMI: 0.695888
+2-swap Best Case: Time: 4.693527 Objective: 146.612155 AMI: 0.706434
+2-swap Worst Case: Time: 9.691984 Objective: 149.441502 AMI: 0.681048
+
+Gauss_3_10_5.txt 
+2-swap Average: Time: 6.951616 Objective: 144.092715 AMI: 0.531979
+2-swap Best Case: Time: 4.200346 Objective: 142.505508 AMI: 0.548312
+2-swap Worst Case: Time: 12.430919 Objective: 146.504797 AMI: 0.516589
+
+Gauss_3_10_10.txt 
+2-swap Average: Time: 10.645743 Objective: 202.084506 AMI: 0.657435
+2-swap Best Case: Time: 6.343063 Objective: 200.864481 AMI: 0.676028
+2-swap Worst Case: Time: 14.551380 Objective: 203.689037 AMI: 0.632263
+
+Gauss_3_50_0.txt 
+2-swap Average: Time: 49.963954 Objective: 111.125621 AMI: 0.496936
+2-swap Best Case: Time: 34.097200 Objective: 110.245334 AMI: 0.512463
+2-swap Worst Case: Time: 67.951557 Objective: 112.596084 AMI: 0.481249
+
+Gauss_3_50_5.txt 
+2-swap Average: Time: 33.212905 Objective: 95.927259 AMI: 0.385751
+2-swap Best Case: Time: 24.948657 Objective: 95.458151 AMI: 0.419263
+2-swap Worst Case: Time: 49.148396 Objective: 96.269519 AMI: 0.367622
+
+Gauss_3_50_10.txt 
+2-swap Average: Time: 32.138708 Objective: 97.084468 AMI: 0.404470
+2-swap Best Case: Time: 21.051118 Objective: 96.055609 AMI: 0.419800
+2-swap Worst Case: Time: 51.096870 Objective: 97.659613 AMI: 0.398672
+
+Gauss_5_5_0.txt 
+2-swap Average: Time: 8.062645 Objective: 352.137554 AMI: 0.994392
+2-swap Best Case: Time: 6.494544 Objective: 352.137554 AMI: 0.994392
+2-swap Worst Case: Time: 11.201086 Objective: 352.137554 AMI: 0.994392
+
+Gauss_5_5_5.txt 
+2-swap Average: Time: 2.382404 Objective: 196.467415 AMI: 0.744222
+2-swap Best Case: Time: 1.827203 Objective: 195.432477 AMI: 0.752210
+2-swap Worst Case: Time: 4.028770 Objective: 198.505456 AMI: 0.734554
+
+Gauss_5_5_10.txt 
+2-swap Average: Time: 2.575064 Objective: 215.236745 AMI: 0.747142
+2-swap Best Case: Time: 1.744410 Objective: 213.739558 AMI: 0.828658
+2-swap Worst Case: Time: 4.625798 Objective: 216.585880 AMI: 0.707484
+
+Gauss_5_10_0.txt 
+2-swap Average: Time: 18.654213 Objective: 346.141509 AMI: 0.964658
+2-swap Best Case: Time: 10.201942 Objective: 345.883987 AMI: 0.966973
+2-swap Worst Case: Time: 27.029674 Objective: 346.527791 AMI: 0.963114
+
+Gauss_5_10_5.txt 
+2-swap Average: Time: 9.427700 Objective: 272.554884 AMI: 0.736556
+2-swap Best Case: Time: 6.450350 Objective: 270.742373 AMI: 0.763293
+2-swap Worst Case: Time: 12.134604 Objective: 274.389171 AMI: 0.672219
+
+Gauss_5_10_10.txt 
+2-swap Average: Time: 12.185607 Objective: 294.274189 AMI: 0.872385
+2-swap Best Case: Time: 8.100693 Objective: 292.196371 AMI: 0.880982
+2-swap Worst Case: Time: 17.570877 Objective: 295.775328 AMI: 0.863044
+
+Gauss_5_50_0.txt 
+2-swap Average: Time: 43.421017 Objective: 190.921871 AMI: 0.700382
+2-swap Best Case: Time: 25.553093 Objective: 189.950413 AMI: 0.729444
+2-swap Worst Case: Time: 77.362464 Objective: 192.320844 AMI: 0.685086
+
+Gauss_5_50_5.txt 
+2-swap Average: Time: 39.614374 Objective: 180.594185 AMI: 0.631464
+2-swap Best Case: Time: 29.889337 Objective: 179.681576 AMI: 0.650534
+2-swap Worst Case: Time: 52.367043 Objective: 182.052468 AMI: 0.610436
+
+Gauss_5_50_10.txt 
+2-swap Average: Time: 47.001689 Objective: 232.222454 AMI: 0.650491
+2-swap Best Case: Time: 31.701906 Objective: 230.695779 AMI: 0.671305
+2-swap Worst Case: Time: 79.452802 Objective: 233.515885 AMI: 0.629283
+
+Gauss_7_5_0.txt 
+2-swap Average: Time: 5.005287 Objective: 349.436194 AMI: 1.000000
+2-swap Best Case: Time: 3.186097 Objective: 349.436194 AMI: 1.000000
+2-swap Worst Case: Time: 8.229354 Objective: 349.436194 AMI: 1.000000
+
+Gauss_7_5_5.txt 
+2-swap Average: Time: 5.737804 Objective: 369.041804 AMI: 0.846828
+2-swap Best Case: Time: 3.602037 Objective: 367.563031 AMI: 0.851630
+2-swap Worst Case: Time: 7.678821 Objective: 371.455142 AMI: 0.844578
+
+Gauss_7_5_10.txt 
+2-swap Average: Time: 4.848523 Objective: 355.914704 AMI: 0.979090
+2-swap Best Case: Time: 3.684399 Objective: 355.914704 AMI: 0.979090
+2-swap Worst Case: Time: 5.397710 Objective: 355.914704 AMI: 0.979090
+
+Gauss_7_10_0.txt 
+2-swap Average: Time: 10.473569 Objective: 350.880567 AMI: 0.984142
+2-swap Best Case: Time: 8.139623 Objective: 350.880567 AMI: 0.984142
+2-swap Worst Case: Time: 14.265020 Objective: 350.880567 AMI: 0.984142
+
+Gauss_7_10_5.txt 
+2-swap Average: Time: 6.870323 Objective: 301.515657 AMI: 0.994393
+2-swap Best Case: Time: 5.637992 Objective: 301.515657 AMI: 0.994393
+2-swap Worst Case: Time: 8.004905 Objective: 301.515657 AMI: 0.994393
+
+Gauss_7_10_10.txt 
+2-swap Average: Time: 9.322048 Objective: 355.407868 AMI: 0.853952
+2-swap Best Case: Time: 5.773725 Objective: 353.705780 AMI: 0.863069
+2-swap Worst Case: Time: 12.522732 Objective: 357.467803 AMI: 0.845255
+
+Gauss_7_50_0.txt 
+2-swap Average: Time: 42.999236 Objective: 259.758903 AMI: 0.833245
+2-swap Best Case: Time: 23.785329 Objective: 258.612019 AMI: 0.854167
+2-swap Worst Case: Time: 62.008951 Objective: 262.015766 AMI: 0.816938
+
+Gauss_7_50_5.txt 
+2-swap Average: Time: 34.334646 Objective: 259.190395 AMI: 0.815356
+2-swap Best Case: Time: 24.943827 Objective: 257.928345 AMI: 0.826339
+2-swap Worst Case: Time: 53.100103 Objective: 260.897808 AMI: 0.802101
+
+Gauss_7_50_10.txt 
+2-swap Average: Time: 50.174740 Objective: 302.173060 AMI: 0.804358
+2-swap Best Case: Time: 36.489381 Objective: 300.989579 AMI: 0.819452
+2-swap Worst Case: Time: 70.669666 Objective: 303.554919 AMI: 0.785386
+
+pmed1.txt 
+2-swap Average: Time: 0.161371 Objective: 5849.200000 AMI: 0.000000
+2-swap Best Case: Time: 0.124147 Objective: 5819.000000 AMI: 0.000000
+2-swap Worst Case: Time: 0.208032 Objective: 5893.000000 AMI: 0.000000
+
+pmed2.txt 
+2-swap Average: Time: 0.332273 Objective: 4138.200000 AMI: 0.000000
+2-swap Best Case: Time: 0.189650 Objective: 4093.000000 AMI: 0.000000
+2-swap Worst Case: Time: 0.492905 Objective: 4219.000000 AMI: 0.000000
+
+pmed3.txt 
+2-swap Average: Time: 0.288806 Objective: 4292.600000 AMI: 0.000000
+2-swap Best Case: Time: 0.182207 Objective: 4250.000000 AMI: 0.000000
+2-swap Worst Case: Time: 0.453278 Objective: 4349.000000 AMI: 0.000000
+
+pmed4.txt 
+2-swap Average: Time: 0.585604 Objective: 3091.500000 AMI: 0.000000
+2-swap Best Case: Time: 0.387320 Objective: 3046.000000 AMI: 0.000000
+2-swap Worst Case: Time: 0.953117 Objective: 3157.000000 AMI: 0.000000
+
+pmed5.txt 
+2-swap Average: Time: 0.747929 Objective: 1399.100000 AMI: 0.000000
+2-swap Best Case: Time: 0.487993 Objective: 1362.000000 AMI: 0.000000
+2-swap Worst Case: Time: 1.251782 Objective: 1436.000000 AMI: 0.000000
+
+pmed6.txt 
+2-swap Average: Time: 0.556019 Objective: 7889.500000 AMI: -0.000000
+2-swap Best Case: Time: 0.428642 Objective: 7824.000000 AMI: -0.000000
+2-swap Worst Case: Time: 0.705031 Objective: 7975.000000 AMI: -0.000000
+
+pmed7.txt 
+2-swap Average: Time: 1.255234 Objective: 5689.100000 AMI: -0.000000
+2-swap Best Case: Time: 0.783561 Objective: 5639.000000 AMI: -0.000000
+2-swap Worst Case: Time: 1.729912 Objective: 5850.000000 AMI: -0.000000
+
+pmed8.txt 
+2-swap Average: Time: 2.639238 Objective: 4538.300000 AMI: -0.000000
+2-swap Best Case: Time: 1.479156 Objective: 4472.000000 AMI: 0.000000
+2-swap Worst Case: Time: 3.833289 Objective: 4622.000000 AMI: -0.000000
+
+pmed9.txt 
+2-swap Average: Time: 4.795381 Objective: 2800.000000 AMI: -0.000000
+2-swap Best Case: Time: 2.841805 Objective: 2749.000000 AMI: -0.000000
+2-swap Worst Case: Time: 6.639789 Objective: 2900.000000 AMI: -0.000000
+
+pmed10.txt 
+2-swap Average: Time: 7.276164 Objective: 1303.600000 AMI: -0.000000
+2-swap Best Case: Time: 4.226952 Objective: 1271.000000 AMI: -0.000000
+2-swap Worst Case: Time: 11.443297 Objective: 1332.000000 AMI: -0.000000
+
+pmed11.txt 
+2-swap Average: Time: 1.243178 Objective: 7737.100000 AMI: -0.000000
+2-swap Best Case: Time: 0.929679 Objective: 7696.000000 AMI: 0.000000
+2-swap Worst Case: Time: 1.741521 Objective: 7833.000000 AMI: -0.000000
+
+pmed12.txt 
+2-swap Average: Time: 2.418665 Objective: 6681.700000 AMI: -0.000000
+2-swap Best Case: Time: 1.870088 Objective: 6640.000000 AMI: 0.000000
+2-swap Worst Case: Time: 3.035310 Objective: 6743.000000 AMI: -0.000000
+
+pmed13.txt 
+2-swap Average: Time: 8.403449 Objective: 4466.700000 AMI: -0.000000
+2-swap Best Case: Time: 5.498160 Objective: 4428.000000 AMI: 0.000000
+2-swap Worst Case: Time: 12.846478 Objective: 4500.000000 AMI: -0.000000
+
+pmed14.txt 
+2-swap Average: Time: 17.398685 Objective: 3041.800000 AMI: -0.000000
+2-swap Best Case: Time: 10.621044 Objective: 3011.000000 AMI: 0.000000
+2-swap Worst Case: Time: 24.720753 Objective: 3113.000000 AMI: -0.000000
+
+pmed15.txt 
+2-swap Average: Time: 28.654703 Objective: 1780.700000 AMI: -0.000000
+2-swap Best Case: Time: 14.404216 Objective: 1753.000000 AMI: -0.000000
+2-swap Worst Case: Time: 42.124407 Objective: 1847.000000 AMI: -0.000000
+
+pmed16.txt 
+2-swap Average: Time: 2.410641 Objective: 8204.600000 AMI: -0.000000
+2-swap Best Case: Time: 2.004787 Objective: 8173.000000 AMI: 0.000000
+2-swap Worst Case: Time: 2.732043 Objective: 8289.000000 AMI: -0.000000
+
+pmed17.txt 
+2-swap Average: Time: 4.809203 Objective: 7090.700000 AMI: -0.000000
+2-swap Best Case: Time: 3.071031 Objective: 7007.000000 AMI: -0.000000
+2-swap Worst Case: Time: 7.770861 Objective: 7196.000000 AMI: -0.000000
+
+pmed18.txt 
+2-swap Average: Time: 23.319188 Objective: 4888.100000 AMI: -0.000000
+2-swap Best Case: Time: 18.874195 Objective: 4865.000000 AMI: -0.000000
+2-swap Worst Case: Time: 33.768969 Objective: 4927.000000 AMI: -0.000000
+
+pmed19.txt 
+2-swap Average: Time: 47.851286 Objective: 2903.100000 AMI: -0.000000
+2-swap Best Case: Time: 34.597683 Objective: 2876.000000 AMI: -0.000000
+2-swap Worst Case: Time: 68.864357 Objective: 2928.000000 AMI: -0.000000
+
+pmed20.txt 
+2-swap Average: Time: 68.230589 Objective: 1837.800000 AMI: -0.000000
+2-swap Best Case: Time: 42.511444 Objective: 1820.000000 AMI: -0.000000
+2-swap Worst Case: Time: 86.555648 Objective: 1866.000000 AMI: -0.000000
+
+pmed21.txt 
+2-swap Average: Time: 4.182178 Objective: 9168.600000 AMI: -0.000000
+2-swap Best Case: Time: 2.542749 Objective: 9138.000000 AMI: 0.000000
+2-swap Worst Case: Time: 5.928990 Objective: 9271.000000 AMI: -0.000000
+
+pmed22.txt 
+2-swap Average: Time: 7.452694 Objective: 8639.400000 AMI: -0.000000
+2-swap Best Case: Time: 5.222015 Objective: 8579.000000 AMI: -0.000000
+2-swap Worst Case: Time: 10.322800 Objective: 8716.000000 AMI: -0.000000
+
+pmed23.txt 
+2-swap Average: Time: 52.312326 Objective: 4692.000000 AMI: -0.000000
+2-swap Best Case: Time: 32.292539 Objective: 4668.000000 AMI: -0.000000
+2-swap Worst Case: Time: 62.539946 Objective: 4746.000000 AMI: -0.000000
+
+pmed24.txt 
+2-swap Average: Time: 88.483754 Objective: 3016.400000 AMI: -0.000000
+2-swap Best Case: Time: 65.154533 Objective: 2980.000000 AMI: -0.000000
+2-swap Worst Case: Time: 134.129075 Objective: 3037.000000 AMI: -0.000000
+
+pmed25.txt 
+2-swap Average: Time: 146.398461 Objective: 1891.200000 AMI: -0.000000
+2-swap Best Case: Time: 93.079054 Objective: 1870.000000 AMI: 0.000000
+2-swap Worst Case: Time: 224.589259 Objective: 1909.000000 AMI: -0.000000
+
+pmed26.txt 
+2-swap Average: Time: 5.603876 Objective: 9942.200000 AMI: -0.000000
+2-swap Best Case: Time: 3.789882 Objective: 9917.000000 AMI: 0.000000
+2-swap Worst Case: Time: 7.931516 Objective: 9980.000000 AMI: -0.000000
+
+pmed27.txt 
+2-swap Average: Time: 10.715495 Objective: 8384.800000 AMI: 0.000000
+2-swap Best Case: Time: 8.941980 Objective: 8332.000000 AMI: 0.000000
+2-swap Worst Case: Time: 12.965215 Objective: 8550.000000 AMI: -0.000000
+
+pmed28.txt 
+2-swap Average: Time: 98.475763 Objective: 4564.200000 AMI: 0.000000
+2-swap Best Case: Time: 67.194792 Objective: 4539.000000 AMI: 0.000000
+2-swap Worst Case: Time: 178.066196 Objective: 4603.000000 AMI: 0.000000
+
+pmed29.txt 
+2-swap Average: Time: 172.808429 Objective: 3105.000000 AMI: 0.000000
+2-swap Best Case: Time: 131.797642 Objective: 3076.000000 AMI: 0.000000
+2-swap Worst Case: Time: 222.441743 Objective: 3143.000000 AMI: 0.000000
+
+pmed30.txt 
+2-swap Average: Time: 249.689636 Objective: 2053.200000 AMI: 0.000000
+2-swap Best Case: Time: 184.225682 Objective: 2036.000000 AMI: 0.000000
+2-swap Worst Case: Time: 377.948284 Objective: 2076.000000 AMI: 0.000000
+
+pmed31.txt 
+2-swap Average: Time: 6.636644 Objective: 10093.600000 AMI: -0.000000
+2-swap Best Case: Time: 4.411606 Objective: 10086.000000 AMI: 0.000000
+2-swap Worst Case: Time: 9.402066 Objective: 10126.000000 AMI: -0.000000
+
+pmed32.txt 
+2-swap Average: Time: 12.864804 Objective: 9397.100000 AMI: -0.000000
+2-swap Best Case: Time: 9.612021 Objective: 9315.000000 AMI: 0.000000
+2-swap Worst Case: Time: 17.160443 Objective: 9565.000000 AMI: -0.000000
+
+pmed33.txt 
+2-swap Average: Time: 158.473254 Objective: 4780.500000 AMI: -0.000000
+2-swap Best Case: Time: 118.533153 Objective: 4747.000000 AMI: -0.000000
+2-swap Worst Case: Time: 254.338704 Objective: 4818.000000 AMI: -0.000000
+
+pmed34.txt 
+2-swap Average: Time: 287.824277 Objective: 3074.900000 AMI: -0.000000
+2-swap Best Case: Time: 199.388544 Objective: 3053.000000 AMI: -0.000000
+2-swap Worst Case: Time: 360.761538 Objective: 3088.000000 AMI: -0.000000
+
+pmed35.txt 
+2-swap Average: Time: 9.288123 Objective: 10468.500000 AMI: -0.000000
+2-swap Best Case: Time: 6.420202 Objective: 10400.000000 AMI: 0.000000
+2-swap Worst Case: Time: 11.625176 Objective: 10583.000000 AMI: -0.000000
+
+pmed36.txt 
+2-swap Average: Time: 24.049442 Objective: 10040.000000 AMI: -0.000000
+2-swap Best Case: Time: 16.080303 Objective: 9963.000000 AMI: 0.000000
+2-swap Worst Case: Time: 36.113667 Objective: 10082.000000 AMI: -0.000000
+
+pmed37.txt 
+2-swap Average: Time: 282.266347 Objective: 5144.700000 AMI: -0.000000
+2-swap Best Case: Time: 192.780035 Objective: 5110.000000 AMI: -0.000000
+2-swap Worst Case: Time: 359.610890 Objective: 5183.000000 AMI: -0.000000
+
+pmed38.txt 
+2-swap Average: Time: 12.223503 Objective: 11131.000000 AMI: 0.000000
+2-swap Best Case: Time: 9.430219 Objective: 11060.000000 AMI: 0.000000
+2-swap Worst Case: Time: 15.759046 Objective: 11199.000000 AMI: -0.000000
+
+pmed39.txt 
+2-swap Average: Time: 25.516392 Objective: 9487.300000 AMI: 0.000000
+2-swap Best Case: Time: 17.165206 Objective: 9423.000000 AMI: 0.000000
+2-swap Worst Case: Time: 35.191138 Objective: 9574.000000 AMI: -0.000000
+
+pmed40.txt 
+2-swap Average: Time: 391.738354 Objective: 5227.500000 AMI: 0.000000
+2-swap Best Case: Time: 211.184798 Objective: 5203.000000 AMI: 0.000000
+2-swap Worst Case: Time: 595.952319 Objective: 5271.000000 AMI: 0.000000
+
+
