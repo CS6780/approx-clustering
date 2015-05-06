@@ -148,25 +148,18 @@ def updateS(S, psiOld, distances, sorted_distances, H, F, delta, h_perc):
     return list(S), psiOld, False
 
 # find a random initial set represented as a frozenset
-def initialS(k,n,max_iter=1000):
-    X = frozenset([i for i in range(n)])
-    S = frozenset()
-    i = 0
-    while (len(S) < k):
-        j = np.random.choice(list(X))
-        X = X.difference([j])
-        S = S.union([j])
-    return S
+def initialS(k,n):
+    S = np.random.choice([i for i in range(n)], size=k, replace=False)
+    return frozenset(S)
 
 
 # supermodular looks for a locally optimal solution with a potential function
-def cluster(distances, k, warm_start= None, epsilon=5, h_perc=50, \
-                 max_iter=100):
+def cluster(distances, k, warm_start= None, epsilon=5, h_perc=50):
     # Find Initial S
     n = distances.shape[0]
     X = frozenset([i for i in range(n)])
     if warm_start is None:
-        S = initialS(n-k,n,max_iter)
+        S = initialS(n-k,n)
     else:
         S = X.difference(frozenset(warm_start))
 
@@ -212,6 +205,7 @@ if __name__ == '__main__':
     X, labels_true = make_blobs(n_samples=100, centers=centers, cluster_std=0.5,
                             random_state=999)
     distances = pairwise_distances(X)
+    
     print(cluster(distances,3,None,10,100,100))
 
     print("curvature is ", totalCurvature(distances))

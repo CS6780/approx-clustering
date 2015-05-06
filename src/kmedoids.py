@@ -5,19 +5,11 @@ import random
 
 def cluster(distances, k=3, max_iter=1000, warm_start = None):
     m = distances.shape[0] # number of points
-
     # Pick k random medoids.
     if warm_start is None:
-        curr_medoids = np.array([random.randint(0, m - 1) for _ in range(k)])
-        i = 0
-        while (len(np.unique(curr_medoids)) < k):
-            i+=1
-            if i > max_iter:
-                curr_medoids = np.array([i for i in range(k)])
-                break
-            curr_medoids = np.array([random.randint(0, m - 1) for _ in range(k)])
+        curr_medoids = np.random.choice([i for i in range(m)],size=k,replace=False)
     else:
-        curr_medoids = warm_start
+        curr_medoids = np.array(warm_start)
         
     old_medoids = np.array([-1]*k) # Doesn't matter what we initialize these to.
     new_medoids = np.array([-1]*k)
@@ -25,7 +17,7 @@ def cluster(distances, k=3, max_iter=1000, warm_start = None):
     i = 0
    
     # Until the medoids stop updating, do the following:
-    while not ((old_medoids == curr_medoids).all()) and i < max_iter:
+    while not np.array_equal(old_medoids,curr_medoids) and i < max_iter:
         # Assign each point to cluster with closest medoid.
         clusters = assign_points_to_clusters(curr_medoids, distances)
 

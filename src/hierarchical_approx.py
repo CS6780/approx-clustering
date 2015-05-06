@@ -19,50 +19,58 @@ def next_assignment(Z, k, assignment):
 # Calls k-median algorithm
 def k_cluster_alg(k, distances, alg, warm_start = None):
     if alg[0] == "multiswaps":
-        centers, cost = multiswaps.cluster(distances, k, alg[1])
+        clusters, centers = multiswaps.cluster(distances, k, alg[1])
+    elif alg[0] == "multiswaps-plus":
+        clusters, centers = multiswaps.cluster2(distances, k, alg[1])
     else:
         clusters, centers = kmedoids.cluster(distances, k, 1000, warm_start)
-        distances_to_centers = distances[:,centers]
-        cost = sum( np.min(distances_to_centers, axis=1))
+    distances_to_centers = distances[:,centers]
+    cost = sum( np.min(distances_to_centers, axis=1))
               
     return centers, cost
 
 # Finds the solutions with costs in buckets [lb, ub] with the fewest
 # cluster centers
-def bucketed_solns(distances, beta, beta_0, alg):
+def bucketed_solns(distances, beta, beta_0, alg, logn = False):
     n = distances.shape[0]
-    all_centers = [[] for i in range(n)]
-    all_costs = [0 for i in range(n)]
-    
-    for k in range(1, n):
+    all_centers = []
+    all_costs = []
+
+    k = 1
+    while k < n:
         if k == 1:
             k_centers, k_cost = k_cluster_alg(k, distances, alg)
         else:
             warm_start = k_centers
             non_centers = [i for i in range(n) if i not in k_centers]
-            warm_start = np.append(warm_start, non_centers[0])
+            warm_start = np.append(warm_start,np.random.choice(\
+                non_centers,size=k-len(k_centers), replace=False))
             k_centers, k_cost = k_cluster_alg(k, distances, alg, warm_start)
             
-        if k != 1 and k_cost > all_costs[k-1]:
-            all_centers[k] = all_centers[k-1]
-            all_costs[k] = all_costs[k-1]
+            
+        if k == 1 or k_cost < all_costs[-1]:
+            all_centers.append(k_centers)
+            all_costs.append(k_cost)
+            
+        if logn:
+            k = 2*k
         else:
-            all_centers[k] = k_centers
-            all_costs[k] = k_cost
+            k += 1
     
     bucketed_centers = []
     lb = 0
     ub = beta_0
     k = n
     while k>1:
-        next_bucket = [i for i in range(1,n) if all_costs[i]<= ub and \
+        next_bucket = [i for i in range(len(all_costs)) if all_costs[i]<= ub and \
                        all_costs[i] > lb]
         if len(next_bucket) > 0 and len(next_bucket) != n:
-            k = min(next_bucket)
-            bucketed_centers.append(all_centers[k])
+            x = min(next_bucket)
+            k = len(all_centers[x])
+            bucketed_centers.append(all_centers[x])
         lb = ub
         ub = ub*beta
-
+        
     return bucketed_centers
 
 def replacement_center(centers, points, distances):
@@ -98,7 +106,7 @@ def nest(curr_centers, curr_clusters, next_centers, distances, Z):
         
     
     
-def cluster(distances, alg = ["k-medoids", None], random = False):
+def cluster(distances, alg = ["k-medoids", None], random = False, logn = False):
     n = distances.shape[0]
     if random:
         beta = 6.355
@@ -112,7 +120,7 @@ def cluster(distances, alg = ["k-medoids", None], random = False):
     curr_clusters = [i for i in range(n)]
     k = n
 
-    centers = bucketed_solns(distances, beta, beta_0, alg)
+    centers = bucketed_solns(distances, beta, beta_0, alg, logn)
     
     for i in range(len(centers)):
         # Find next bucket's representative
@@ -126,17 +134,17 @@ def cluster(distances, alg = ["k-medoids", None], random = False):
     
 if __name__ == '__main__':
     centers = [[1, 1], [-1, -1], [1, -1]]
-    X, labels_true = make_blobs(n_samples=6, centers=centers, cluster_std=0.5,
+    X, labels_true = make_blobs(n_samples=50, centers=centers, cluster_std=0.5,
                                 random_state=999)
     distances = pairwise_distances(X)
 
-    Z= cluster(distances,["k-medoids",None],0)
-    print Z
+    Z= cluster(distances,["multiswaps",1],0,0)
+    #print Z
     n=6
     assignment = [i for i in range(n)]
     for k in range(n-1,0,-1):
         assignment = next_assignment(Z,k,assignment)
-        print assignment
+        #print assignment
     
         
 
