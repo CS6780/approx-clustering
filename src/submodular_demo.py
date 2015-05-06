@@ -212,6 +212,6 @@ if __name__ == '__main__':
     X, labels_true = make_blobs(n_samples=100, centers=centers, cluster_std=0.5,
                             random_state=999)
     distances = pairwise_distances(X)
-    print cluster(distances,3,None,10,100,100)
+    print(cluster(distances,3,None,10,100,100))
 
-    print "curvature is ", totalCurvature(distances)
+    print("curvature is ", totalCurvature(distances))

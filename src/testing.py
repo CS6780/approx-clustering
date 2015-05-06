@@ -39,16 +39,17 @@ def test_clustering(cluster_alg, distances, labels_true, N=10):
 
 if __name__ == '__main__':
     
-    X, y, n, k = LoadData("data/Real Data Sets/soybean-small.data.txt", cluster_loc=0, split=0)
+    X, y, n, k = LoadData("data/Gaussian2/Gauss_7_5_10.txt", cluster_loc=1, split=1)
+    # X, y, n, k = LoadData("data/Real Data Sets/soybean-small.data.txt", cluster_loc=0, split=0)
     distances = pairwise_distances(X)
 
-    # p = 3
-    # multi_swaps = lambda: multiswaps.cluster(distances, k, p, epsilon=1)
-    # avg_tim, avg_obj, avg_ami, min_tim, min_obj, min_ami, max_tim, \
-    #          max_obj, max_ami = test_clustering(multi_swaps, distances, y, N=10)
-    # print("%s-swap Average: Time: %f Objective: %f AMI: %f" % (p, avg_tim, avg_obj, avg_ami))
-    # print("%s-swap Best Case: Time: %f Objective: %f AMI: %f" % (p, min_tim, min_obj, max_ami))
-    # print("%s-swap Worst Case: Time: %f Objective: %f AMI: %f" % (p, max_tim, max_obj, min_ami))
+    p = 3
+    multi_swaps = lambda: multiswaps.cluster(distances, k, p, epsilon=1)
+    avg_tim, avg_obj, avg_ami, min_tim, min_obj, min_ami, max_tim, \
+             max_obj, max_ami = test_clustering(multi_swaps, distances, y, N=1)
+    print("%s-swap Average: Time: %f Objective: %f AMI: %f" % (p, avg_tim, avg_obj, avg_ami))
+    print("%s-swap Best Case: Time: %f Objective: %f AMI: %f" % (p, min_tim, min_obj, max_ami))
+    print("%s-swap Worst Case: Time: %f Objective: %f AMI: %f" % (p, max_tim, max_obj, min_ami))
 
     # k_medoids = lambda: kmedoids.cluster(distances, k=k)
     # avg_obj, avg_ami, min_obj, min_ami, max_obj, max_ami = test_clustering(k_medoids, distances, y, N=10)
@@ -59,11 +60,11 @@ if __name__ == '__main__':
     # for i in range(2):
     #     submodular_demo.supermodular_list(X, k, h_perc=10)
 
-    super_modular = lambda: (submodular_demo.supermodular_list(X, k, h_perc=10), None)
-    _, avg_obj, avg_ami, _, min_obj, min_ami, _, max_obj, max_ami = test_clustering(super_modular, distances, y, N=3)
-    print("SuperModular Average: Objective: %f AMI: %f" % (avg_obj, avg_ami))
-    print("SuperModular Best Case: Objective: %f AMI: %f" % (min_obj, max_ami))
-    print("SuperModular Worst Case: Objective: %f AMI: %f" % (max_obj, min_ami))
+    # super_modular = lambda: (submodular_demo.supermodular_list(X, k, h_perc=10), None)
+    # _, avg_obj, avg_ami, _, min_obj, min_ami, _, max_obj, max_ami = test_clustering(super_modular, distances, y, N=3)
+    # print("SuperModular Average: Objective: %f AMI: %f" % (avg_obj, avg_ami))
+    # print("SuperModular Best Case: Objective: %f AMI: %f" % (min_obj, max_ami))
+    # print("SuperModular Worst Case: Objective: %f AMI: %f" % (max_obj, min_ami))
 
 
 

@@ -56,7 +56,7 @@ def search_for_swap(medoids, obj, distances, FDict, p=2, delta=0):
                     new_objective = objective(new_medoids, distances, FDict)
                     if new_objective < (1.0-delta)*prev_objective:
                         improvement = True
-                        #print("Improvement: %f" % (prev_objective - new_objective))
+                        # print("Improvement: %f" % (prev_objective - new_objective))
                         return new_medoids, new_objective, improvement
         else:
             iters = 0
@@ -68,7 +68,7 @@ def search_for_swap(medoids, obj, distances, FDict, p=2, delta=0):
                 new_objective = objective(new_medoids, distances, FDict)
                 if new_objective < (1.0-delta)*prev_objective:
                     improvement = True
-                    #print("Improvement: %f" % (prev_objective - new_objective))
+                    # print("Improvement: %f" % (prev_objective - new_objective))
                     return new_medoids, new_objective, improvement
                 
     return medoids, prev_objective, improvement
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     X, labels_true = make_blobs(n_samples=900, centers=centers, cluster_std=0.5,
                             random_state=999)
     distances = pairwise_distances(X)
-    print cluster(distances,3,2,[0,1,2],0.1)
+    print(cluster(distances,3,2,[0,1,2],0.1))
 
 
 
