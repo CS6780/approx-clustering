@@ -164,45 +164,23 @@ Note that $\psi$ requires summing an exponential number of terms. However, we ca
 \[ Pr[ | \hat{\psi}(A) - \psi(A) | \geq \delta ] = O(M^{-1}). \]
 By setting $M$ large enough (polynomially large), the algorithm will converge in polynomial time and will return a solution satisying the above guarantee with high probability \cite{Sviridenko}. 
  
-\subsection{Implementation}
+\subsection{Implementation and Results}
 
-We will compare the above algorithms against $k$-means, $k$-medoids, PAM, affinity propagation, and Shi and Meila's spectral algorithm. All these methods except $k$-medoids and PAM are implemented in python's scikit-learn package. For comparisons against affinity propagation, we will first observe how many clusters the algorithm outputs and use that as input for our proposed algorithms. We implement the above local search algorithm for $p=2, 3,4$ so the computation time is reasonable. 
+We implement the above local search algorithm for $p=1, 2, 3$ so the computation time is reasonable, and compare the above algorithms against $k$-medoids and Shi and Meila's spectral algorithm in time, AMI, and approximation ratio.  Note that for $p=1$, the local search algorithm is equivalent to PAM.  In order to calculate approximation ratios, Gurobi was used to compute the global optimum for each data set.
 
-Given a true clustering, we will use the adjusted mutual information (AMI) measure to score the accuracy of each method. AMI measures the agreement of two assignments and is normalized to reflect chance so that a perfect labeling receives a score of 1 and an independent random labeling receives a score of 0 in expectation \cite{Vinh}. For each data set, we will also report the $k$-median objective function value for that clustering, the guaranteed approximation ratio, and the computation time. 
+To achieve reasonable computation times for the local search and supermodular function minimization algorithms, at each iteration we first consider nearby swaps, as well as placing 
 
-The data sets we chose to use for comparison were 
+We also considered a hybrid heuristic algorithm where we ran $k$-medoids on the result of the local search algorithm.  This is motivated by the fact that, similar to Lloyd's algorithm, $k$-medoids will quickly converge to local optima.  So 
 
-NEED TO DECIDE:
-OR library $p$-median.
+When information on true labels is available, we use adjusted mutual information (AMI) measure to score accuracy of predicted clusters. AMI measures the agreement of two assignments and is normalized to reflect chance so that a perfect labeling receives a score of 1 and an independent random labeling receives a score of 0 in expectation.  See \cite{Vinh} for more information. For each data set and each clustering method, we also report objective function values, the approximation ratio, and the computation time. 
 
-\subsection{Results}
-
-\section{Hierarchical Clustering Approximation Algorithms}
-Again, suppose we have a set $X$ and a distance metric $d(i,j)$ for all $i,j \in X$. In the hierarchical setting, we will represent a solution to the $k$-median problem as a pair $(S, a)$ where $S \subseteq X$ such that $|S| \leq k$ and $a$ is an assignment function that maps each $i \in X$ to a center in $S$. Therefore, for any $i \in S$, $a^{-1}(i)$ will be all points in the cluster centered at $i$. We define
-\[ \mathrm{cost}(S,a) := \sum_{i \in X} d(i, a(i)) . \]
-
-Given solution pairs $(S_1, a_1)$ and $(S_2, a_2)$, we say that $(S_1, a_1)$ is \emph{nested} in $(S_2, a_2)$ if 
-\begin{enumerate}
-\item $S_1 \subset S_2$, 
-\item  $\forall  j \in X$, if $a_2(j) \in S_1$, then $a_1(j) = a_2(j)$, and 
-\item $\forall j, k \in X$, if $a_2(j) = a_2(k)$, then $a_1(j) = a_1(k)$.
-\end{enumerate}
- A solution to the hierarchical clustering problem is therefore a chain of nested solutions. However, we want this solution to stay close to the optimal $k$-median solutions when looking at any level of the algorithm.  
-Consider any $k$-median algorithm $\mathcal{A}$, such as the algorithms above. After running $\mathcal{A}$ for all potential values of $k$, Lin et al.~\cite{Lin} introduce  augmentation step that will nest these clusterings so that they fit into the hierarchical framework and only increase the costs by a bounded factor. 
-
-First, we set $i=1$, $S_0 = \emptyset$, $\beta = 3+\sqrt{3}$, and $\beta_0 = 1$ (for the randomized algorithm we switch $\beta = 6.355$ and set $\beta_0 = \beta^X$, where $X$ is chosen from a uniform distribution on $[0,1]$). Let $V_i$ be the solutions generated from running $\mathcal{A}$ for $k=n-i+1$ for $i=1, \ldots, n$. The cost of these solutions is determined by assigning each point to the nearest cluster center. We then order these solutions according to their cost into buckets of the form $[0,\beta_0], (\beta_0, \beta_0 \beta], (\beta_0 \beta, \beta_0 \beta^2], \ldots $. 
-
-From each non-empty bucket, pick the solution with the smallest number of cluster centers and let these solutions be $\overline{V}_1, \overline{V}_2, \ldots \overline{V}_r = V_n$. We then inductively build up our nested solutions in the following manner. Given $(S_{i-1}, a_{i-1})$ and $\overline{V}_i$, we define $S_{i+1}$ by iteratively adding the closest point $j \in S_{i-1}$ to $i$ for all $i \in \overline{V}_i$. Note that $|S_{i}| \leq |\overline{V}_i|$. 
-
-We then define an assignment $a_i$. For each $j \in X$ such that $a_{i-1}(j) \in S_{i}$, we set $a_i(j) = a_{i-1}(j)$. Otherwise, we set $a_i(j)$ to be the facility $i \in S_i$ such that assigning all points in $a_{i-1}^{-1}(j)$ (i.e. all points in $j$'s cluster in $S_{i-1}$) would have minimum cost. Using this assignment, $(a_i, S_i)$ is nested in $(a_{i-1}, S_{i-1})$. 
-
-We continue this nesting until $|S_i| = 1$ and we have reached the top level of the hierarchy. After forming this hierarchical clustering, for any $k \in 1, \ldots, n$ \cite{Lin} guarantee that the cost of $S_i$ is at most $20.71$ times the cost of $V_k$ where $|S_{i-1}| \geq n-k+1 \geq |S_{i}|$ (in the randomized case the expected cost of $S_i$ is at most $10.03$ times the cost of $V_k$).
-
-We can test this hierarchical framework for both the multiswap and supermodular local search algorithms above. 
-
-\subsection{Implementation}
-
-\subsection{Results}
+The data sets tested against were:
+\begin{description}
+\item[Gaussian] Synthetic $k$-center Gaussian data, generated in Python.  Add info on std deviation, size, etc.
+\item[P-median] ADD CITATION OR Library p-median data sets
+\item[UCI Iris] \cite{Iris} Contains 4 attributes on 150 instances of flowers, each of with belongs to one of three species of iris.  One of the species is linearly separable from the others, but the other two are not.  One of the most used data sets in pattern recognition.
+\item[UCI Soybean (Small)] \cite{Soybean} 47 instances, with 35 attributes data set of soybean disease from UCI.
+\end{description} 
 
 \begin{figure}[h]
 \begin{tabular}{ | l | l | l | l | l | }
@@ -219,6 +197,7 @@ We can test this hierarchical framework for both the multiswap and supermodular 
 \caption{Some specifics about our datasets}
 \end{figure}
 
+Tests were conducted using Python 2.7.9 on a 64-bit Windows platform, on an 8 core ....
 
 \begin{figure*}[h]
 \begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | }
@@ -269,18 +248,35 @@ We can test this hierarchical framework for both the multiswap and supermodular 
 \caption{Approximation Coeffiecients For Algorithms}
 \end{figure*}
 
+Comment on results here.
 
+\section{Hierarchical Clustering Approximation Algorithms}
+Suppose we have a set $X$ and a distance metric $d(i,j)$ for all $i,j \in X$. In the hierarchical setting, we will represent a solution to the $k$-median problem as a pair $(S, a)$ where $S \subseteq X$ such that $|S| \leq k$ and $a$ is an assignment function that maps each $i \in X$ to a center in $S$. Therefore, for any $i \in S$, $a^{-1}(i)$ will be all points in the cluster centered at $i$. We define
+\[ \mathrm{cost}(S,a) := \sum_{i \in X} d(i, a(i)) . \]
 
-\section{Data Sets}
-In order to empirically test these clustering methods, we used four different data sets.  
-\begin{description}
-\item[Generated Gaussian Data] We wanted to test our clustering algorithms on data that had data nicely clustered around $k$ centers. So, we generated synthetic $k$-center Gaussian data algorithmically and used this for testing.
-\item[$P$-median]
-\item[UCI Iris Dataset] This is one of the most used data sets in pattern recognition (\cite{Iris}).  It contains data on 150 instances of flowers, each of with belongs to one of three species of iris.  One of the species is linearly separable from the others, but the other two are not.  In total, there are 150 instances and 4 attributes.
-\item[UCI Soybean Dataset] This is another small, real data set from UCI.  This, too, is widely used in machine learning.  It has 47 instances, with 35 attributes.
-\end{description}  
+Given solution pairs $(S_1, a_1)$ and $(S_2, a_2)$, we say that $(S_1, a_1)$ is \emph{nested} in $(S_2, a_2)$ if 
+\begin{enumerate}
+\item $S_1 \subset S_2$, 
+\item  $\forall  j \in X$, if $a_2(j) \in S_1$, then $a_1(j) = a_2(j)$, and 
+\item $\forall j, k \in X$, if $a_2(j) = a_2(k)$, then $a_1(j) = a_1(k)$.
+\end{enumerate}
+ A solution to the hierarchical clustering problem is therefore a chain of nested solutions. However, we want this solution to stay close to the optimal $k$-median solutions when looking at any level of the algorithm.  
+Consider any $k$-median algorithm $\mathcal{A}$, such as the algorithms above. After running $\mathcal{A}$ for all potential values of $k$, Lin et al.~\cite{Lin} introduce  augmentation step that will nest these clusterings so that they fit into the hierarchical framework and only increase the costs by a bounded factor. 
 
-\
+First, we set $i=1$, $S_0 = \emptyset$, $\beta = 3+\sqrt{3}$, and $\beta_0 = 1$ (for the randomized algorithm we switch $\beta = 6.355$ and set $\beta_0 = \beta^X$, where $X$ is chosen from a uniform distribution on $[0,1]$). Let $V_i$ be the solutions generated from running $\mathcal{A}$ for $k=n-i+1$ for $i=1, \ldots, n$. The cost of these solutions is determined by assigning each point to the nearest cluster center. We then order these solutions according to their cost into buckets of the form $[0,\beta_0], (\beta_0, \beta_0 \beta], (\beta_0 \beta, \beta_0 \beta^2], \ldots $. 
+
+From each non-empty bucket, pick the solution with the smallest number of cluster centers and let these solutions be $\overline{V}_1, \overline{V}_2, \ldots \overline{V}_r = V_n$. We then inductively build up our nested solutions in the following manner. Given $(S_{i-1}, a_{i-1})$ and $\overline{V}_i$, we define $S_{i+1}$ by iteratively adding the closest point $j \in S_{i-1}$ to $i$ for all $i \in \overline{V}_i$. Note that $|S_{i}| \leq |\overline{V}_i|$. 
+
+We then define an assignment $a_i$. For each $j \in X$ such that $a_{i-1}(j) \in S_{i}$, we set $a_i(j) = a_{i-1}(j)$. Otherwise, we set $a_i(j)$ to be the facility $i \in S_i$ such that assigning all points in $a_{i-1}^{-1}(j)$ (i.e. all points in $j$'s cluster in $S_{i-1}$) would have minimum cost. Using this assignment, $(a_i, S_i)$ is nested in $(a_{i-1}, S_{i-1})$. 
+
+We continue this nesting until $|S_i| = 1$ and we have reached the top level of the hierarchy. After forming this hierarchical clustering, for any $k \in 1, \ldots, n$ \cite{Lin} guarantee that the cost of $S_i$ is at most $20.71$ times the cost of $V_k$ where $|S_{i-1}| \geq n-k+1 \geq |S_{i}|$ (in the randomized case the expected cost of $S_i$ is at most $10.03$ times the cost of $V_k$).
+
+We test this hierarchical framework for both the multiswap and supermodular local search algorithms above. 
+
+\subsection{Implementation}
+
+\subsection{Results}
+
 \label{submission}
 
 % In the unusual situation where you want a paper to appear in the
