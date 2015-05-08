@@ -18,7 +18,6 @@ import random
 
 ##############################################################################
 # Define Functions
-  
 
 # Find closest median in S to i
 def find_closest_median(i, S, distances):
@@ -206,9 +205,7 @@ if __name__ == '__main__':
     X, labels_true = make_blobs(n_samples=100, centers=centers, cluster_std=0.5,
                             random_state=999)
     distances = pairwise_distances(X)
-    print cluster(distances,3,None,10,100)
+    
+    print(cluster(distances,3,None,10,100,100))
 
-    print "curvature is ", totalCurvature(distances)
-
-
-
+    print("curvature is ", totalCurvature(distances))
