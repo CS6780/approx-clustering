@@ -166,13 +166,15 @@ By setting $M$ large enough (polynomially large), the algorithm will converge in
  
 \subsection{Implementation and Results}
 
-We implement the above local search algorithm for $p=1, 2, 3$ so the computation time is reasonable, and compare the above algorithms against $k$-medoids and Shi and Meila's spectral algorithm in time, AMI, and approximation ratio.  Note that for $p=1$, the local search algorithm is equivalent to PAM.  In order to calculate approximation ratios, Gurobi was used to compute the global optimum for each data set.
+We implemented the local search algorithm described above for $p=1, 2, 3$ as well as the supermodular function minimization algorithm in Python, and compare against $k$-medoids and Shi and Meila's spectral algorithm (implemented in the scikit-learn package for Python).  Note that for $p=1$, the local search algorithm is equivalent to the well-known PAM algorithm.  In order to calculate approximation ratios, Gurobi was used to compute the global optimum for each data set.
 
-To achieve reasonable computation times for the local search and supermodular function minimization algorithms, at each iteration we first consider nearby swaps, as well as placing 
+CITATION FOR K-MEDOIDS CODE?
 
-We also considered a hybrid heuristic algorithm where we ran $k$-medoids on the result of the local search algorithm.  This is motivated by the fact that, similar to Lloyd's algorithm, $k$-medoids will quickly converge to local optima.  So 
+To achieve reasonable computation times for the local search and supermodular function minimization algorithms, at each iteration we first consider nearby swaps and ensure that some minimum level progress is achieved.  We also implemented a maximum of 1000 iterations for the $k$-median algorithm.
 
-When information on true labels is available, we use adjusted mutual information (AMI) measure to score accuracy of predicted clusters. AMI measures the agreement of two assignments and is normalized to reflect chance so that a perfect labeling receives a score of 1 and an independent random labeling receives a score of 0 in expectation.  See \cite{Vinh} for more information. For each data set and each clustering method, we also report objective function values, the approximation ratio, and the computation time. 
+We also considered a hybrid heuristic algorithm (labelled $p$-swap+ in the results) where we ran $k$-medoids on the result of the local search ($p$-swap) algorithm.  This is motivated by the fact that, similar to Lloyd's algorithm, $k$-medoids will quickly converge to local minima.  Since $p$-swaps avoids getting stuck in local minima, the hybrid algorithm should in theory achieve good results with minimal extra computation time over the regular local search algorithm.
+
+For each data set and each clustering method, we report objective function values, the approximation ratio, computation time, and adjusted mutual information (AMI).  When information on true labels is available, AMI is a measure which scores accuracy of predicted clusters. AMI measures the agreement of two assignments and is normalized to reflect chance, so that a perfect labeling receives a score of 1 and an independent random labeling receives a score of 0 in expectation.  See \cite{Vinh} for further information.  The results reported are average values across 10 trials.
 
 The data sets tested against were:
 \begin{description}
@@ -276,6 +278,11 @@ We test this hierarchical framework for both the multiswap and supermodular loca
 \subsection{Implementation}
 
 \subsection{Results}
+
+\section{Conclusion}
+
+\section{Acknowledgements}
+David Williamson and Karthik Sridharan?
 
 \label{submission}
 
