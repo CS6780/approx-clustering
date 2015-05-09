@@ -93,13 +93,11 @@ Another common heuristic for this problem (often called just $k$-medoids) is sim
 
 More recently, spectral based methods have become popular for clustering. These algorithms construct a graph based on the similarity matrix and compute the eigenvalues of the normalized graph Laplacian matrix \cite{Luxburg}. These eigenvectors are either used to split the current cluster in half using the second eigenvector (continuing recursively until there are $k$ clusters) or the eigenvectors are used to project the data points into a lower dimensional space on which the $k$-means algorithm above is run \cite{Verma}. We will base our comparisons against the algorithm introduced by \cite{Meila} which uses the latter method and performed best in practice on several datasets \cite{Verma}.
 
-If we relax the constraint to have exactly $k$ clusters, then a recent algorithm called affinity propagation has shown lower error and computation time than the algorithms above \cite{Frey}. Instead of specifying a number of clusters, the user inputs ``preferences'' on the data points to be cluster centers. This algorithm relies on passing messages between data points. For each pair of data points $i, j \in X$, ``availability'' $a(i,j)$ represents the evidence for having $i$ choose $j$ to be its cluster center and ``responsibility'' $r(i,j)$ reflects how well-suited $j$ is to serve $i$. These are messages are then updated iteratively. Once the messages converge (this is not guaranteed) then $\max_{j \in X} (a(i,j) + r(i,j))$ will identify the cluster center for $i$, and these decisions will be consistent \cite{Frey}.
-
 The $k$-median problem is also a fundamental problem in approximation algorithms. The problem is formulated as above: choose $k$ cluster centers from a set $X$ so as to minimize the sum of distances from each point to their closest center. The best known approximation algorithm for this problem guarantees a solution within a factor of 2.592 of the optimal solution \cite{Wu}. However, this algorithm uses linear programming and is computationally intensive compared to the local search and greedy algorithms above. On the other hand, it is known that a local search algorithm that considers swaps of size $\leq p$ is a $(3 + \frac{2}{p})$-approximation algorithm \cite{Arya}. Note that for $p=1$, this is the same as PAM. As far as we know, nobody has implemented this algorithm on clustering data to compare the relative trade-off of solution quality and computation time as $p$ increases.  
 
-Additionally, center-based clustering in general can be seen as minimizing a supermodular decreasing function subject to a cardinality constraint, a problem related to maximizing a submodular function that is well-studied in approximation algorithms. Furthermore, the approximation algorithms in this area are constructed using local-search or greedy methods and are therefore computationally tractable on large data. In addition, using supermodular functions means our distance measure does not have to satisfy the triangle inequality, which can be useful when considering non-vector data. 
+Additionally, center-based clustering in general can be seen as minimizing a supermodular decreasing function subject to a cardinality constraint, a problem related to maximizing a submodular function that is well-studied in approximation algorithms. Furthermore, the approximation algorithms in this area are constructed using local-search or greedy methods and are therefore computationally tractable on large data. In addition, using supermodular functions means our distance measure does not have to satisfy the triangle inequality, which can be useful when considering non-vector data. This algorithm has also not been previously tested in practice. 
 
-There exist many other methods for clustering. Methods such as MeanShift and DBSCAN focus on finding clusters of high density \cite{Comaniciu, Ester}. We choose not to compare against densit- based methods since their objective differs widely from the center-based methods above. In addition, we will focus on test data in which center-based methods seem appropriate. We also choose not to compare our proposed methods against Bayesian clustering methods such as Gaussian mixture models since these methods require many more parameters (representing the prior information). In addition, the $k$-means algorithm above can be thought of as a special case of the Gaussian mixture model when all the covariances are equal \cite{ESL}. Therefore, this algorithm can serve as a basis of comparison when both algorithms have the same available information. 
+There exist many other methods for clustering. Methods such as MeanShift and DBSCAN focus on finding clusters of high density \cite{Comaniciu, Ester}. We choose not to compare against density based methods since their objective differs widely from the center-based methods above. In addition, we will focus on test data in which center-based methods seem appropriate. We also choose not to compare our proposed methods against Bayesian clustering methods such as Gaussian mixture models since these methods require many more parameters (representing the prior information). In addition, the $k$-means algorithm above can be thought of as a special case of the Gaussian mixture model when all the covariances are equal \cite{ESL}. Therefore, this algorithm can serve as a basis of comparison when both algorithms have the same available information. Lastly, if we relax the constraint to have exactly $k$ clusters and instead allow the user to input ``preferences'' on the data points being clusters, then a recent algorithm called affinity propagation has shown to perform particularly well \cite{Frey}. Again, because of the difference in available information, we do not to test against this algorithm.  
 
 \subsection{Hierarchical Clustering}
 
@@ -111,7 +109,7 @@ There are four choices of criteria for choosing which clusters to merge.
 In single linkage clustering (also called nearest neighbor), we measure the distance between two clusters to be the smallest pairwise distance and then merge the two closest clusters. The main drawback to this method is that two points within a cluster can be very far apart. Complete linkage clustering on the other hand measures the distance between two clusters to be the largest pairwise distance and then merges the two closest clusters. While points within a single cluster will be quite similar using this metric, points may not belong to their closest cluster. 
 A method between these two extremes is group average linkage which looks at the average pairwise distance between clusters and merges the two closest clusters. This strikes a balance between the closeness and compactness of the two techniques above and gives more reasonable results in practice \cite{ESL}. Lastly, there is Ward's method which merges the two clusters so as to minimize the sum of each cluster's variance \cite{Ward}. All four of these methods can be implemented in the Lance-Williams recursive framework which updates the cluster distances efficiently \cite{Lance}.
 
-Hierarchical clustering has also been studied in approximation algorithms. In this problem, we need to identify a hierarchy of clusters with their corresponding cluster centers so as to minimize the ratio of the cost of our solution on any level with $k$ clusters to the optimal $k$-median solution. Here, the cost of our solution is given by the sum of the distance from each point to its cluster center (i.e. the $k$-median objective we described above). The hierarchical $k$-median problem was originally introduced by Plaxton who gave a 238.88 approximation algorithm \cite{Plaxton}. This was improved by Lin et al.~\cite{Lin} who gave an incremental approximation algorithm framework. In particular, their approach relies on a black box $k$-median solver and then uses these solutions for $k=1, \ldots, n$ to construct a hierarchical clustering by increasing the cost by at most a factor of $20.71$ (or a factor of $10.03$ when randomized). Using the $(3+\frac{2}{p})$-approximation algorithm as the black-box, this translates into a $20.71 (3+\frac{2}{p})$-approximation algorithm (or $10.03 (3+\frac{2}{p})$ when randomized). These ratios can be improved by using a Lagrangian multiplier preserving $2$-approximation algorithm but the local search algorithm performed comparably in experimental tests \cite{Nagarajan}.
+Hierarchical clustering has also been studied in approximation algorithms. In this problem, we need to identify a hierarchy of clusters with their corresponding cluster centers so as to minimize the ratio of the cost of our solution on any level with $k$ clusters to the optimal $k$-median solution. Here, the cost of our solution is given by the sum of the distance from each point to its cluster center (i.e. the $k$-median objective we described above). Note that it may not always be possible to find a solution with approximation ratio 1. The hierarchical $k$-median problem was originally introduced by Plaxton who gave a 238.88 approximation algorithm \cite{Plaxton}. This was improved by Lin et al.~\cite{Lin} who gave an incremental approximation algorithm framework. In particular, their approach relies on a black box $k$-median solver and then uses these solutions for $k=1, \ldots, n$ to construct a hierarchical clustering by increasing the cost by at most a factor of $20.71$ (or a factor of $10.03$ when randomized). Using the $(3+\frac{2}{p})$-approximation algorithm as the black-box, this translates into a $20.71 (3+\frac{2}{p})$-approximation algorithm (or $10.03 (3+\frac{2}{p})$ when randomized). These ratios can be improved by using a Lagrangian multiplier preserving $2$-approximation algorithm but the local search algorithm performed comparably in experimental tests \cite{Nagarajan}. While the authors tested the variants of this algorithm against other $k$-median approximation algorithms, it has not been tested against traditional clustering algorithms or on any labeled data sets. 
 
 Again, several algorithms have been built upon agglomerative clustering to incorporate non-spherical cluster shapes and categorical data such as the CURE, ROCK, and Chameleon algorithms \cite{Guha_CURE, Guha_ROCK, Karypis} but do not relate as much to our proposed algorithm in objective. We also choose not compare our proposed method with Bayesian hierarchical methods for the same reasons as above. 
 
@@ -120,10 +118,10 @@ Again, several algorithms have been built upon agglomerative clustering to incor
 \subsection{Local Search with Multiswaps}
 In the $k$-median problem, we have a set $X$ and a distance metric $d(i,j)$ for all $i,j \in X$. The goal is to find a set $S \subseteq X$ such that $|S| \leq k$ so as to minimize 
 \[ f(S) = \sum_{ i\in X} \min_{j \in S} d(i,j). \]
-Consider a local search algorithm with starts with a random subset $S$ of $k$ points. In any iteration, the algorithm looks for a set $A \subseteq S$ and a set $B \subseteq X -S$ such that $|A| = |B| \leq p$ and
+Consider a local search algorithm which starts with a random subset $S$ of $k$ points. In any iteration, the algorithm looks for a set $A \subseteq S$ and a set $B \subseteq X -S$ such that $|A| = |B| \leq p$ and
 \[ f(S- B \cup A) \geq f(S). \]
-If the algorithm finds such a set, it swaps out $B$ from $S$ and adds $A$. If no such set exists, the algorithm outputs $S$. Note that for $p$ independent of $k$ and $n$ and if we ensure that the algorithm makes at least $\delta = \varepsilon/n$ progress in each iteration, this is a polynomial-time algorithm. Furthermore, the local search algorithm outputs $S \subseteq X$ such that $|S| = k$ and
-\[ f(S) \leq \left (3 + \frac{2}{p}+\varepsilon \right ) f(O) \]
+If the algorithm finds such a set, it swaps out $B$ from $S$ and adds $A$. If no such set exists, the algorithm outputs $S$. For $p$ independent of $k$ and $n$, let $\mathcal{N}$ be the size of the search neighborhood on each iteration. If we ensure that the algorithm improves by at least a factor of $(1- \delta) = (1- \varepsilon/\mathcal{N})$ in each iteration, this is a polynomial-time algorithm. Furthermore, the local search algorithm outputs $S \subseteq X$ such that $|S| = k$ and
+\[ f(S) \leq \frac{1}{1-\varepsilon} \left (3 + \frac{2}{p}) \right ) f(O) \]
 for all $O \subseteq X$. Therefore, there is a trade-off between the computation time of this algorithm and the guaranteed quality of the solution. 
 
 \subsection{Supermodular Function Minimization}
@@ -166,20 +164,18 @@ By setting $M$ large enough (polynomially large), the algorithm will converge in
  
 \subsection{Implementation and Results}
 
-We implemented the local search algorithm described above for $p=1, 2, 3$ as well as the supermodular function minimization algorithm in Python, and compare against $k$-medoids and Shi and Meila's spectral algorithm (implemented in the scikit-learn package for Python).  Note that for $p=1$, the local search algorithm is equivalent to the well-known PAM algorithm.  In order to calculate approximation ratios, Gurobi was used to compute the global optimum for each data set.
+We implemented the local search swapping algorithm described above for $p=1, 2, 3$ as well as the supermodular function minimization algorithm in Python, and compare against $k$-means, $k$-medoids and Shi and Meila's spectral algorithm (implemented in the scikit-learn package for Python).  We also implemented the $k$-medoids algorithm with a maximum iteration of 1000. Note that for $p=1$, the multiswaps algorithm is equivalent to the well-known PAM algorithm.  In order to calculate approximation ratios, Gurobi was used to compute the global optimum for each data set.
 
-CITATION FOR K-MEDOIDS CODE?
+To achieve reasonable computation times for the multiswaps and supermodular function minimization algorithms, at each iteration we first consider nearby swaps before sampling for other potential swaps. For the multiswaps algorithm, we sample $O(p\cdot n)$ potential swaps on each iteration, and for the supermodular function, sample $min(100,n^2)$ swaps where each potential function is calculated with by sampling 50 subsets. We also ensure that some minimum level progress is achieved for both algorithms by setting $\varepsilon = 0.1$ for the multiswaps algorithm and $\varepsilon = 10$ for the submodular function. These values were chosen by looking at the relative performance and computation time on random Gaussian data not tested below.   
 
-To achieve reasonable computation times for the local search and supermodular function minimization algorithms, at each iteration we first consider nearby swaps and ensure that some minimum level progress is achieved.  We also implemented a maximum of 1000 iterations for the $k$-median algorithm.
+We also considered a hybrid heuristic algorithm (labelled $p$-swap+ in the results) where we ran $k$-medoids for 10 iterations on the result of the multiswap search algorithm.  This is motivated by the fact that, similar to Lloyd's algorithm, $k$-medoids will quickly converge to local minima.  Since $p$-swaps avoids getting stuck in local minima, the hybrid algorithm should in theory achieve good results with minimal extra computation time over the regular local search algorithm.
 
-We also considered a hybrid heuristic algorithm (labelled $p$-swap+ in the results) where we ran $k$-medoids on the result of the local search ($p$-swap) algorithm.  This is motivated by the fact that, similar to Lloyd's algorithm, $k$-medoids will quickly converge to local minima.  Since $p$-swaps avoids getting stuck in local minima, the hybrid algorithm should in theory achieve good results with minimal extra computation time over the regular local search algorithm.
-
-For each data set and each clustering method, we report objective function values, the approximation ratio, computation time, and adjusted mutual information (AMI).  When information on true labels is available, AMI is a measure which scores accuracy of predicted clusters. AMI measures the agreement of two assignments and is normalized to reflect chance, so that a perfect labeling receives a score of 1 and an independent random labeling receives a score of 0 in expectation.  See \cite{Vinh} for further information.  The results reported are average values across 10 trials.
+For each data set and each clustering method, we report objective function values, the approximation ratio, computation time, and adjusted mutual information (AMI).  AMI is a measure which scores accuracy of predicted clusters compared to a true labeling by measuring the agreement of two assignments. The measure is normalized to reflect chance, so that a perfect labeling receives a score of 1 and an independent random labeling receives a score of 0 in expectation.  See \cite{Vinh} for further information.  The results reported are average values across 10 trials.
 
 The data sets tested against were:
 \begin{description}
-\item[Gaussian] Synthetic $k$-center Gaussian data, generated in Python.  Add info on std deviation, size, etc.
-\item[P-median] ADD CITATION OR Library p-median data sets
+\item[Gaussian] Synthetic $k$-center Gaussian data, generated in Python. In particular, Gauss\textunderscore d \textunderscore k \textunderscore e was generated by first choosing k random centers in $[-1,1]^d$. Around each center, we then generated $1000/k \mathrm{Unif}[0,1]$ Gaussian points of which $e$ percent had standard deviation 0.25 (noisy) and $1-e$ percent had standard deviation $0.05$. 
+\item[OR $p$-median Library] From a collection of test data sets created by J. E. Beasley with data sets of size $100, 200, \ldots, 900$ and varying values of $k$ \cite{Beasley}. 
 \item[UCI Iris] \cite{Iris} Contains 4 attributes on 150 instances of flowers, each of with belongs to one of three species of iris.  One of the species is linearly separable from the others, but the other two are not.  One of the most used data sets in pattern recognition.
 \item[UCI Soybean (Small)] \cite{Soybean} 47 instances, with 35 attributes data set of soybean disease from UCI.
 \end{description} 
@@ -199,7 +195,7 @@ The data sets tested against were:
 \caption{Some specifics about our datasets}
 \end{figure}
 
-Tests were conducted using Python 2.7.9 on a 64-bit Windows platform, on an 8 core ....
+Tests were conducted using Python 2.7.9 on a 64-bit Windows platform, on a 4 core Intel processor. 
 
 \begin{figure*}[h]
 \begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | }
@@ -250,6 +246,8 @@ Tests were conducted using Python 2.7.9 on a 64-bit Windows platform, on an 8 co
 \caption{Approximation Coeffiecients For Algorithms}
 \end{figure*}
 
+
+
 Comment on results here.
 
 \section{Hierarchical Clustering Approximation Algorithms}
@@ -265,7 +263,7 @@ Given solution pairs $(S_1, a_1)$ and $(S_2, a_2)$, we say that $(S_1, a_1)$ is 
  A solution to the hierarchical clustering problem is therefore a chain of nested solutions. However, we want this solution to stay close to the optimal $k$-median solutions when looking at any level of the algorithm.  
 Consider any $k$-median algorithm $\mathcal{A}$, such as the algorithms above. After running $\mathcal{A}$ for all potential values of $k$, Lin et al.~\cite{Lin} introduce  augmentation step that will nest these clusterings so that they fit into the hierarchical framework and only increase the costs by a bounded factor. 
 
-First, we set $i=1$, $S_0 = \emptyset$, $\beta = 3+\sqrt{3}$, and $\beta_0 = 1$ (for the randomized algorithm we switch $\beta = 6.355$ and set $\beta_0 = \beta^X$, where $X$ is chosen from a uniform distribution on $[0,1]$). Let $V_i$ be the solutions generated from running $\mathcal{A}$ for $k=n-i+1$ for $i=1, \ldots, n$. The cost of these solutions is determined by assigning each point to the nearest cluster center. We then order these solutions according to their cost into buckets of the form $[0,\beta_0], (\beta_0, \beta_0 \beta], (\beta_0 \beta, \beta_0 \beta^2], \ldots $. 
+First, we set $i=1$, $S_0 = \emptyset$, $\beta = 3+\sqrt{3}$, and $\beta_0 = 1$ (for the randomized algorithm we switch $\beta = 6.355$ and set $\beta_0 = \beta^X$, where $X$ is chosen from a uniform distribution on $[0,1]$). Let $V_i$ be the solutions generated from running $\mathcal{A}$ for $k=n-i+1$ for $i=1, \ldots, n$. The cost of these solutions is determined by assigning each point to the nearest cluster center and is scaled so that the minimum cost for $k<n$ is at least one. We then order these solutions according to their cost into buckets of the form $[0,0], (\beta_0, \beta_0 \beta], (\beta_0 \beta, \beta_0 \beta^2], \ldots $. 
 
 From each non-empty bucket, pick the solution with the smallest number of cluster centers and let these solutions be $\overline{V}_1, \overline{V}_2, \ldots \overline{V}_r = V_n$. We then inductively build up our nested solutions in the following manner. Given $(S_{i-1}, a_{i-1})$ and $\overline{V}_i$, we define $S_{i+1}$ by iteratively adding the closest point $j \in S_{i-1}$ to $i$ for all $i \in \overline{V}_i$. Note that $|S_{i}| \leq |\overline{V}_i|$. 
 
@@ -275,341 +273,13 @@ We continue this nesting until $|S_i| = 1$ and we have reached the top level of 
 
 We test this hierarchical framework for both the multiswap and supermodular local search algorithms above. 
 
-\subsection{Implementation}
-
-\subsection{Results}
-
-
-\section{Appendix 1: Full Results}
-
-\subsection{Gaussian Data}
-\begin{figure*}[h]
-\begin{center}
-\begin{tabular}{ | l | l | l | l | l | }
-\hline
-	Dataset & NameOpt Obj & k & n & dim  \\ \hline
-	Gauss\_3\_5\_0 & 195 & 5 & 542 & 3 \\ 
-	Gauss\_3\_5\_5 & 225 & 5 & 620 & 3 \\ 
-	Gauss\_3\_5\_10 & 158 & 5 & 441 & 3 \\
-	Gauss\_3\_10\_0 & 147 & 10 & 472 & 3 \\
-	Gauss\_3\_10\_5 & 142 & 10 & 480 & 3 \\ 
-	Gauss\_3\_10\_10 & 201 & 10 & 557 & 3 \\ 
-	Gauss\_3\_50\_0 & 108 & 50 & 471 & 3 \\
-	Gauss\_3\_50\_5 & 94 & 50 & 422 & 3 \\ 
-	Gauss\_3\_50\_10 & 95 & 50 & 408 & 3 \\ 
-	Gauss\_5\_5\_0 & 352 & 5 & 720 & 5 \\ 
-	Gauss\_5\_5\_5 & 195 & 5 & 388 & 5 \\ 
-	Gauss\_5\_5\_10 & 214 & 5 & 394 & 5 \\ 
-	Gauss\_5\_10\_0 & 346 & 10 & 703 & 5 \\ 
-	Gauss\_5\_10\_5 & 270 & 10 & 544 & 5 \\ 
-	Gauss\_5\_10\_10 & 292 & 10 & 572 & 5 \\ 
-	Gauss\_5\_50\_0 & 188 & 50 & 445 & 5 \\ 
-	Gauss\_5\_50\_5 & 178 & 50 & 408 & 5 \\ 
-	Gauss\_5\_50\_10 & 229 & 50 & 480 & 5 \\ 
-	Gauss\_7\_5\_0 & 349 & 5 & 567 & 7 \\ 
-	Gauss\_7\_5\_5 & 368 & 5 & 579 & 7 \\ 
-	Gauss\_7\_5\_10 & 356 & 5 & 527 & 7 \\ 
-	Gauss\_7\_10\_0 & 351 & 10 & 573 & 7 \\ 
-	Gauss\_7\_10\_5 & 302 & 10 & 478 & 7 \\ 
-	Gauss\_7\_10\_10 & 354 & 10 & 534 & 7 \\ 
-	Gauss\_7\_50\_0 & 257 & 50 & 451 & 7 \\ 
-	Gauss\_7\_50\_5 & 256 & 50 & 430 & 7 \\ 
-	Gauss\_7\_50\_10 & 298 & 50 & 480 & 7 \\ \hline
-\end{tabular}
-\end{center}
-
-\caption{Details For Gaussian Datasets}
-\end{figure*}
-
-\begin{figure*}[h]
-\begin{center}
-\begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | l | }
-\hline
-	Dataset &Time & Time & Time & Time & Time & Time & Time & Time & Time & Time   \\ \hline
-	&K-means & Spectral & k-medoids & Supermodular & PAM & 1-Swap+ & 2-Swap & 2-swaps+ & 3-Swap & 4-swaps   \\ 
-	Gauss\_3\_5\_0 & 0.024 & 0.056 & 0.066 & 131.305 & 2.707 & 3.195 & 4.779 & 4.138 & 7.683 & 11.325 \\ 
-	Gauss\_3\_5\_5 & 0.032 & 0.076 & 0.099 & 195.013 & 3.682 & 3.764 & 6.639 & 5.32 & 9.627 & 14.575 \\ 
-	Gauss\_3\_5\_10 & 0.033 & 0.055 & 0.047 & 80.439 & 2.244 & 1.802 & 2.806 & 3.024 & 5.107 & 7.457 \\ 
-	Gauss\_3\_10\_0 & 0.041 & 0.083 & 0.095 & 121.551 & 5.133 & 3.576 & 7.452 & 6.3 & 10.157 & 11.872 \\ 
-	Gauss\_3\_10\_5 & 0.048 & 0.1 & 0.117 & 101.072 & 5.026 & 4.96 & 8.57 & 6.952 & 11.948 & 12.225 \\ 
-	Gauss\_3\_10\_10 & 0.05 & 0.106 & 0.153 & 149.352 & 7.101 & 6.456 & 11.273 & 10.646 & 18.21 & 17.414 \\ 
-	Gauss\_3\_50\_0 & 0.154 & 0.324 & 0.435 & 175.827 & 29.201 & 34.228 & 43.65 & 49.964 & 48.259 & 66.413 \\ 
-	Gauss\_3\_50\_5 & 0.151 & 0.253 & 0.376 & 127.64 & 26.318 & 21.541 & 38.004 & 33.213 & 45.862 & 57.262 \\ 
-	Gauss\_3\_50\_10 & 0.153 & 0.265 & 0.301 & 132.119 & 21.341 & 22.556 & 35.389 & 32.139 & 44.361 & 50.143 \\ 
-	Gauss\_5\_5\_0 & 0.026 & 0.079 & 0.08 & 230.345 & 4.997 & 4.21 & 9.428 & 8.063 & 12.811 & 19.337 \\ 
-	Gauss\_5\_5\_5 & 0.025 & 0.056 & 0.032 & 75.262 & 1.159 & 1.506 & 2.188 & 2.382 & 3.71 & 5.797 \\ 
-	Gauss\_5\_5\_10 & 0.025 & 0.042 & 0.027 & 69.349 & 1.383 & 1.458 & 2.403 & 2.575 & 3.811 & 5.748 \\ 
-	Gauss\_5\_10\_0 & 0.044 & 0.1 & 0.18 & 227.747 & 11.633 & 12.129 & 17.724 & 18.654 & 26.563 & 33.646 \\ 
-	Gauss\_5\_10\_5 & 0.054 & 0.095 & 0.109 & 134.137 & 6.834 & 5.407 & 9.243 & 9.428 & 15.96 & 21.795 \\ 
-	Gauss\_5\_10\_10 & 0.045 & 0.092 & 0.117 & 127.614 & 7.639 & 6.456 & 11.807 & 12.186 & 18.339 & 23.554 \\ 
-	Gauss\_5\_50\_0 & 0.142 & 0.211 & 0.389 & 139.818 & 30.155 & 27.431 & 37.251 & 43.421 & 50.192 & 68.329 \\ 
-	Gauss\_5\_50\_5 & 0.137 & 0.196 & 0.302 & 97.336 & 27.856 & 21.446 & 32.407 & 39.614 & 44.69 & 53.546 \\ 
-	Gauss\_5\_50\_10 & 0.149 & 0.219 & 0.417 & 170.431 & 37.132 & 35.119 & 45.341 & 47.002 & 56.683 & 69.712 \\ 
-	Gauss\_7\_5\_0 & 0.019 & 0.054 & 0.052 & 185.865 & 2.975 & 3.565 & 4.954 & 5.005 & 8.531 & 11.867 \\ 
-	Gauss\_7\_5\_5 & 0.031 & 0.078 & 0.047 & 154.1 & 2.603 & 3.04 & 5.45 & 5.738 & 8.056 & 12.505 \\ 
-	Gauss\_7\_5\_10 & 0.018 & 0.052 & 0.043 & 130.185 & 2.949 & 2.478 & 4.668 & 4.849 & 7.324 & 11.036 \\ 
-	Gauss\_7\_10\_0 & 0.045 & 0.071 & 0.097 & 185.521 & 8.015 & 7.338 & 12.495 & 10.474 & 16.174 & 20.671 \\ 
-	Gauss\_7\_10\_5 & 0.04 & 0.063 & 0.073 & 136.189 & 5.315 & 5.365 & 9.287 & 6.87 & 11.768 & 16.072 \\ 
-	Gauss\_7\_10\_10 & 0.048 & 0.09 & 0.1 & 168.962 & 7.047 & 6.538 & 9.783 & 9.322 & 13.581 & 19.41 \\ 
-	Gauss\_7\_50\_0 & 0.143 & 0.199 & 0.401 & 152.958 & 32.592 & 37.747 & 39.026 & 42.999 & 60.483 & 69.667 \\ 
-	Gauss\_7\_50\_5 & 0.147 & 0.212 & 0.327 & 136.496 & 27.8 & 26.288 & 38.683 & 34.335 & 47.779 & 59.414 \\ 
-	Gauss\_7\_50\_10 & 0.149 & 0.231 & 0.426 & 163.651 & 37.968 & 41.976 & 55.514 & 50.175 & 56.302 & 79.819 \\ \hline
-\end{tabular}
-
-\end{center}
-
-\caption{Running Times For Gaussian Datasets}
-\end{figure*}
-
-\begin{figure*}[h]
-\begin{center}
-\begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | l | }
-\hline
-	Dataset&AMI & AMI & AMI & AMI & AMI & AMI & AMI & AMI & AMI & AMI  \\ \hline
-	& K-means & Spectral & k-medoids & Supermodular & PAM & 1-Swap + & 2-Swap & 2-swaps + & 3-Swap & 4-swaps   \\ \hline
-	Gauss\_3\_5\_0 & 0.884 & 0.887 & 0.729 & 0.678 & 0.88 & 0.876 & 0.884 & 0.876 & 0.881 & 0.882 \\ 
-	Gauss\_3\_5\_5 & 0.7 & 0.62 & 0.637 & 0.545 & 0.683 & 0.68 & 0.685 & 0.69 & 0.682 & 0.686 \\ 
-	Gauss\_3\_5\_10 & 0.68 & 0.618 & 0.62 & 0.504 & 0.663 & 0.665 & 0.659 & 0.659 & 0.664 & 0.668 \\ 
-	Gauss\_3\_10\_0 & 0.693 & 0.641 & 0.699 & 0.619 & 0.692 & 0.692 & 0.688 & 0.696 & 0.685 & 0.685 \\ 
-	Gauss\_3\_10\_5 & 0.534 & 0.466 & 0.516 & 0.446 & 0.534 & 0.533 & 0.535 & 0.532 & 0.531 & 0.536 \\ 
-	Gauss\_3\_10\_10 & 0.669 & 0.56 & 0.616 & 0.516 & 0.651 & 0.653 & 0.652 & 0.657 & 0.657 & 0.653 \\ 
-	Gauss\_3\_50\_0 & 0.504 & 0.498 & 0.498 & 0.475 & 0.501 & 0.497 & 0.491 & 0.497 & 0.495 & 0.501 \\ 
-	Gauss\_3\_50\_5 & 0.407 & 0.412 & 0.402 & 0.396 & 0.392 & 0.385 & 0.389 & 0.386 & 0.387 & 0.385 \\ 
-	Gauss\_3\_50\_10 & 0.421 & 0.424 & 0.406 & 0.39 & 0.413 & 0.414 & 0.408 & 0.404 & 0.405 & 0.41 \\ 
-	Gauss\_5\_5\_0 & 0.99 & 0.99 & 0.858 & 0.719 & 0.988 & 0.994 & 0.989 & 0.994 & 0.989 & 0.985 \\ 
-	Gauss\_5\_5\_5 & 0.741 & 0.713 & 0.687 & 0.657 & 0.742 & 0.749 & 0.741 & 0.744 & 0.737 & 0.747 \\ 
-	Gauss\_5\_5\_10 & 0.833 & 0.83 & 227.742 & 0.663 & 0.76 & 0.779 & 0.806 & 0.747 & 0.789 & 0.77 \\ 
-	Gauss\_5\_10\_0 & 0.974 & 0.972 & 0.858 & 0.732 & 0.96 & 0.964 & 0.964 & 0.965 & 0.96 & 0.964 \\ 
-	Gauss\_5\_10\_5 & 0.783 & 0.736 & 0.677 & 0.575 & 0.729 & 0.725 & 0.737 & 0.737 & 0.729 & 0.725 \\ 
-	Gauss\_5\_10\_10 & 0.878 & 0.829 & 0.795 & 0.704 & 0.873 & 0.875 & 0.873 & 0.872 & 0.875 & 0.868 \\ 
-	Gauss\_5\_50\_0 & 0.723 & 0.669 & 0.668 & 0.622 & 0.695 & 0.692 & 0.692 & 0.7 & 0.696 & 0.692 \\ 
-	Gauss\_5\_50\_5 & 0.646 & 0.596 & 0.621 & 0.57 & 0.622 & 0.619 & 0.627 & 0.631 & 0.625 & 0.626 \\
-	Gauss\_5\_50\_10 & 0.669 & 0.639 & 0.626 & 0.546 & 0.64 & 0.641 & 0.639 & 0.65 & 0.643 & 0.637 \\ 
-	Gauss\_7\_5\_0 & 1 & 1 & 0.852 & 0.773 & 0.999 & 1 & 0.999 & 1 & 0.999 & 0.998 \\ 
-	Gauss\_7\_5\_5 & 0.847 & 0.832 & 0.86 & 0.72 & 0.852 & 0.85 & 0.849 & 0.847 & 0.847 & 0.847 \\ 
-	Gauss\_7\_5\_10 & 0.979 & 0.963 & 0.839 & 0.744 & 0.981 & 0.979 & 0.98 & 0.979 & 0.978 & 0.978 \\ 
-	Gauss\_7\_10\_0 & 0.995 & 0.995 & 0.869 & 0.785 & 0.988 & 0.984 & 0.987 & 0.984 & 0.982 & 0.976 \\ 
-	Gauss\_7\_10\_5 & 0.988 & 0.994 & 0.853 & 0.732 & 0.988 & 0.994 & 0.99 & 0.994 & 0.993 & 0.994 \\ 
-	Gauss\_7\_10\_10 & 0.89 & 0.81 & 0.845 & 0.724 & 0.851 & 0.856 & 0.854 & 0.854 & 0.85 & 0.851 \\ 
-	Gauss\_7\_50\_0 & 0.867 & 0.834 & 0.784 & 0.693 & 0.832 & 0.835 & 0.84 & 0.833 & 0.835 & 0.846 \\ 
-	Gauss\_7\_50\_5 & 0.852 & 0.808 & 0.727 & 0.647 & 0.813 & 0.815 & 0.814 & 0.815 & 0.812 & 0.807 \\ 
-	Gauss\_7\_50\_10 & 0.829 & 0.761 & 0.742 & 0.645 & 0.807 & 0.799 & 0.807 & 0.804 & 0.804 & 0.799 \\ \hline
-\end{tabular}
-
-\end{center}
-
-\caption{AMI For Gaussian Datasets}
-\end{figure*}
-
-
-\begin{figure*}[h]
-\begin{center}
-\begin{tabular}{ | l | l | l | l | l | l | l | l | l | }
-\hline
-	Dataset & Approx & Approx & Approx & Approx & Approx & Approx & Approx & Approx \\ \hline
-	& k-medoids & Supermodular & PAM & 1-Swap+ & 2-Swap & 2-Swap+ & 3-Swap & 4-swaps   \\ \hline
-	Gauss\_3\_5\_0 & 1.159 & 1.481 & 1.013 & 1 & 1.011 & 1 & 1.013 & 1.009 \\ 
-	Gauss\_3\_5\_5 & 1.057 & 1.4 & 1.005 & 1.001 & 1.006 & 1.001 & 1.01 & 1.007 \\ 
-	Gauss\_3\_5\_10 & 1.047 & 1.377 & 1.007 & 1.004 & 1.014 & 1.007 & 1.009 & 1.008 \\ 
-	Gauss\_3\_10\_0 & 1.029 & 1.404 & 1.018 & 1.01 & 1.013 & 1.01 & 1.022 & 1.019 \\ 
-	Gauss\_3\_10\_5 & 1.063 & 1.329 & 1.025 & 1.013 & 1.021 & 1.012 & 1.02 & 1.026 \\ 
-	Gauss\_3\_10\_10 & 1.06 & 1.369 & 1.017 & 1.009 & 1.018 & 1.007 & 1.016 & 1.016 \\ 
-	Gauss\_3\_50\_0 & 1.112 & 1.354 & 1.05 & 1.026 & 1.037 & 1.025 & 1.049 & 1.044 \\ 
-	Gauss\_3\_50\_5 & 1.124 & 1.327 & 1.045 & 1.025 & 1.041 & 1.019 & 1.044 & 1.04 \\ 
-	Gauss\_3\_50\_10 & 1.121 & 1.316 & 1.044 & 1.023 & 1.037 & 1.021 & 1.043 & 1.043 \\ 
-	Gauss\_5\_5\_0 & 1.105 & 1.576 & 1.013 & 1 & 1.011 & 1 & 1.016 & 1.015 \\ 
-	Gauss\_5\_5\_5 & 1.07 & 1.436 & 1.03 & 1.002 & 1.028 & 1.005 & 1.026 & 1.024 \\ 
-	Gauss\_5\_5\_10 & 0.003 & 1.369 & 1.021 & 1.004 & 1.016 & 1.007 & 1.016 & 1.015 \\ 
-	Gauss\_5\_10\_0 & 1.148 & 1.619 & 1.029 & 1 & 1.026 & 1.001 & 1.028 & 1.029 \\ 
-	Gauss\_5\_10\_5 & 1.08 & 1.389 & 1.017 & 1.011 & 1.018 & 1.009 & 1.017 & 1.019 \\ 
-	Gauss\_5\_10\_10 & 1.152 & 1.458 & 1.022 & 1.006 & 1.023 & 1.007 & 1.021 & 1.026 \\
-	Gauss\_5\_50\_0 & 1.096 & 1.271 & 1.031 & 1.017 & 1.033 & 1.015 & 1.031 & 1.029 \\ 
-	Gauss\_5\_50\_5 & 1.089 & 1.272 & 1.03 & 1.02 & 1.027 & 1.014 & 1.033 & 1.032 \\ 
-	Gauss\_5\_50\_10 & 1.09 & 1.299 & 1.029 & 1.017 & 1.036 & 1.016 & 1.028 & 1.036 \\ 
-	Gauss\_7\_5\_0 & 1.214 & 1.59 & 1.016 & 1 & 1.018 & 1 & 1.014 & 1.016 \\ 
-	Gauss\_7\_5\_5 & 1.046 & 1.446 & 1.017 & 1.009 & 1.014 & 1.004 & 1.014 & 1.019 \\ 
-	Gauss\_7\_5\_10 & 1.153 & 1.53 & 1.01 & 1 & 1.007 & 1 & 1.01 & 1.009 \\ 
-	Gauss\_7\_10\_0 & 1.132 & 1.504 & 1.032 & 1 & 1.023 & 1 & 1.032 & 1.034 \\ 
-	Gauss\_7\_10\_5 & 1.159 & 1.569 & 1.031 & 1 & 1.028 & 1 & 1.027 & 1.024 \\ 
-	Gauss\_7\_10\_10 & 1.074 & 1.56 & 1.024 & 1.003 & 1.019 & 1.005 & 1.02 & 1.02 \\ 
-	Gauss\_7\_50\_0 & 1.104 & 1.321 & 1.029 & 1.01 & 1.031 & 1.011 & 1.027 & 1.026 \\ 
-	Gauss\_7\_50\_5 & 1.132 & 1.326 & 1.033 & 1.013 & 1.031 & 1.013 & 1.026 & 1.036 \\ 
-	Gauss\_7\_50\_10 & 1.107 & 1.345 & 1.027 & 1.014 & 1.025 & 1.012 & 1.031 & 1.026 \\ \hline
-\end{tabular}
-
-\end{center}
-
-\caption{Approximation Constants For Gaussian Datasets}
-\end{figure*}
-
-\subsection{P-Median}
-
-\begin{figure*}[h]
-\begin{center}
-\begin{tabular}{ | l | l | l | l | }
-\hline
-	Dataset & Optimal Objective & $k$ & $n$ \\ \hline
-	pmed1 & 5819 & 5 & 100 \\ 
-	pmed2 & 4093 & 10 & 100 \\ 
-	pmed3 & 4250 & 10 & 100 \\ 
-	pmed4 & 3034 & 20 & 100 \\
-	pmed5 & 1355 & 33 & 100 \\ 
-	pmed6 & 7824 & 5 & 200 \\ 
-	pmed7 & 5631 & 10 & 200 \\ 
-	pmed8 & 4445 & 20 & 200 \\ 
-	pmed9 & 2734 & 40 & 200 \\ 
-	pmed10 & 1255 & 67 & 200 \\ 
-	pmed11 & 7696 & 5 & 300 \\ 
-	pmed12 & 6634 & 10 & 300 \\ 
-	pmed13 & 4374 & 30 & 300 \\ 
-	pmed14 & 2968 & 60 & 300 \\ 
-	pmed15 & 1729 & 100 & 300 \\
-	pmed16 & 8162 & 5 & 400 \\ 
-	pmed17 & 6999 & 10 & 400 \\
-	pmed18 & 4809 & 40 & 400 \\ 
-	pmed19 & 2845 & 80 & 400 \\ 
-	pmed20 & 1789 & 133 & 400 \\ 
-	pmed21 & 9138 & 5 & 500 \\ 
-	pmed22 & 8579 & 10 & 500 \\ 
-	pmed23 & 4619 & 50 & 500 \\ 
-	pmed24 & 2961 & 100 & 500 \\ 
-	pmed25 & 1828 & 167 & 500 \\ 
-	pmed26 & 9917 & 5 & 600 \\ 
-	pmed27 & 8307 & 10 & 600 \\ 
-	pmed28 & 4498 & 60 & 600 \\ 
-	pmed29 & 3033 & 120 & 600 \\
-	pmed30 & 1989 & 200 & 600 \\ 
-	pmed31 & 10086 & 5 & 700 \\ 
-	pmed32 & 9297 & 10 & 700 \\ 
-	pmed33 & 4700 & 60 & 700 \\ 
-	pmed34 & 3013 & 140 & 700 \\ 
-	pmed35 & 10400 & 5 & 800 \\ 
-	pmed36 & 9934 & 10 & 800 \\ 
-	pmed37 & 5057 & 80 & 800 \\ 
-	pmed38 & 11060 & 5 & 900 \\ 
-	pmed39 & 9423 & 10 & 900 \\ 
-	pmed40 & 5128 & 90 & 900 \\ \hline
-\end{tabular}
-
-
-\end{center}
-
-\caption{Details for P-Median Datasets}
-\end{figure*}
-
-\begin{figure*}[h]
-\begin{center}
-\begin{tabular}{ | l | l | l | l | l | l | l | l | }
-\hline
-	Dataset & Time & Time & Time & Time & Time & Time & Time \\ \hline
-	&k-medoids & Supermodular & PAM & 1-Swap + & 2-Swap & 2-swaps + & 3-Swap   \\ \hline
-	pmed1 & 0.0032 & 5 & 0.1 & 0.1 & 0.2 & 0.2 & 0.3 \\ 
-	pmed2 & 0.0069 & 6.4 & 0.2 & 0.2 & 0.3 & 0.3 & 0.4 \\ 
-	pmed3 & 0.0067 & 7.5 & 0.2 & 0.2 & 0.3 & 0.3 & 0.4 \\ 
-	pmed4 & 0.0125 & 8 & 0.3 & 0.4 & 0.5 & 0.6 & 0.6 \\ 
-	pmed5 & 0.0381 & 8.3 & 0.5 & 0.6 & 0.7 & 0.7 & 0.9 \\ 
-	pmed6 & 0.0065 & 19.3 & 0.3 & 0.4 & 0.5 & 0.6 & 0.8 \\ 
-	pmed7 & 0.0117 & 23.9 & 0.7 & 0.9 & 0.9 & 1.3 & 1.5 \\ 
-	pmed8 & 0.027 & 27.2 & 1.4 & 1.8 & 2.2 & 2.6 & 3.1 \\ 
-	pmed9 & 0.0642 & 29 & 3.4 & 3.5 & 3.3 & 4.8 & 4.7 \\ 
-	pmed10 & 0.7329 & 39.8 & 4.4 & 5.8 & 6.2 & 7.3 & 8.2 \\ 
-	pmed11 & 0.0124 & 42 & 0.6 & 0.8 & 1.4 & 1.2 & 2.2 \\ 
-	pmed12 & 0.0186 & 45.7 & 1.7 & 2 & 2.3 & 2.4 & 4.3 \\ 
-	pmed13 & 0.0685 & 69.1 & 6.6 & 5.3 & 7 & 8.4 & 11 \\ 
-	pmed14 & 0.2238 & 76.3 & 13.6 & 14.2 & 17.1 & 17.4 & 25 \\ 
-	pmed15 & 1.0969 & 100.2 & 18.4 & 19.7 & 23.1 & 28.7 & 35.5 \\ 
-	pmed16 & 0.0251 & 87.1 & 1.3 & 1.2 & 2.3 & 2.4 & 3.8 \\ 
-	pmed17 & 0.0581 & 97.1 & 3.5 & 2.5 & 3.9 & 4.8 & 6.8 \\ 
-	pmed18 & 0.2596 & 134.7 & 15.3 & 16.5 & 23.1 & 23.3 & 31.3 \\ 
-	pmed19 & 1.0193 & 153.5 & 34.9 & 34.1 & 40.3 & 47.9 & 57.8 \\ 
-	pmed20 & 1.7947 & 175 & 52.2 & 45 & 68.6 & 68.2 & 79.3 \\ 
-	pmed21 & 0.0327 & 109.4 & 1.8 & 2.1 & 4.1 & 4.2 & 6.1 \\ 
-	pmed22 & 0.0786 & 113.1 & 4.3 & 5.6 & 8.3 & 7.5 & 12.7 \\ 
-	pmed23 & 0.5123 & 199.8 & 35.9 & 34.8 & 46.9 & 52.3 & 62.2 \\ 
-	pmed24 & 1.7861 & 245.9 & 66.6 & 90.3 & 99.2 & 88.5 & 125.5 \\ 
-	pmed25 & 3.1433 & 451.9 & 103 & 118 & 126.8 & 146.4 & 138.1 \\ 
-	pmed26 & 0.0503 & 159.8 & 2.8 & 2.4 & 4.7 & 5.6 & 6.9 \\ 
-	pmed27 & 0.1265 & 183.4 & 7.1 & 6.1 & 11.7 & 10.7 & 13 \\ 
-	pmed28 & 0.8738 & 263.3 & 60.3 & 71.3 & 95.6 & 98.5 & 89.3 \\ 
-	pmed29 & 2.8418 & 424.3 & 152.6 & 146.8 & 196.5 & 172.8 & 167 \\ 
-	pmed30 & 5.2891 & 571 & 175 & 207.5 & 254.2 & 249.7 & 255.7 \\ 
-	pmed31 & 0.0728 & 225.6 & 4.9 & 4.4 & 8.2 & 6.6 & 9.2 \\ 
-	pmed32 & 0.1528 & 249.5 & 11 & 7.8 & 14.3 & 12.9 & 19 \\ 
-	pmed33 & 1.4723 & 440.1 & 112.8 & 91.9 & 143.9 & 158.5 & 154.1 \\ 
-	pmed34 & 3.6669 & 591.7 & 234.8 & 217.8 & 233.1 & 287.8 & 256.8 \\ 
-	pmed35 & 0.1133 & 298.3 & 4.8 & 5.9 & 7.5 & 9.3 & 11.9 \\ 
-	pmed36 & 0.2221 & 259.8 & 13 & 11.4 & 15.9 & 24 & 23.6 \\ 
-	pmed37 & 2.4409 & 571 & 190.5 & 149.7 & 172.8 & 282.3 & 224.7 \\ 
-	pmed38 & 0.1326 & 349.9 & 7.1 & 6.5 & 9.8 & 12.2 & 14.5 \\ 
-	pmed39 & 0.2676 & 419.8 & 16.5 & 13.6 & 22.6 & 25.5 & 29.4 \\ 
-	pmed40 & 3.5269 & 849.9 & 251.3 & 264.9 & 250.4 & 391.7 & 350.2 \\ \hline
-\end{tabular}
-
-
-\end{center}
-
-\caption{Running Time for P-Median Datasets}
-\end{figure*}
-
-\begin{figure*}[h]
-\begin{center}
-\begin{tabular}{ | l | l | l | l | l | l | l | l | }
-\hline
-	Dataset & Approx & Approx & Approx & Approx & Approx & Approx & Approx \\ \hline
-	  & k-medoids & Supermodular & PAM & 1-Swap + & 2-Swap & 2-swaps+ & 3-Swap \\ \hline
-	pmed1 & 1.113 & 1.409 & 1.03 & 1.013 & 1.029 & 1.005 & 1.018 \\ 
-	pmed2 & 1.158 & 1.486 & 1.044 & 1.011 & 1.038 & 1.011 & 1.044 \\ 
-	pmed3 & 1.161 & 1.442 & 1.053 & 1.01 & 1.037 & 1.01 & 1.046 \\ 
-	pmed4 & 1.16 & 1.5 & 1.07 & 1.028 & 1.061 & 1.019 & 1.056 \\ 
-	pmed5 & 1.373 & 1.681 & 1.06 & 1.026 & 1.071 & 1.033 & 1.051 \\ 
-	pmed6 & 1.09 & 1.286 & 1.015 & 1.008 & 1.016 & 1.008 & 1.012 \\ 
-	pmed7 & 1.126 & 1.367 & 1.027 & 1.011 & 1.023 & 1.01 & 1.025 \\ 
-	pmed8 & 1.179 & 1.489 & 1.064 & 1.017 & 1.051 & 1.021 & 1.048 \\ 
-	pmed9 & 1.249 & 1.559 & 1.065 & 1.031 & 1.063 & 1.024 & 1.063 \\ 
-	pmed10 & 1.462 & 1.839 & 1.076 & 1.037 & 1.076 & 1.039 & 1.076 \\ 
-	pmed11 & 1.071 & 1.369 & 1.014 & 1.004 & 1.008 & 1.005 & 1.011 \\ 
-	pmed12 & 1.144 & 1.368 & 1.025 & 1.007 & 1.028 & 1.007 & 1.025 \\ 
-	pmed13 & 1.209 & 1.446 & 1.047 & 1.019 & 1.05 & 1.021 & 1.05 \\ 
-	pmed14 & 1.243 & 1.504 & 1.056 & 1.026 & 1.053 & 1.025 & 1.049 \\ 
-	pmed15 & 1.61 & 1.658 & 1.067 & 1.032 & 1.068 & 1.03 & 1.06 \\ 
-	pmed16 & 1.062 & 1.333 & 1.012 & 1.004 & 1.012 & 1.005 & 1.008 \\ 
-	pmed17 & 1.149 & 1.359 & 1.023 & 1.014 & 1.028 & 1.013 & 1.025 \\ 
-	pmed18 & 1.169 & 1.414 & 1.044 & 1.016 & 1.033 & 1.016 & 1.04 \\ 
-	pmed19 & 1.261 & 1.537 & 1.056 & 1.022 & 1.059 & 1.02 & 1.055 \\ 
-	pmed20 & 1.501 & 1.73 & 1.079 & 1.032 & 1.076 & 1.027 & 1.073 \\ 
-	pmed21 & 1.096 & 1.384 & 1.027 & 1.005 & 1.015 & 1.003 & 1.021 \\ 
-	pmed22 & 1.128 & 1.371 & 1.026 & 1.015 & 1.018 & 1.007 & 1.021 \\ 
-	pmed23 & 1.151 & 1.42 & 1.041 & 1.019 & 1.045 & 1.016 & 1.041 \\ 
-	pmed24 & 1.271 & 1.519 & 1.058 & 1.019 & 1.055 & 1.019 & 1.052 \\ 
-	pmed25 & 1.449 & 1.711 & 1.07 & 1.033 & 1.077 & 1.035 & 1.073 \\ 
-	pmed26 & 1.073 & 1.317 & 1.018 & 1.008 & 1.012 & 1.003 & 1.014 \\ 
-	pmed27 & 1.113 & 1.36 & 1.017 & 1.008 & 1.018 & 1.009 & 1.017 \\ 
-	pmed28 & 1.168 & 1.386 & 1.046 & 1.011 & 1.037 & 1.015 & 1.04 \\ 
-	pmed29 & 1.263 & 1.497 & 1.055 & 1.026 & 1.057 & 1.024 & 1.057 \\ 
-	pmed30 & 1.456 & 1.643 & 1.067 & 1.033 & 1.064 & 1.032 & 1.061 \\ 
-	pmed31 & 1.082 & 1.336 & 1.01 & 1.003 & 1.006 & 1.001 & 1.013 \\ 
-	pmed32 & 1.12 & 1.344 & 1.02 & 1.011 & 1.018 & 1.011 & 1.017 \\ 
-	pmed33 & 1.182 & 1.432 & 1.043 & 1.018 & 1.044 & 1.017 & 1.04 \\ 
-	pmed34 & 1.323 & 1.539 & 1.061 & 1.024 & 1.059 & 1.021 & 1.056 \\ 
-	pmed35 & 1.083 & 1.292 & 1.011 & 1.005 & 1.015 & 1.007 & 1.01 \\ 
-	pmed36 & 1.138 & 1.334 & 1.016 & 1.009 & 1.016 & 1.011 & 1.016 \\ 
-	pmed37 & 1.157 & 1.439 & 1.042 & 1.02 & 1.05 & 1.017 & 1.047 \\ 
-	pmed38 & 1.063 & 1.288 & 1.007 & 1.009 & 1.008 & 1.006 & 1.01 \\ 
-	pmed39 & 1.127 & 1.42 & 1.02 & 1.007 & 1.014 & 1.007 & 1.015 \\ 
-	pmed40 & 1.187 & 1.423 & 1.046 & 1.017 & 1.043 & 1.019 & 1.039 \\ \hline
-\end{tabular}
-
-
-\end{center}
-
-\caption{Approximation Constants for P-Median Datasets}
-\end{figure*}
+\subsection{Implementation and Results}
 
 
 \section{Conclusion}
 
 \section{Acknowledgements}
-David Williamson and Karthik Sridharan?
+We would like to acknowledge David P. Williamson and Karthik Sridharan for their valuable feedback on this project.
 
 \label{submission}
 
@@ -618,6 +288,335 @@ David Williamson and Karthik Sridharan?
 
 \bibliography{projectBib}
 \bibliographystyle{icml2014}
+
+%\appendix
+%
+%\section{Appendix 1: Full Results}
+%
+%\subsection{Gaussian Data}
+%\begin{figure*}[h]
+%\begin{center}
+%\begin{tabular}{ | l | l | l | l | l | }
+%\hline
+%	Dataset & NameOpt Obj & k & n & dim  \\ \hline
+%	Gauss\_3\_5\_0 & 195 & 5 & 542 & 3 \\ 
+%	Gauss\_3\_5\_5 & 225 & 5 & 620 & 3 \\ 
+%	Gauss\_3\_5\_10 & 158 & 5 & 441 & 3 \\
+%	Gauss\_3\_10\_0 & 147 & 10 & 472 & 3 \\
+%	Gauss\_3\_10\_5 & 142 & 10 & 480 & 3 \\ 
+%	Gauss\_3\_10\_10 & 201 & 10 & 557 & 3 \\ 
+%	Gauss\_3\_50\_0 & 108 & 50 & 471 & 3 \\
+%	Gauss\_3\_50\_5 & 94 & 50 & 422 & 3 \\ 
+%	Gauss\_3\_50\_10 & 95 & 50 & 408 & 3 \\ 
+%	Gauss\_5\_5\_0 & 352 & 5 & 720 & 5 \\ 
+%	Gauss\_5\_5\_5 & 195 & 5 & 388 & 5 \\ 
+%	Gauss\_5\_5\_10 & 214 & 5 & 394 & 5 \\ 
+%	Gauss\_5\_10\_0 & 346 & 10 & 703 & 5 \\ 
+%	Gauss\_5\_10\_5 & 270 & 10 & 544 & 5 \\ 
+%	Gauss\_5\_10\_10 & 292 & 10 & 572 & 5 \\ 
+%	Gauss\_5\_50\_0 & 188 & 50 & 445 & 5 \\ 
+%	Gauss\_5\_50\_5 & 178 & 50 & 408 & 5 \\ 
+%	Gauss\_5\_50\_10 & 229 & 50 & 480 & 5 \\ 
+%	Gauss\_7\_5\_0 & 349 & 5 & 567 & 7 \\ 
+%	Gauss\_7\_5\_5 & 368 & 5 & 579 & 7 \\ 
+%	Gauss\_7\_5\_10 & 356 & 5 & 527 & 7 \\ 
+%	Gauss\_7\_10\_0 & 351 & 10 & 573 & 7 \\ 
+%	Gauss\_7\_10\_5 & 302 & 10 & 478 & 7 \\ 
+%	Gauss\_7\_10\_10 & 354 & 10 & 534 & 7 \\ 
+%	Gauss\_7\_50\_0 & 257 & 50 & 451 & 7 \\ 
+%	Gauss\_7\_50\_5 & 256 & 50 & 430 & 7 \\ 
+%	Gauss\_7\_50\_10 & 298 & 50 & 480 & 7 \\ \hline
+%\end{tabular}
+%\end{center}
+%
+%\caption{Details For Gaussian Datasets}
+%\end{figure*}
+%
+%\begin{figure*}[h]
+%\begin{center}
+%\begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | l | }
+%\hline
+%	Dataset &Time & Time & Time & Time & Time & Time & Time & Time & Time & Time   \\ \hline
+%	&K-means & Spectral & k-medoids & Supermodular & PAM & 1-Swap+ & 2-Swap & 2-swaps+ & 3-Swap & 4-swaps   \\ 
+%	Gauss\_3\_5\_0 & 0.024 & 0.056 & 0.066 & 131.305 & 2.707 & 3.195 & 4.779 & 4.138 & 7.683 & 11.325 \\ 
+%	Gauss\_3\_5\_5 & 0.032 & 0.076 & 0.099 & 195.013 & 3.682 & 3.764 & 6.639 & 5.32 & 9.627 & 14.575 \\ 
+%	Gauss\_3\_5\_10 & 0.033 & 0.055 & 0.047 & 80.439 & 2.244 & 1.802 & 2.806 & 3.024 & 5.107 & 7.457 \\ 
+%	Gauss\_3\_10\_0 & 0.041 & 0.083 & 0.095 & 121.551 & 5.133 & 3.576 & 7.452 & 6.3 & 10.157 & 11.872 \\ 
+%	Gauss\_3\_10\_5 & 0.048 & 0.1 & 0.117 & 101.072 & 5.026 & 4.96 & 8.57 & 6.952 & 11.948 & 12.225 \\ 
+%	Gauss\_3\_10\_10 & 0.05 & 0.106 & 0.153 & 149.352 & 7.101 & 6.456 & 11.273 & 10.646 & 18.21 & 17.414 \\ 
+%	Gauss\_3\_50\_0 & 0.154 & 0.324 & 0.435 & 175.827 & 29.201 & 34.228 & 43.65 & 49.964 & 48.259 & 66.413 \\ 
+%	Gauss\_3\_50\_5 & 0.151 & 0.253 & 0.376 & 127.64 & 26.318 & 21.541 & 38.004 & 33.213 & 45.862 & 57.262 \\ 
+%	Gauss\_3\_50\_10 & 0.153 & 0.265 & 0.301 & 132.119 & 21.341 & 22.556 & 35.389 & 32.139 & 44.361 & 50.143 \\ 
+%	Gauss\_5\_5\_0 & 0.026 & 0.079 & 0.08 & 230.345 & 4.997 & 4.21 & 9.428 & 8.063 & 12.811 & 19.337 \\ 
+%	Gauss\_5\_5\_5 & 0.025 & 0.056 & 0.032 & 75.262 & 1.159 & 1.506 & 2.188 & 2.382 & 3.71 & 5.797 \\ 
+%	Gauss\_5\_5\_10 & 0.025 & 0.042 & 0.027 & 69.349 & 1.383 & 1.458 & 2.403 & 2.575 & 3.811 & 5.748 \\ 
+%	Gauss\_5\_10\_0 & 0.044 & 0.1 & 0.18 & 227.747 & 11.633 & 12.129 & 17.724 & 18.654 & 26.563 & 33.646 \\ 
+%	Gauss\_5\_10\_5 & 0.054 & 0.095 & 0.109 & 134.137 & 6.834 & 5.407 & 9.243 & 9.428 & 15.96 & 21.795 \\ 
+%	Gauss\_5\_10\_10 & 0.045 & 0.092 & 0.117 & 127.614 & 7.639 & 6.456 & 11.807 & 12.186 & 18.339 & 23.554 \\ 
+%	Gauss\_5\_50\_0 & 0.142 & 0.211 & 0.389 & 139.818 & 30.155 & 27.431 & 37.251 & 43.421 & 50.192 & 68.329 \\ 
+%	Gauss\_5\_50\_5 & 0.137 & 0.196 & 0.302 & 97.336 & 27.856 & 21.446 & 32.407 & 39.614 & 44.69 & 53.546 \\ 
+%	Gauss\_5\_50\_10 & 0.149 & 0.219 & 0.417 & 170.431 & 37.132 & 35.119 & 45.341 & 47.002 & 56.683 & 69.712 \\ 
+%	Gauss\_7\_5\_0 & 0.019 & 0.054 & 0.052 & 185.865 & 2.975 & 3.565 & 4.954 & 5.005 & 8.531 & 11.867 \\ 
+%	Gauss\_7\_5\_5 & 0.031 & 0.078 & 0.047 & 154.1 & 2.603 & 3.04 & 5.45 & 5.738 & 8.056 & 12.505 \\ 
+%	Gauss\_7\_5\_10 & 0.018 & 0.052 & 0.043 & 130.185 & 2.949 & 2.478 & 4.668 & 4.849 & 7.324 & 11.036 \\ 
+%	Gauss\_7\_10\_0 & 0.045 & 0.071 & 0.097 & 185.521 & 8.015 & 7.338 & 12.495 & 10.474 & 16.174 & 20.671 \\ 
+%	Gauss\_7\_10\_5 & 0.04 & 0.063 & 0.073 & 136.189 & 5.315 & 5.365 & 9.287 & 6.87 & 11.768 & 16.072 \\ 
+%	Gauss\_7\_10\_10 & 0.048 & 0.09 & 0.1 & 168.962 & 7.047 & 6.538 & 9.783 & 9.322 & 13.581 & 19.41 \\ 
+%	Gauss\_7\_50\_0 & 0.143 & 0.199 & 0.401 & 152.958 & 32.592 & 37.747 & 39.026 & 42.999 & 60.483 & 69.667 \\ 
+%	Gauss\_7\_50\_5 & 0.147 & 0.212 & 0.327 & 136.496 & 27.8 & 26.288 & 38.683 & 34.335 & 47.779 & 59.414 \\ 
+%	Gauss\_7\_50\_10 & 0.149 & 0.231 & 0.426 & 163.651 & 37.968 & 41.976 & 55.514 & 50.175 & 56.302 & 79.819 \\ \hline
+%\end{tabular}
+%
+%\end{center}
+%
+%\caption{Running Times For Gaussian Datasets}
+%\end{figure*}
+%
+%\begin{figure*}[h]
+%\begin{center}
+%\begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | l | }
+%\hline
+%	Dataset&AMI & AMI & AMI & AMI & AMI & AMI & AMI & AMI & AMI & AMI  \\ \hline
+%	& K-means & Spectral & k-medoids & Supermodular & PAM & 1-Swap + & 2-Swap & 2-swaps + & 3-Swap & 4-swaps   \\ \hline
+%	Gauss\_3\_5\_0 & 0.884 & 0.887 & 0.729 & 0.678 & 0.88 & 0.876 & 0.884 & 0.876 & 0.881 & 0.882 \\ 
+%	Gauss\_3\_5\_5 & 0.7 & 0.62 & 0.637 & 0.545 & 0.683 & 0.68 & 0.685 & 0.69 & 0.682 & 0.686 \\ 
+%	Gauss\_3\_5\_10 & 0.68 & 0.618 & 0.62 & 0.504 & 0.663 & 0.665 & 0.659 & 0.659 & 0.664 & 0.668 \\ 
+%	Gauss\_3\_10\_0 & 0.693 & 0.641 & 0.699 & 0.619 & 0.692 & 0.692 & 0.688 & 0.696 & 0.685 & 0.685 \\ 
+%	Gauss\_3\_10\_5 & 0.534 & 0.466 & 0.516 & 0.446 & 0.534 & 0.533 & 0.535 & 0.532 & 0.531 & 0.536 \\ 
+%	Gauss\_3\_10\_10 & 0.669 & 0.56 & 0.616 & 0.516 & 0.651 & 0.653 & 0.652 & 0.657 & 0.657 & 0.653 \\ 
+%	Gauss\_3\_50\_0 & 0.504 & 0.498 & 0.498 & 0.475 & 0.501 & 0.497 & 0.491 & 0.497 & 0.495 & 0.501 \\ 
+%	Gauss\_3\_50\_5 & 0.407 & 0.412 & 0.402 & 0.396 & 0.392 & 0.385 & 0.389 & 0.386 & 0.387 & 0.385 \\ 
+%	Gauss\_3\_50\_10 & 0.421 & 0.424 & 0.406 & 0.39 & 0.413 & 0.414 & 0.408 & 0.404 & 0.405 & 0.41 \\ 
+%	Gauss\_5\_5\_0 & 0.99 & 0.99 & 0.858 & 0.719 & 0.988 & 0.994 & 0.989 & 0.994 & 0.989 & 0.985 \\ 
+%	Gauss\_5\_5\_5 & 0.741 & 0.713 & 0.687 & 0.657 & 0.742 & 0.749 & 0.741 & 0.744 & 0.737 & 0.747 \\ 
+%	Gauss\_5\_5\_10 & 0.833 & 0.83 & 227.742 & 0.663 & 0.76 & 0.779 & 0.806 & 0.747 & 0.789 & 0.77 \\ 
+%	Gauss\_5\_10\_0 & 0.974 & 0.972 & 0.858 & 0.732 & 0.96 & 0.964 & 0.964 & 0.965 & 0.96 & 0.964 \\ 
+%	Gauss\_5\_10\_5 & 0.783 & 0.736 & 0.677 & 0.575 & 0.729 & 0.725 & 0.737 & 0.737 & 0.729 & 0.725 \\ 
+%	Gauss\_5\_10\_10 & 0.878 & 0.829 & 0.795 & 0.704 & 0.873 & 0.875 & 0.873 & 0.872 & 0.875 & 0.868 \\ 
+%	Gauss\_5\_50\_0 & 0.723 & 0.669 & 0.668 & 0.622 & 0.695 & 0.692 & 0.692 & 0.7 & 0.696 & 0.692 \\ 
+%	Gauss\_5\_50\_5 & 0.646 & 0.596 & 0.621 & 0.57 & 0.622 & 0.619 & 0.627 & 0.631 & 0.625 & 0.626 \\
+%	Gauss\_5\_50\_10 & 0.669 & 0.639 & 0.626 & 0.546 & 0.64 & 0.641 & 0.639 & 0.65 & 0.643 & 0.637 \\ 
+%	Gauss\_7\_5\_0 & 1 & 1 & 0.852 & 0.773 & 0.999 & 1 & 0.999 & 1 & 0.999 & 0.998 \\ 
+%	Gauss\_7\_5\_5 & 0.847 & 0.832 & 0.86 & 0.72 & 0.852 & 0.85 & 0.849 & 0.847 & 0.847 & 0.847 \\ 
+%	Gauss\_7\_5\_10 & 0.979 & 0.963 & 0.839 & 0.744 & 0.981 & 0.979 & 0.98 & 0.979 & 0.978 & 0.978 \\ 
+%	Gauss\_7\_10\_0 & 0.995 & 0.995 & 0.869 & 0.785 & 0.988 & 0.984 & 0.987 & 0.984 & 0.982 & 0.976 \\ 
+%	Gauss\_7\_10\_5 & 0.988 & 0.994 & 0.853 & 0.732 & 0.988 & 0.994 & 0.99 & 0.994 & 0.993 & 0.994 \\ 
+%	Gauss\_7\_10\_10 & 0.89 & 0.81 & 0.845 & 0.724 & 0.851 & 0.856 & 0.854 & 0.854 & 0.85 & 0.851 \\ 
+%	Gauss\_7\_50\_0 & 0.867 & 0.834 & 0.784 & 0.693 & 0.832 & 0.835 & 0.84 & 0.833 & 0.835 & 0.846 \\ 
+%	Gauss\_7\_50\_5 & 0.852 & 0.808 & 0.727 & 0.647 & 0.813 & 0.815 & 0.814 & 0.815 & 0.812 & 0.807 \\ 
+%	Gauss\_7\_50\_10 & 0.829 & 0.761 & 0.742 & 0.645 & 0.807 & 0.799 & 0.807 & 0.804 & 0.804 & 0.799 \\ \hline
+%\end{tabular}
+%
+%\end{center}
+%
+%\caption{AMI For Gaussian Datasets}
+%\end{figure*}
+%
+%
+%\begin{figure*}[h]
+%\begin{center}
+%\begin{tabular}{ | l | l | l | l | l | l | l | l | l | }
+%\hline
+%	Dataset & Approx & Approx & Approx & Approx & Approx & Approx & Approx & Approx \\ \hline
+%	& k-medoids & Supermodular & PAM & 1-Swap+ & 2-Swap & 2-Swap+ & 3-Swap & 4-swaps   \\ \hline
+%	Gauss\_3\_5\_0 & 1.159 & 1.481 & 1.013 & 1 & 1.011 & 1 & 1.013 & 1.009 \\ 
+%	Gauss\_3\_5\_5 & 1.057 & 1.4 & 1.005 & 1.001 & 1.006 & 1.001 & 1.01 & 1.007 \\ 
+%	Gauss\_3\_5\_10 & 1.047 & 1.377 & 1.007 & 1.004 & 1.014 & 1.007 & 1.009 & 1.008 \\ 
+%	Gauss\_3\_10\_0 & 1.029 & 1.404 & 1.018 & 1.01 & 1.013 & 1.01 & 1.022 & 1.019 \\ 
+%	Gauss\_3\_10\_5 & 1.063 & 1.329 & 1.025 & 1.013 & 1.021 & 1.012 & 1.02 & 1.026 \\ 
+%	Gauss\_3\_10\_10 & 1.06 & 1.369 & 1.017 & 1.009 & 1.018 & 1.007 & 1.016 & 1.016 \\ 
+%	Gauss\_3\_50\_0 & 1.112 & 1.354 & 1.05 & 1.026 & 1.037 & 1.025 & 1.049 & 1.044 \\ 
+%	Gauss\_3\_50\_5 & 1.124 & 1.327 & 1.045 & 1.025 & 1.041 & 1.019 & 1.044 & 1.04 \\ 
+%	Gauss\_3\_50\_10 & 1.121 & 1.316 & 1.044 & 1.023 & 1.037 & 1.021 & 1.043 & 1.043 \\ 
+%	Gauss\_5\_5\_0 & 1.105 & 1.576 & 1.013 & 1 & 1.011 & 1 & 1.016 & 1.015 \\ 
+%	Gauss\_5\_5\_5 & 1.07 & 1.436 & 1.03 & 1.002 & 1.028 & 1.005 & 1.026 & 1.024 \\ 
+%	Gauss\_5\_5\_10 & 0.003 & 1.369 & 1.021 & 1.004 & 1.016 & 1.007 & 1.016 & 1.015 \\ 
+%	Gauss\_5\_10\_0 & 1.148 & 1.619 & 1.029 & 1 & 1.026 & 1.001 & 1.028 & 1.029 \\ 
+%	Gauss\_5\_10\_5 & 1.08 & 1.389 & 1.017 & 1.011 & 1.018 & 1.009 & 1.017 & 1.019 \\ 
+%	Gauss\_5\_10\_10 & 1.152 & 1.458 & 1.022 & 1.006 & 1.023 & 1.007 & 1.021 & 1.026 \\
+%	Gauss\_5\_50\_0 & 1.096 & 1.271 & 1.031 & 1.017 & 1.033 & 1.015 & 1.031 & 1.029 \\ 
+%	Gauss\_5\_50\_5 & 1.089 & 1.272 & 1.03 & 1.02 & 1.027 & 1.014 & 1.033 & 1.032 \\ 
+%	Gauss\_5\_50\_10 & 1.09 & 1.299 & 1.029 & 1.017 & 1.036 & 1.016 & 1.028 & 1.036 \\ 
+%	Gauss\_7\_5\_0 & 1.214 & 1.59 & 1.016 & 1 & 1.018 & 1 & 1.014 & 1.016 \\ 
+%	Gauss\_7\_5\_5 & 1.046 & 1.446 & 1.017 & 1.009 & 1.014 & 1.004 & 1.014 & 1.019 \\ 
+%	Gauss\_7\_5\_10 & 1.153 & 1.53 & 1.01 & 1 & 1.007 & 1 & 1.01 & 1.009 \\ 
+%	Gauss\_7\_10\_0 & 1.132 & 1.504 & 1.032 & 1 & 1.023 & 1 & 1.032 & 1.034 \\ 
+%	Gauss\_7\_10\_5 & 1.159 & 1.569 & 1.031 & 1 & 1.028 & 1 & 1.027 & 1.024 \\ 
+%	Gauss\_7\_10\_10 & 1.074 & 1.56 & 1.024 & 1.003 & 1.019 & 1.005 & 1.02 & 1.02 \\ 
+%	Gauss\_7\_50\_0 & 1.104 & 1.321 & 1.029 & 1.01 & 1.031 & 1.011 & 1.027 & 1.026 \\ 
+%	Gauss\_7\_50\_5 & 1.132 & 1.326 & 1.033 & 1.013 & 1.031 & 1.013 & 1.026 & 1.036 \\ 
+%	Gauss\_7\_50\_10 & 1.107 & 1.345 & 1.027 & 1.014 & 1.025 & 1.012 & 1.031 & 1.026 \\ \hline
+%\end{tabular}
+%
+%\end{center}
+%
+%\caption{Approximation Constants For Gaussian Datasets}
+%\end{figure*}
+%
+%\subsection{P-Median}
+%
+%\begin{figure*}[h]
+%\begin{center}
+%\begin{tabular}{ | l | l | l | l | }
+%\hline
+%	Dataset & Optimal Objective & $k$ & $n$ \\ \hline
+%	pmed1 & 5819 & 5 & 100 \\ 
+%	pmed2 & 4093 & 10 & 100 \\ 
+%	pmed3 & 4250 & 10 & 100 \\ 
+%	pmed4 & 3034 & 20 & 100 \\
+%	pmed5 & 1355 & 33 & 100 \\ 
+%	pmed6 & 7824 & 5 & 200 \\ 
+%	pmed7 & 5631 & 10 & 200 \\ 
+%	pmed8 & 4445 & 20 & 200 \\ 
+%	pmed9 & 2734 & 40 & 200 \\ 
+%	pmed10 & 1255 & 67 & 200 \\ 
+%	pmed11 & 7696 & 5 & 300 \\ 
+%	pmed12 & 6634 & 10 & 300 \\ 
+%	pmed13 & 4374 & 30 & 300 \\ 
+%	pmed14 & 2968 & 60 & 300 \\ 
+%	pmed15 & 1729 & 100 & 300 \\
+%	pmed16 & 8162 & 5 & 400 \\ 
+%	pmed17 & 6999 & 10 & 400 \\
+%	pmed18 & 4809 & 40 & 400 \\ 
+%	pmed19 & 2845 & 80 & 400 \\ 
+%	pmed20 & 1789 & 133 & 400 \\ 
+%	pmed21 & 9138 & 5 & 500 \\ 
+%	pmed22 & 8579 & 10 & 500 \\ 
+%	pmed23 & 4619 & 50 & 500 \\ 
+%	pmed24 & 2961 & 100 & 500 \\ 
+%	pmed25 & 1828 & 167 & 500 \\ 
+%	pmed26 & 9917 & 5 & 600 \\ 
+%	pmed27 & 8307 & 10 & 600 \\ 
+%	pmed28 & 4498 & 60 & 600 \\ 
+%	pmed29 & 3033 & 120 & 600 \\
+%	pmed30 & 1989 & 200 & 600 \\ 
+%	pmed31 & 10086 & 5 & 700 \\ 
+%	pmed32 & 9297 & 10 & 700 \\ 
+%	pmed33 & 4700 & 60 & 700 \\ 
+%	pmed34 & 3013 & 140 & 700 \\ 
+%	pmed35 & 10400 & 5 & 800 \\ 
+%	pmed36 & 9934 & 10 & 800 \\ 
+%	pmed37 & 5057 & 80 & 800 \\ 
+%	pmed38 & 11060 & 5 & 900 \\ 
+%	pmed39 & 9423 & 10 & 900 \\ 
+%	pmed40 & 5128 & 90 & 900 \\ \hline
+%\end{tabular}
+%
+%
+%\end{center}
+%
+%\caption{Details for P-Median Datasets}
+%\end{figure*}
+%
+%\begin{figure*}[h]
+%\begin{center}
+%\begin{tabular}{ | l | l | l | l | l | l | l | l | }
+%\hline
+%	Dataset & Time & Time & Time & Time & Time & Time & Time \\ \hline
+%	&k-medoids & Supermodular & PAM & 1-Swap + & 2-Swap & 2-swaps + & 3-Swap   \\ \hline
+%	pmed1 & 0.0032 & 5 & 0.1 & 0.1 & 0.2 & 0.2 & 0.3 \\ 
+%	pmed2 & 0.0069 & 6.4 & 0.2 & 0.2 & 0.3 & 0.3 & 0.4 \\ 
+%	pmed3 & 0.0067 & 7.5 & 0.2 & 0.2 & 0.3 & 0.3 & 0.4 \\ 
+%	pmed4 & 0.0125 & 8 & 0.3 & 0.4 & 0.5 & 0.6 & 0.6 \\ 
+%	pmed5 & 0.0381 & 8.3 & 0.5 & 0.6 & 0.7 & 0.7 & 0.9 \\ 
+%	pmed6 & 0.0065 & 19.3 & 0.3 & 0.4 & 0.5 & 0.6 & 0.8 \\ 
+%	pmed7 & 0.0117 & 23.9 & 0.7 & 0.9 & 0.9 & 1.3 & 1.5 \\ 
+%	pmed8 & 0.027 & 27.2 & 1.4 & 1.8 & 2.2 & 2.6 & 3.1 \\ 
+%	pmed9 & 0.0642 & 29 & 3.4 & 3.5 & 3.3 & 4.8 & 4.7 \\ 
+%	pmed10 & 0.7329 & 39.8 & 4.4 & 5.8 & 6.2 & 7.3 & 8.2 \\ 
+%	pmed11 & 0.0124 & 42 & 0.6 & 0.8 & 1.4 & 1.2 & 2.2 \\ 
+%	pmed12 & 0.0186 & 45.7 & 1.7 & 2 & 2.3 & 2.4 & 4.3 \\ 
+%	pmed13 & 0.0685 & 69.1 & 6.6 & 5.3 & 7 & 8.4 & 11 \\ 
+%	pmed14 & 0.2238 & 76.3 & 13.6 & 14.2 & 17.1 & 17.4 & 25 \\ 
+%	pmed15 & 1.0969 & 100.2 & 18.4 & 19.7 & 23.1 & 28.7 & 35.5 \\ 
+%	pmed16 & 0.0251 & 87.1 & 1.3 & 1.2 & 2.3 & 2.4 & 3.8 \\ 
+%	pmed17 & 0.0581 & 97.1 & 3.5 & 2.5 & 3.9 & 4.8 & 6.8 \\ 
+%	pmed18 & 0.2596 & 134.7 & 15.3 & 16.5 & 23.1 & 23.3 & 31.3 \\ 
+%	pmed19 & 1.0193 & 153.5 & 34.9 & 34.1 & 40.3 & 47.9 & 57.8 \\ 
+%	pmed20 & 1.7947 & 175 & 52.2 & 45 & 68.6 & 68.2 & 79.3 \\ 
+%	pmed21 & 0.0327 & 109.4 & 1.8 & 2.1 & 4.1 & 4.2 & 6.1 \\ 
+%	pmed22 & 0.0786 & 113.1 & 4.3 & 5.6 & 8.3 & 7.5 & 12.7 \\ 
+%	pmed23 & 0.5123 & 199.8 & 35.9 & 34.8 & 46.9 & 52.3 & 62.2 \\ 
+%	pmed24 & 1.7861 & 245.9 & 66.6 & 90.3 & 99.2 & 88.5 & 125.5 \\ 
+%	pmed25 & 3.1433 & 451.9 & 103 & 118 & 126.8 & 146.4 & 138.1 \\ 
+%	pmed26 & 0.0503 & 159.8 & 2.8 & 2.4 & 4.7 & 5.6 & 6.9 \\ 
+%	pmed27 & 0.1265 & 183.4 & 7.1 & 6.1 & 11.7 & 10.7 & 13 \\ 
+%	pmed28 & 0.8738 & 263.3 & 60.3 & 71.3 & 95.6 & 98.5 & 89.3 \\ 
+%	pmed29 & 2.8418 & 424.3 & 152.6 & 146.8 & 196.5 & 172.8 & 167 \\ 
+%	pmed30 & 5.2891 & 571 & 175 & 207.5 & 254.2 & 249.7 & 255.7 \\ 
+%	pmed31 & 0.0728 & 225.6 & 4.9 & 4.4 & 8.2 & 6.6 & 9.2 \\ 
+%	pmed32 & 0.1528 & 249.5 & 11 & 7.8 & 14.3 & 12.9 & 19 \\ 
+%	pmed33 & 1.4723 & 440.1 & 112.8 & 91.9 & 143.9 & 158.5 & 154.1 \\ 
+%	pmed34 & 3.6669 & 591.7 & 234.8 & 217.8 & 233.1 & 287.8 & 256.8 \\ 
+%	pmed35 & 0.1133 & 298.3 & 4.8 & 5.9 & 7.5 & 9.3 & 11.9 \\ 
+%	pmed36 & 0.2221 & 259.8 & 13 & 11.4 & 15.9 & 24 & 23.6 \\ 
+%	pmed37 & 2.4409 & 571 & 190.5 & 149.7 & 172.8 & 282.3 & 224.7 \\ 
+%	pmed38 & 0.1326 & 349.9 & 7.1 & 6.5 & 9.8 & 12.2 & 14.5 \\ 
+%	pmed39 & 0.2676 & 419.8 & 16.5 & 13.6 & 22.6 & 25.5 & 29.4 \\ 
+%	pmed40 & 3.5269 & 849.9 & 251.3 & 264.9 & 250.4 & 391.7 & 350.2 \\ \hline
+%\end{tabular}
+%
+%
+%\end{center}
+%
+%\caption{Running Time for P-Median Datasets}
+%\end{figure*}
+%
+%\begin{figure*}[h]
+%\begin{center}
+%\begin{tabular}{ | l | l | l | l | l | l | l | l | }
+%\hline
+%	Dataset & Approx & Approx & Approx & Approx & Approx & Approx & Approx \\ \hline
+%	  & k-medoids & Supermodular & PAM & 1-Swap + & 2-Swap & 2-swaps+ & 3-Swap \\ \hline
+%	pmed1 & 1.113 & 1.409 & 1.03 & 1.013 & 1.029 & 1.005 & 1.018 \\ 
+%	pmed2 & 1.158 & 1.486 & 1.044 & 1.011 & 1.038 & 1.011 & 1.044 \\ 
+%	pmed3 & 1.161 & 1.442 & 1.053 & 1.01 & 1.037 & 1.01 & 1.046 \\ 
+%	pmed4 & 1.16 & 1.5 & 1.07 & 1.028 & 1.061 & 1.019 & 1.056 \\ 
+%	pmed5 & 1.373 & 1.681 & 1.06 & 1.026 & 1.071 & 1.033 & 1.051 \\ 
+%	pmed6 & 1.09 & 1.286 & 1.015 & 1.008 & 1.016 & 1.008 & 1.012 \\ 
+%	pmed7 & 1.126 & 1.367 & 1.027 & 1.011 & 1.023 & 1.01 & 1.025 \\ 
+%	pmed8 & 1.179 & 1.489 & 1.064 & 1.017 & 1.051 & 1.021 & 1.048 \\ 
+%	pmed9 & 1.249 & 1.559 & 1.065 & 1.031 & 1.063 & 1.024 & 1.063 \\ 
+%	pmed10 & 1.462 & 1.839 & 1.076 & 1.037 & 1.076 & 1.039 & 1.076 \\ 
+%	pmed11 & 1.071 & 1.369 & 1.014 & 1.004 & 1.008 & 1.005 & 1.011 \\ 
+%	pmed12 & 1.144 & 1.368 & 1.025 & 1.007 & 1.028 & 1.007 & 1.025 \\ 
+%	pmed13 & 1.209 & 1.446 & 1.047 & 1.019 & 1.05 & 1.021 & 1.05 \\ 
+%	pmed14 & 1.243 & 1.504 & 1.056 & 1.026 & 1.053 & 1.025 & 1.049 \\ 
+%	pmed15 & 1.61 & 1.658 & 1.067 & 1.032 & 1.068 & 1.03 & 1.06 \\ 
+%	pmed16 & 1.062 & 1.333 & 1.012 & 1.004 & 1.012 & 1.005 & 1.008 \\ 
+%	pmed17 & 1.149 & 1.359 & 1.023 & 1.014 & 1.028 & 1.013 & 1.025 \\ 
+%	pmed18 & 1.169 & 1.414 & 1.044 & 1.016 & 1.033 & 1.016 & 1.04 \\ 
+%	pmed19 & 1.261 & 1.537 & 1.056 & 1.022 & 1.059 & 1.02 & 1.055 \\ 
+%	pmed20 & 1.501 & 1.73 & 1.079 & 1.032 & 1.076 & 1.027 & 1.073 \\ 
+%	pmed21 & 1.096 & 1.384 & 1.027 & 1.005 & 1.015 & 1.003 & 1.021 \\ 
+%	pmed22 & 1.128 & 1.371 & 1.026 & 1.015 & 1.018 & 1.007 & 1.021 \\ 
+%	pmed23 & 1.151 & 1.42 & 1.041 & 1.019 & 1.045 & 1.016 & 1.041 \\ 
+%	pmed24 & 1.271 & 1.519 & 1.058 & 1.019 & 1.055 & 1.019 & 1.052 \\ 
+%	pmed25 & 1.449 & 1.711 & 1.07 & 1.033 & 1.077 & 1.035 & 1.073 \\ 
+%	pmed26 & 1.073 & 1.317 & 1.018 & 1.008 & 1.012 & 1.003 & 1.014 \\ 
+%	pmed27 & 1.113 & 1.36 & 1.017 & 1.008 & 1.018 & 1.009 & 1.017 \\ 
+%	pmed28 & 1.168 & 1.386 & 1.046 & 1.011 & 1.037 & 1.015 & 1.04 \\ 
+%	pmed29 & 1.263 & 1.497 & 1.055 & 1.026 & 1.057 & 1.024 & 1.057 \\ 
+%	pmed30 & 1.456 & 1.643 & 1.067 & 1.033 & 1.064 & 1.032 & 1.061 \\ 
+%	pmed31 & 1.082 & 1.336 & 1.01 & 1.003 & 1.006 & 1.001 & 1.013 \\ 
+%	pmed32 & 1.12 & 1.344 & 1.02 & 1.011 & 1.018 & 1.011 & 1.017 \\ 
+%	pmed33 & 1.182 & 1.432 & 1.043 & 1.018 & 1.044 & 1.017 & 1.04 \\ 
+%	pmed34 & 1.323 & 1.539 & 1.061 & 1.024 & 1.059 & 1.021 & 1.056 \\ 
+%	pmed35 & 1.083 & 1.292 & 1.011 & 1.005 & 1.015 & 1.007 & 1.01 \\ 
+%	pmed36 & 1.138 & 1.334 & 1.016 & 1.009 & 1.016 & 1.011 & 1.016 \\ 
+%	pmed37 & 1.157 & 1.439 & 1.042 & 1.02 & 1.05 & 1.017 & 1.047 \\ 
+%	pmed38 & 1.063 & 1.288 & 1.007 & 1.009 & 1.008 & 1.006 & 1.01 \\ 
+%	pmed39 & 1.127 & 1.42 & 1.02 & 1.007 & 1.014 & 1.007 & 1.015 \\ 
+%	pmed40 & 1.187 & 1.423 & 1.046 & 1.017 & 1.043 & 1.019 & 1.039 \\ \hline
+%\end{tabular}
+%
+%
+%\end{center}
+%
+%\caption{Approximation Constants for P-Median Datasets}
+%\end{figure*}
+
+
 
 \end{document} 
 
