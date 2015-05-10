@@ -50,7 +50,7 @@
 \begin{document} 
 
 \twocolumn[
-\icmltitle{Local Search Approximation Algorithms for Partitional and Hierarchical Clustering}
+\icmltitle{Simple Approximation Algorithms for Partitional and Hierarchical Clustering}
 
 % It is OKAY to include author information, even for blind
 % submissions: the style file will automatically remove it for you
@@ -72,7 +72,7 @@ As the data we have access to grows in variety and size and becomes cheaper to s
 Partitioning data (clustering) into similar groups (clusters) is one of the key tools to learn about a set of unlabeled data such as a set of customers who have visited a website or a set of handwritten documents.
 Clustering in these situations helps us learn underlying structure and classifications of our data, and it allows large data sets to be presented in a simplified and compressed view \cite{Jain}.
 
-There are two main branches of clustering: partitional (or flat) and hierarchical. In partitional clustering we want to partition the data into disjoint sets whereas in hierarchical clustering we are interested in finding a nested tree of partitions. Often these problems are solved using heuristic algorithms which have no guarantee on the solution produced but are typically fast and easy to implement. We will look at how local search approximation algorithms, which do have some approximation guarantee on the constructed solution and are less computationally expensive than other approximation methods, compare in practice to some of the most widely used clustering algorithms both in the quality of the solution and in computation time. 
+There are two main branches of clustering: partitional (or flat) and hierarchical. In partitional clustering we want to partition the data into disjoint sets whereas in hierarchical clustering we are interested in finding a nested tree of partitions. Often these problems are solved using heuristic algorithms which have no guarantee on the solution produced but are typically fast and easy to implement. We will look at how local search and greedy approximation algorithms, which do have some approximation guarantee on the constructed solution and are less computationally expensive than other approximation methods, compare in practice to some of the most widely used clustering algorithms both in the quality of the solution and in computation time. 
 
 \section{Literature Review}
 
@@ -86,12 +86,12 @@ Arguably the most common partitional clustering method is $k$-means, in which we
 
 Several variations on $k$-means attempt to reduce the sensitivity and worst-case behavior, such as to minimize the maximum distance from a point to its cluster center, called $k$-center clustering. Here, a simple greedy algorithm is guaranteed to produce a solution within a factor of $2$ of the optimum, as long as the given distances satisfy the triangle inequality \cite{Gonzalez}. Furthermore, this is best approximation ratio possible unless P=NP \cite{Shmoys}.  However, $k$-center does not perform well in practice compared to other methods \cite{Murphy}.
 
-More recently, spectral based methods have become popular for clustering. These algorithms construct a graph based on the similarity matrix and compute the eigenvectors of the normalized graph Laplacian matrix \cite{Luxburg}. These eigenvectors are used to split the current cluster in half using the second eigenvector (continuing recursively until there are $k$ clusters).  Another method is to use the eigenvectors to project the data points into a lower dimensional space on which the $k$-means algorithm is run \cite{Verma}. We will base our comparisons against the algorithm introduced by \cite{Meila} which uses the latter method and performed best in practice on several datasets \cite{Verma}.
+More recently, spectral based methods have become popular for clustering. These algorithms construct a graph based on the similarity matrix and compute the eigenvectors of the normalized graph Laplacian matrix \cite{Luxburg}. These eigenvectors are used to split the current cluster in half using the eigenvector associated with the second highest eigenvalue (continuing recursively until there are $k$ clusters).  Another method is to use the eigenvectors to project the data points into a lower dimensional space on which the $k$-means algorithm is run \cite{Verma}. We will base our comparisons against the algorithm introduced by \cite{Meila} which uses the latter method and performed best in practice on several datasets \cite{Verma}.
 
 An objective function that is somewhat in between $k$-means and $k$-center is to minimize the sum of distances from each point to the median point of its cluster, called $k$-median or $k$-medoids clustering.  There are two common heuristic algorithms for this problem. The first is a local search algorithm called partition around medoids (PAM), which starts with $k$ randomly chosen data points as centers, and looks to swap one of the centers with another data point to improve the objective value.  This repeats until no more improving swaps exist \cite{ESL}. 
 Another common heuristic (which we shall call $k$-medoids throughout this paper), which is more computationally efficient than PAM \cite{Park}, is a varitation on Lloyd's $k$-means algorithm.  Starting with randomly chosen centers, we assign each data point to its closest center, and then update the center within each cluster \cite{Park}. The algorithm repeats this until the solution becomes stable.
 
-Various approximation algorithms for the $k$-median problem have been proposed, with a best known approximation ratio of 2.592 \cite{Wu}. However, this algorithm uses linear programming and is computationally intensive compared to local search and greedy algorithms.  It is known that a local search algorithm that considers swaps of size $\leq p$ is a $(3 + \frac{2}{p})$-approximation algorithm \cite{Arya}. Note that for $p=1$, this is equivalent to PAM.  As far as we know, this algorithm has not been implemented or tested on clustering data, so the relative trade-off of solution quality and computation time as $p$ increases is unknown.
+The $k$-median problem is also a fundamental problem in approximation algorithms. However, these algorithms are often not tested in practice despite their improved guarantees on the solution. The best known approximation ratio for this problem is 2.592 \cite{Wu}. This algorithm uses linear programming and is computationally intensive compared to local search and greedy algorithms.  It is known that a local search algorithm that considers swaps of size $\leq p$ is a $(3 + \frac{2}{p})$-approximation algorithm \cite{Arya}. Note that for $p=1$, this is equivalent to PAM.  As far as we know, this algorithm has not been implemented or tested on clustering data, so the relative trade-off of solution quality and computation time as $p$ increases is unknown.
 
 Other partitional clustering methods include MeanShift and DBSCAN, which focus on finding clusters of high density \cite{Comaniciu, Ester}. We choose not to compare against density based methods since their objective differs widely from the center-based methods above. We also choose not to compare our proposed methods against Bayesian clustering methods such as Gaussian mixture models since these methods require many more parameters (representing the prior information).  Lastly, if we relax the constraint to identify exactly $k$ clusters, and instead allow the user to input ``preferences'' on the data points being clusters, a recent method called affinity propagation has been shown to perform particularly well \cite{Frey}.  However, again, because of the difference in available information, we do not to test against this algorithm.  
 
@@ -101,7 +101,7 @@ In the hierarchical clustering setting, we do not specify a number of clusters. 
 
 The most common method for hierarchical clustering is agglomerative clustering. Agglomerative clustering starts with each data point in its own cluster, and proceeds to recursively merge the two closest clusters to form the next clustering level in the hierarchy, repeating until the entire data set is a single cluster.  There are several choices on how to measure distance in order to choose which clusters to merge. Single linkage (also called nearest neighbor) defines the distance between two clusters to be the minimum pairwise distance between the data points in each cluster.  Complete linkage clustering instead defines the distance to be the largest pairwise distance. A method between these two extremes is group average linkage which looks at the average pairwise distance between clusters. This strikes a balance between the closeness and compactness of the two techniques above and gives more reasonable results in practice \cite{ESL}. Lastly, there is Ward's method which chooses the two clusters to merge so as to minimize the sum of each cluster's variance \cite{Ward}.
 
-Approximation algorithms for hierarchical clustering have also been studied, where we aim to identify a hierarchy of clusters so as to minimize the ratio of the objective value on every level in the hierarchy of size $k$ to the optimal objective value of the flat partitional clustering problem with $k$ clusters. Note that it may not always be possible to find a solution with approximation ratio 1. The hierarchical $k$-median problem was originally introduced by Plaxton who gave a 238.88 approximation algorithm \cite{Plaxton}. This was improved by Lin et al.~\cite{Lin} who gave an incremental approximation algorithm framework. In particular, their approach relies on a black box $k$-median solver and then uses these solutions for $k=1, \ldots, n$ to construct a hierarchical clustering that increases the objective value by at most a factor of $20.71$ (or $10.03$ when randomized) at each level. The local search $(3+\frac{2}{p})$-approximation algorithm as the $k$-median solver performed well in experimental tests \cite{Nagarajan}. While the authors tested the variants of this algorithm against other $k$-median approximation algorithms, it has not been tested against traditional clustering algorithms or on any labeled data sets. 
+Approximation algorithms for hierarchical clustering have also been studied, where we aim to identify a hierarchy of clusters so as to minimize the ratio of the objective value on every level in the hierarchy of size $k$ to the optimal objective value of the flat partitional clustering problem with $k$ clusters. Note that it may not always be possible to find a solution with approximation ratio 1. The hierarchical $k$-median problem was originally introduced by Plaxton who gave a 238.88 approximation algorithm \cite{Plaxton}. This was improved by Lin et al.~\cite{Lin} who gave an incremental approximation algorithm framework. In particular, their approach relies on a black box $k$-median solver and then uses these solutions for $k=1, \ldots, n$ to greedily construct a hierarchical clustering that increases the objective value by at most a factor of $20.71$ (or $10.03$ when randomized) at each level. Using the local $p$-swap $(3+\frac{2}{p})$-approximation algorithm mentioned above as the black-box $k$-median solver performed well in experimental tests \cite{Nagarajan}. While the authors tested the variants of this algorithm against other $k$-median approximation algorithms, it has not been tested against traditional clustering algorithms or on any labeled data sets. 
 
 Several algorithms have been built upon agglomerative clustering to incorporate non-spherical cluster shapes and categorical data such as the CURE, ROCK, and Chameleon algorithms \cite{Guha_CURE, Guha_ROCK, Karypis}, but do not relate as much to the above approximation algorithm in objective. We also choose not compare the approximation framework with Bayesian hierarchical methods for the same reasons as above. 
 
@@ -111,9 +111,9 @@ We will focus our attention on the $k$-median problem, where we are given a set 
 \[ f(S) = \sum_{ i\in X} \min_{j \in S} d(i,j). \]
 
 \subsection{Local Search with Multiswaps}
-Consider a local search algorithm which starts with a random subset $S$ of $k$ points. At every iteration, the algorithm looks for a set $A \subseteq S$ and a set $B \subseteq X -S$ such that $|A| = |B| \leq p$ and
+Consider a local search algorithm which starts with a random subset $S$ of $k$ points. At every iteration, the algorithm looks for a set $B \subseteq S$ and a set $A \subseteq X -S$ such that $|A| = |B| \leq p$ and
 \[ f(S- B \cup A) \geq f(S). \]
-If the algorithm finds such a set, it swaps out $B$ from $S$ and adds $A$. If no such set exists, the algorithm outputs $S$. At every iteration, for $p$ independent of $k$ and $n$, let $\mathcal{N}$ be the size of the search neighborhood. If we ensure that the algorithm improves the objective by at least a factor of $(1- \delta) = (1- \varepsilon/\mathcal{N})$, this is a polynomial-time algorithm. Furthermore, the local search algorithm outputs $S \subseteq X$ such that $|S| = k$ and
+If the algorithm finds such sets, it swaps out $B$ from $S$ and adds $A$. If no such set exists, the algorithm outputs $S$. At every iteration, for $p$ independent of $k$ and $n$, let $\mathcal{N}$ be the size of the search neighborhood. If we ensure that the algorithm improves the objective by at least a factor of $(1- \delta) = (1- \varepsilon/\mathcal{N})$, this is a polynomial-time algorithm. Furthermore, the local search algorithm outputs $S \subseteq X$ such that $|S| = k$ and
 \[ f(S) \leq \frac{1}{1-\varepsilon} \left (3 + \frac{2}{p} \right ) f(O) \]
 for all $O \subseteq X$. Therefore, there is a trade-off between the computation time of this algorithm and the guaranteed quality of the solution. 
 
@@ -150,7 +150,7 @@ the algorithm removes $a$ from $S$ and adds $b$. If there is no swap that increa
 
 Note that $\psi$ requires summing an exponential number of terms. However, we can estimate $h(A)$ (and therefore $\psi(A)$) by randomly sampling $g(B)$. If $\hat{\psi}(A)$ is an estimate of $\psi(A)$ sampled from $\Omega (\varepsilon^{-2} n^4 \ln^4 n \ln M)$ samples, then 
 \[ Pr[ | \hat{\psi}(A) - \psi(A) | \geq \delta ] = O(M^{-1}). \]
-By setting $M$ large enough (polynomially large), the algorithm will converge in polynomial time and will return a solution satisying the above approximation ratio with high probability \cite{Sviridenko}. 
+By setting $M$ large enough (polynomially large), the algorithm will converge in polynomial time and will return a solution satisying the above approximation ratio with high probability \cite{Sviridenko}. As far as we are aware, this algorithm has not been tested for any clustering problems. 
  
 \subsection{Implementation and Results}
 
@@ -249,7 +249,7 @@ In addition, the supermodular function algorithm did not perform as well in term
 
 When increasing $p$ for the multiswaps algorithm, we did observe slight increases in computation time, but the times remained on the same order of magnitude. The increase in $p$ did not seem to have any significant effect on the AMI measure nor approximation ratio. This may be due to the fact the algorithm for $p=1$ performed quite well already with an approximation ratio very close to 1. In addition, PAM had the highest AMI measures for the iris and soybean data sets. The AMI measures for the Gaussian data set were higher than those of $k$-medoids in general but equivalent or only slightly weaker than those of the spectral method or $k$-means. The heuristic method of adding in a few rounds of $k$-medoids at the end of our multiswaps algorithm did not have much effect on the AMI measure but did boost the approximation ratio, sometimes finding an optimal solution. 
 
-It is interesting to note that higher dimensional Gaussian data, with smaller values of $k$ and a lower percentage of noisy data, was easier for the algorithms to classify, which makes sense based on our intuition of clustering. For the OR library instances, we saw that the approximation ratio tended to increase as $k$ grew larger but not as $n$ grew. 
+It is interesting to note that, for the Gaussian data, an increase in dimension, reduction in $k$, or reduction in the percentage of noisy data made it easier for the algorithms to classify the data set, which makes sense based on our intuition of clustering. For the OR library instances, we saw that the approximation ratio tended to increase as $k$ grew larger but not as $n$ grew. 
 
 Overall, the results of our experiments do not suggest that the proposed approximation algorithms provide any advantage over current well known methods. However, the results do suggest that we can use sampling to run PAM with lower computational cost while still maintaining good performance accuracy in terms of AMI and approximation ratio. 
 
@@ -267,7 +267,7 @@ Consider any $k$-median algorithm $\mathcal{A}$. After running $\mathcal{A}$ for
 
 First, set $i=1$, $S_0 = \emptyset$, $\beta = 3+\sqrt{3}$, and $\beta_0 = 1$ (for the randomized algorithm we switch $\beta = 6.355$ and set $\beta_0 = \beta^X$, where $X$ is chosen from a uniform distribution on $[0,1]$). Let $V_i$ be the solutions generated from running $\mathcal{A}$ for $k=n-i+1$ for $i=1, \ldots, n$. The cost of these solutions is determined by assigning each point to the nearest cluster center and is scaled so that the minimum cost for $k<n$ is at least one. We then order these solutions according to their cost into buckets of the form $[0,0], (\beta_0, \beta_0 \beta], (\beta_0 \beta, \beta_0 \beta^2], \ldots $. 
 
-From each non-empty bucket, pick the solution with the smallest number of cluster centers and let these solutions be $\overline{V}_1, \overline{V}_2, \ldots \overline{V}_r = V_n$. We then inductively build our nested solutions. Given $(S_{i-1}, a_{i-1})$ and $\overline{V}_i$, we define $S_i$ by iteratively adding the closest point $j \in S_{i-1}$ to $i$ for all $i \in \overline{V}_i$. Note that $|S_{i}| \leq |\overline{V}_i|$. 
+From each non-empty bucket, pick the solution with the smallest number of cluster centers, and let these solutions be $\overline{V}_1, \overline{V}_2, \ldots \overline{V}_r$. We then inductively build our nested solutions. Given $(S_{i-1}, a_{i-1})$ and $\overline{V}_i$, we define $S_i$ by iteratively adding the closest point $j \in S_{i-1}$ to $k$ for all $k \in \overline{V}_i$. Note that $|S_{i}| \leq |\overline{V}_i|$. 
 
 We then define an assignment $a_i$. For each $j \in X$ such that $a_{i-1}(j) \in S_{i}$, we set $a_i(j) = a_{i-1}(j)$. Otherwise, we set $a_i(j)$ to be the facility $i \in S_i$ such that assigning all points in $a_{i-1}^{-1}(j)$ (i.e. all points in $j$'s cluster in $S_{i-1}$) would have minimum cost. Using this assignment, $(a_i, S_i)$ is nested in $(a_{i-1}, S_{i-1})$. 
 
@@ -302,7 +302,7 @@ For each data set discussed previously, and each clustering method, we report th
 \begin{tabular}{ | l | l | l | l | l | l | l | }
 \hline
 	   & F-Score & F-Score & F-Score & F-Score & F-Score & F-Score \\ \hline
-	Dataset & Ave Linking & Ward Linking & K-med & K-med logn ran & k-med ran & PAM logn ran \\ \hline
+	Dataset & Ave Linking & Ward Linking & K-med & K-med logn rand & K-med rand & PAM logn rand \\ \hline
 	Soybean & 0.615 & 0.510 & 0.772 & 0.643 & 0.742 & 0.633 \\ 
 	Iris & 0.5 & 0.5 & 0.888 & 0.767 & 0.762 & 0.732 \\ 
 	Gauss\_5\_5\_5 & 0.519 & 0.516 & 0.591 & 0.816 & 0.761 & 0.785 \\
@@ -315,7 +315,7 @@ For each data set discussed previously, and each clustering method, we report th
 \begin{tabular}{ | l | l | l | l | l | }
 \hline
 	   & Approx & Approx & Approx & Approx \\ \hline
-	Dataset & K-med & K-med logn ran & k-med ran & PAM logn ran \\ \hline
+	Dataset & K-med & K-med logn rand & K-med rand & PAM logn rand \\ \hline
 	Soybean & 1.585 & 2.334 & 1.711 & 2.001 \\ 
 	Iris & 2560631.459 & 2550279.566 & 2787312.009 & 1623132.096 \\ 
 	Gauss\_5\_5\_5 & 6.459 & 13.394 & 8.624 & 7.791 \\
@@ -327,7 +327,7 @@ For each data set discussed previously, and each clustering method, we report th
 	pmedian avg & 10.330 & 19.822 & 10.524 & 8.599 \\ \hline
 \end{tabular}
 
-\caption{Average Computation Time (sec), FScore measure, and Approximation Coeffiecients for Hierarchical Clustering Algorithms}
+\caption{Average Computation Time (sec), FScore measure, and Approximation Coeffiecients for Hierarchical Clustering Algorithms. K-med and PAM represent the black-box $k$-median solvers used and rand and logn indicate whether the randomized and logarithmic setting were used, respectively.}
 \end{figure*}
 
 In general, the hierarchical framework performed significantly better than both methods of agglomerative clustering in terms of FScore measure, even for our logarithmic version. The FScore measures were very low for the agglomerative clustering methods, often around 0.25, but were much closer to the AMI measures we saw in flat clustering for our implemented algorithms. 
@@ -340,8 +340,8 @@ For partitional clustering, we found that the approximation algorithms in the li
 
 In the future, we hope to explore how linear programming based methods perform in both the flat and hierarchical context as well and to implement our own agglomerative clustering to test on the OR library instances and help make smarter local merges in the nesting framework.
 
-%\section{Acknowledgements}
-%We would like to acknowledge David P. Williamson and Karthik Sridharan for their valuable feedback on this project.
+\section{Acknowledgements}
+We would like to acknowledge David P. Williamson and Karthik Sridharan for their valuable feedback on this project.
 
 \label{submission}
 
