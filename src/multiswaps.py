@@ -2,11 +2,11 @@ import random
 import itertools
 import numpy as np
 from scipy.special import binom
-import LoadpMedian
+#import LoadpMedian
 import kmedoids
 
-from sklearn.datasets.samples_generator import make_blobs
-from sklearn.metrics.pairwise import pairwise_distances
+#from sklearn.datasets.samples_generator import make_blobs
+#from sklearn.metrics.pairwise import pairwise_distances
 
 def find_closest_median(i, medoids, distances):
     closest = None
