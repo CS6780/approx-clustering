@@ -183,21 +183,25 @@ The data sets tested against were:
 \begin{figure}[h]
 \begin{tabular}{ | l | l | l | l | l | }
 \hline
-	Data Set Name &Optimal Objective & $k$ & $n$ & dim   \\ \hline
-	Soybean & 113.8 & 4 & 47 & 35 \\ 
-	Iris & 98.2 & 3 & 150 & 4 \\ 
-	Gauss\_5\_5\_5 & 195.4 & 5 & 388 & 5 \\ 
-	Gauss\_5\_10\_5 & 270 & 10 & 544 & 5 \\ 
-	Gauss\_5\_50\_5 & 178.1 & 50 & 408 & 5 \\ 
-	pmed1 & 5819 & 5 & 100 & \  \\ 
-	\hline
-\end{tabular}
+ Dataset Name & Opt Obj & $k$ & $n$ & dim \\ \hline
+Soybean & 114 & 4 & 47 & 35 \\ 
+Iris & 98 & 3 & 150 & 4 \\ 
+Gauss\_5\_5\_5 & 195.4 & 5 & 388 & 5 \\ 
+Gauss\_5\_10\_5 & 270 & 10 & 544 & 5 \\ 
+Gaussian avg & 241 & 22 & 507 & 5 \\ 
+pmed5 & 1355 & 33 & 100 & \  \\ 
+pmed20 & 1789 & 133 & 400 & \  \\ 
+% pmed40 & 5128 & 90 & 900 & \  \\ 
+pmedian avg & 5535 & 46 & 460 & \  \\ \hline
+ \end{tabular}
 \caption{Some specifics about our datasets}
 \end{figure}
 
-Tests were conducted using Python 2.7.9 on a 64-bit Windows platform, on a 4 core Intel processor. 
+Tests were conducted using Python 2.7.9 on a 64-bit Windows platform, on a 4 core Intel processor. Results are given in Figure 2  below with some results averaged due to space constraints. 
 
 \begin{figure*}[h]
+\label{fig:flat_results}
+\small
 \begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | }
 \hline
 	Dataset Name & Time & Time & Time & Time & Time & Time & Time & Time & Time \\ \hline
@@ -206,50 +210,52 @@ Tests were conducted using Python 2.7.9 on a 64-bit Windows platform, on a 4 cor
 	Iris & 0.013 & 0.023 & 0.003 & 9.788 & 0.125 & 0.102 & 0.212 & 0.229 & 0.414 \\ 
 	Gauss\_5\_5\_5 & 0.025 & 0.056 & 0.032 & 75.262 & 1.159 & 1.506 & 2.188 & 2.382 & 3.71 \\ 
 	Gauss\_5\_10\_5 & 0.054 & 0.095 & 0.109 & 134.137 & 6.834 & 5.407 & 9.243 & 9.428 & 15.96 \\ 
-	Gauss\_5\_50\_5 & 0.137 & 0.196 & 0.302 & 97.336 & 27.856 & 21.446 & 32.407 & 39.614 & 44.69 \\ 
-	pmed1 & N/A & N/A & 0.003 & 5.042 & 0.084 & 0.09 & 0.155 & 0.161 & 0.255 \\ \hline
+	%Gauss\_5\_50\_5 & 0.137 & 0.196 & 0.302 & 97.336 & 27.856 & 21.446 & 32.407 & 39.614 & 44.69 \\ 
+	Gaussian avg & 0.073 & 0.128 & 0.182 & 144.455 & 13.289 & 13.021 & 18.749 & 18.696 & 24.592 \\ 
+	pmed5 & 0.038 & 8.298 & 0.481 & 0.622 & 0.653 & 0.748 & 0.939 & \  & \  \\ 
+	pmed20 & 1.795 & 174.951 & 52.208 & 44.979 & 68.554 & 68.231 & 79.288 & \  & \  \\ 
+	% pmed40 & 3.527 & 849.852 & 251.259 & 264.867 & 250.412 & 391.738 & 350.235 & \  & \  \\ 
+	pmedian avg & 0.807 & 203.308 & 40.386 & 40.347 & 48.264 & 56.76 & 56.19 & \  & \  \\ \hline
 \end{tabular}
+\vspace{0.2 cm}
 
-\caption{Running Times For Algorithms}
-\end{figure*}
-
-\begin{figure*}[h]
 \begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | l | }
 \hline
 	Dataset Name & AMI & AMI & AMI & AMI & AMI & AMI & AMI & AMI & AMI  \\ \hline
 	& K-means & Spectral & k-medoids & Supermodular & PAM & 1-Swap + & 2-Swap & 2-swaps + & 3-Swap   \\ \hline
-	Soybean & 0.69 & 0.18 & 0.55 & 0.61 & 0.71 & 0.73 & 0.72 & 0.71 & 0.71  \\ 
-	Iris & 0.75 & 0.76 & 0.69 & 0.7 & 0.77 & 0.76 & 0.76 & 0.76 & 0.76  \\ 
-	Gauss\_5\_5\_5 & 0.74 & 0.71 & 0.69 & 0.66 & 0.74 & 0.75 & 0.74 & 0.74 & 0.74  \\ 
-	Gauss\_5\_10\_5 & 0.78 & 0.74 & 0.68 & 0.58 & 0.73 & 0.72 & 0.74 & 0.74 & 0.73  \\ 
-	Gauss\_5\_50\_5 & 0.65 & 0.6 & 0.62 & 0.57 & 0.62 & 0.62 & 0.63 & 0.63 & 0.62  \\ \hline
+	Soybean & 0.686 & 0.178 & 0.55 & 0.612 & 0.708 & 0.732 & 0.717 & 0.708 & 0.712 \\ 
+	Iris & 0.748 & 0.757 & 0.69 & 0.7 & 0.772 & 0.760 & 0.763 & 0.757 & 0.761 \\ 
+	Gauss\_5\_5\_5 & 0.741 & 0.713 & 0.687 & 0.657 & 0.742 & 0.749 & 0.741 & 0.744 & 0.737  \\ 
+	Gauss\_5\_10\_5 & 0.783 & 0.736 & 0.677 & 0.575 & 0.729 & 0.725 & 0.737 & 0.737& 0.729  \\ 
+	%Gauss\_5\_50\_5 & 0.646 & 0.596 & 0.621 & 0.570 & 0.622 & 0.619 & 0.627 & 0.631 & 0.625  \\ 
+	Gaussian avg & 0.777 & 0.744 & 9.112 & 0.623 & 0.76 & 0.761 & 0.762 & 0.761 & 0.76 \\ \hline
 \end{tabular}
+\vspace{0.2 cm}
 
-
-\caption{AMI For Algorithms}
-\end{figure*}
-
-\begin{figure*}[h]
 \begin{tabular}{ | l | l | l | l | l | l | l | l | l | }
 \hline
 	Dataset Name & Approx & Approx & Approx & Approx & Approx & Approx & Approx  \\ \hline
 	& k-medoids & Supermodular & PAM & 1-Swap + & 2-Swap & 2-swaps+ & 3-Swap   \\ \hline
-	Soybean & 1.17 & 1.2 & 1.03 & 1.01 & 1.02 & 1.01 & 1.02  \\ 
-	Iris & 1.08 & 1.37 & 1.02 & 1 & 1.01 & 1 & 1.01  \\ 
-	Gauss\_5\_5\_5 & 1.07 & 1.44 & 1.03 & 1 & 1.03 & 1.01 & 1.03  \\ 
-	Gauss\_5\_10\_5 & 1.08 & 1.39 & 1.02 & 1.01 & 1.02 & 1.01 & 1.02  \\ 
-	Gauss\_5\_50\_5 & 1.09 & 1.27 & 1.03 & 1.02 & 1.03 & 1.01 & 1.03  \\ 
-	pmed1 & 1.11 & 1.41 & 1.03 & 1.01 & 1.03 & 1.01 & 1.02  \\ \hline
+	Soybean & 1.167 & 1.199 & 1.027 & 1.012 & 1.022 & 1.012 & 1.024 \\ 
+	Iris & 1.081 & 1.375 & 1.016 & 1.004 & 1.013 & 1.004 & 1.009 \\ 
+	Gauss\_5\_5\_5 & 1.070 & 1.436 & 1.030 & 1.002 & 1.027 & 1.005 & 1.026  \\ 
+	Gauss\_5\_10\_5 & 1.080 & 1.389 & 1.017 & 1.011 & 1.018 & 1.009 & 1.017  \\ 
+	%Gauss\_5\_50\_5 & 1.0887 & 1.272 & 1.030 & 1.020 & 1.027 & 1.014 & 1.033  \\ 
+	Gaussian avg & 1.064 & 1.416 & 1.025 & 1.009 & 1.023 & 1.008 & 1.024 \\ 
+	pmed5 & 1.373 & 1.681 & 1.06 & 1.026 & 1.071 & 1.033 & 1.051 \\ 
+	pmed20 & 1.501 & 1.73 & 1.079 & 1.032 & 1.076 & 1.027 & 1.073 \\ 
+	%pmed40 & 1.187 & 1.423 & 1.046 & 1.017 & 1.043 & 1.019 & 1.039 \\ 
+	pmedian avg & 1.203 & 1.456 & 1.041 & 1.017 & 1.039 & 1.016 & 1.037 \\ \hline
 \end{tabular}
 
 
-\caption{Approximation Coeffiecients For Algorithms}
+\caption{Average Computation Time (sec), AMI measure, and Approximation Coeffiecients for Partitional Clustering Algorithms}
 \end{figure*}
 
 
-In terms of computation time, our proposed algorithms were much slower than $k$-means, the spectral algorithm, or $k$-medoids. In general, the multiswaps algorithm was around two orders of magnitude slower with a small multiplicative increase as $p$ increased, and the supermodular algorithm was around four orders of magnitude slower. This was probably due to the extra sampling the algorithm had to do. 
+In terms of computation time, our proposed algorithms were much slower than $k$-means, the spectral algorithm, or $k$-medoids. In general, the multiswaps algorithm was around two orders of magnitude slower with a small multiplicative increase as $p$ increased, and the supermodular algorithm was around four orders of magnitude slower. This was probably due to the extra potential function sampling. 
 
-In addition, the supermodular function did not perform as well in terms of AMI or approximation ratio compared to the other methods. Calculating the curvature, we saw that every  test set's curvature was almost equal to 1 so the guarantee of the algorithm was quite poor. Given that, the algorithm did maintain an approximation ratio below 2 for all instances and an AMI measure above 0.5 for almost all instances even averaging around 0.85 for the 7 dimensional Gaussian data. 
+In addition, the supermodular function did not perform as well in terms of AMI or approximation ratio compared to the other methods. Calculating the curvature, we saw that every  test set's curvature was almost equal to 1 so the guarantee of the algorithm was quite poor. Given that, the algorithm did maintain an approximation ratio below 2 for all instances and an AMI measure above 0.5 for almost all instances even averaging around 0.85 for the 7 dimensional Gaussian data.
 
 When increasing $p$ for the multiswaps algorithm, we did see a slight increase in time but the times remained on the same order of magnitude. The increase in $p$ did not seem to have any significant effect on the AMI measure or approximation ratio with the values being roughly equivalent. This may due to the fact the algorithm for $p=1$ performed quite well already with an approximation ratio very close to 1 that beat out $k$-medoids. In addition, PAM had the highest AMI measures for the iris and soybean data sets. The AMI measures for the Gaussian data set were higher than those of $k$-medoids in general but equivalent or only slightly weaker than those of the spectral method or $k$-means. Adding in a few rounds of $k$-medoids at the end of our multiswaps algorithm did not seem to have much of an effect on the AMI measure but did boost the approximation ratio, sometimes finding an optimal solution. 
 
@@ -258,17 +264,11 @@ It is interesting to note that higher dimensional Gaussian data seemed easier fo
 Overall, the results of our experiments do not point to the fact that these proposed approximation algorithms can add any advantage over current methods. However, the results do point to the fact that we can use sampling to run PAM with lower computational cost while still maintaining good performance accuracy both in terms of AMI measure and approximation ratios. Adding in a few rounds of $k$-medoids seems also to be a good method to refine a given solution towards a local optimum.  
 
 \section{Hierarchical Clustering Approximation Algorithms}
-Suppose we have a set $X$ and a distance metric $d(i,j)$ for all $i,j \in X$. In the hierarchical setting, we will represent a solution to the $k$-median problem as a pair $(S, a)$ where $S \subseteq X$ such that $|S| \leq k$ and $a$ is an assignment function that maps each $i \in X$ to a center in $S$. Therefore, for any $i \in S$, $a^{-1}(i)$ will be all points in the cluster centered at $i$. We define
-\[ \mathrm{cost}(S,a) := \sum_{i \in X} d(i, a(i)) . \]
+Suppose we have a set $X$ and a distance metric $d(i,j)$ for all $i,j \in X$. In the hierarchical setting, we will represent a solution to the $k$-median problem as a pair $(S, a)$ where $S \subseteq X$ such that $|S| \leq k$ and $a$ is an assignment function that maps each $i \in X$ to a center in $S$. Therefore, for any $i \in S$, $a^{-1}(i)$ will be all points in the cluster centered at $i$. We define $\mathrm{cost}(S,a) := \sum_{i \in X} d(i, a(i))$.
 
-Given solution pairs $(S_1, a_1)$ and $(S_2, a_2)$, we say that $(S_1, a_1)$ is \emph{nested} in $(S_2, a_2)$ if 
-\begin{enumerate}
-\item $S_1 \subset S_2$, 
-\item  $\forall  j \in X$, if $a_2(j) \in S_1$, then $a_1(j) = a_2(j)$, and 
-\item $\forall j, k \in X$, if $a_2(j) = a_2(k)$, then $a_1(j) = a_1(k)$.
-\end{enumerate}
+Given solution pairs $(S_1, a_1)$ and $(S_2, a_2)$, we say that $(S_1, a_1)$ is \emph{nested} in $(S_2, a_2)$ if  (1) $S_1 \subset S_2$, (2)  $\forall  j \in X$, if $a_2(j) \in S_1$, then $a_1(j) = a_2(j)$, and (3) $\forall j, k \in X$, if $a_2(j) = a_2(k)$, then $a_1(j) = a_1(k)$.
  A solution to the hierarchical clustering problem is therefore a chain of nested solutions. However, we want this solution to stay close to the optimal $k$-median solutions when looking at any level of the algorithm.  
-Consider any $k$-median algorithm $\mathcal{A}$, such as the algorithms above. After running $\mathcal{A}$ for all potential values of $k$, Lin et al.~\cite{Lin} introduce  augmentation step that will nest these clusterings so that they fit into the hierarchical framework and only increase the costs by a bounded factor. 
+Consider any $k$-median algorithm $\mathcal{A}$, such as the algorithms above. After running $\mathcal{A}$ for all potential values of $k$, Lin et al.~\cite{Lin} introduce  augmentation step that will nest these clusterings into the hierarchical framework and only increase the costs by a bounded factor. 
 
 First, we set $i=1$, $S_0 = \emptyset$, $\beta = 3+\sqrt{3}$, and $\beta_0 = 1$ (for the randomized algorithm we switch $\beta = 6.355$ and set $\beta_0 = \beta^X$, where $X$ is chosen from a uniform distribution on $[0,1]$). Let $V_i$ be the solutions generated from running $\mathcal{A}$ for $k=n-i+1$ for $i=1, \ldots, n$. The cost of these solutions is determined by assigning each point to the nearest cluster center and is scaled so that the minimum cost for $k<n$ is at least one. We then order these solutions according to their cost into buckets of the form $[0,0], (\beta_0, \beta_0 \beta], (\beta_0 \beta, \beta_0 \beta^2], \ldots $. 
 
@@ -278,24 +278,72 @@ We then define an assignment $a_i$. For each $j \in X$ such that $a_{i-1}(j) \in
 
 We continue this nesting until $|S_i| = 1$ and we have reached the top level of the hierarchy. After forming this hierarchical clustering, for any $k \in 1, \ldots, n$ \cite{Lin} guarantee that the cost of $S_i$ is at most $20.71$ times the cost of $V_k$ where $|S_{i-1}| \geq n-k+1 \geq |S_{i}|$ (in the randomized case the expected cost of $S_i$ is at most $10.03$ times the cost of $V_k$).
 
-We test this hierarchical framework for both the multiswap and supermodular local search algorithms above. 
-
 \subsection{Implementation and Results}
 We implemented the nesting hierarchical framework above in Python offering options for both the randomized and deterministic versions. As a black-box $k$-median solver, we used $k$-medoids and the 1-swap+ algorithms above. We compared the results to hierarchical agglomerative clustering with both average linkage and Ward's linkage (implemented in the scipy package in Python). 
 
 We also tested a more computationally friendly heuristic of the hierarchical framework which just buckets solutions for values of $k$ that are a power of two. This yields many fewer $k$-median instances to solve and reduced the run-time significantly. This was motivated by the fact that with the difference between various $k$-median solutions will be larger when $k$ is small so we expect our sampling to still represent much of the underlying structure. 
  
-For each data set and each clustering method, we report the approximation ratio, computation time, and FScore measure.  FScore is a measure that looks at the clusters represented on each level and how they represent the true clustering in terms of precision and recall. See \cite{Larsen} for more information. 
+For each data set and each clustering method, we report the approximation ratio, computation time, and FScore measure.  FScore is a measure that looks at the clusters represented on each level and how they represent the true clustering in terms of precision and recall. See \cite{Larsen} for more information.  Results are in Figure 3.
+
+\begin{figure*}[h]
+\label{fig:hier_results}
+\small
+\begin{tabular}{ | l | l | l | l | l | l | l | }
+\hline
+	   & Time & Time & Time & Time & Time & Time \\ \hline
+	Dataset & Ave Linking & Ward Linking & K-med & K-med logn ran & k-med ran & PAM logn ran \\ \hline
+	Soybean & 0.0002 & 0.0002 & 0.2 & 0 & 0.2 & 0.2 \\ 
+	Iris & 0.0023 & 0.003 & 3.2 & 0.2 & 3.8 & 5.1 \\ 
+	Gauss\_5\_5\_5 &  & & & & & \\
+	Gauss\_5\_10\_5 & & & & & & \\
+	%Gauss\_5\_50\_5 &  & & & & & \\
+	Gaussian Average & 0.0858 & 0.0853 & 354.5 & 7.5 & 369.9 & 423.3 \\ 
+	pmed5 & 1.2 & 0.1 & 1.3 & 1.7 & \  & \  \\ 
+	pmed25 & 279.3 & 5 & 306.7 & 312.5 & \  & \  \\ 
+	pmedian avg & 87.4 & 2 & 94.5 & 101.6 & \  & \  \\ \hline
+\end{tabular}
+\vspace{0.2 cm}
+
+\begin{tabular}{ | l | l | l | l | l | l | l | }
+\hline
+	   & F-Score & F-Score & F-Score & F-Score & F-Score & F-Score \\ \hline
+	Dataset & Ave Linking & Ward Linking & K-med & K-med logn ran & k-med ran & PAM logn ran \\ \hline
+	Soybean & 0.6 & 0.5 & 0.8 & 0.6 & 0.7 & 0.6 \\ 
+	Iris & 0.5 & 0.5 & 0.9 & 0.8 & 0.8 & 0.7 \\ 
+	Gauss\_5\_5\_5 &  & & & & & \\
+	Gauss\_5\_10\_5 &  & & & & & \\
+	%Gauss\_5\_50\_5 &  & & & & & \\
+	Gaussian Average & 0.4 & 0.4 & 0.6 & 0.6 & 0.6 & 0.6 \\ \hline
+\end{tabular}
+\vspace{0.2 cm}
+
+\begin{tabular}{ | l | l | l | l | l | }
+\hline
+	   & Approx & Approx & Approx & Approx \\ \hline
+	Dataset & K-med & K-med logn ran & k-med ran & PAM logn ran \\ \hline
+	Soybean & 1.6 & 2.3 & 1.7 & 2 \\ 
+	Iris & 2560631.5 & 2550279.6 & 2787312 & 1623132.1 \\ 
+	Gauss\_5\_5\_5 &  & & &  \\
+	Gauss\_5\_10\_5 &  & & &  \\
+	%Gauss\_5\_50\_5 &  & & &  \\
+	Gaussian Average & 5.2 & 7.3 & 5.5 & 4.7 \\ 
+	pmed5 & 11.4 & 51.1 & 16.3 & 12 \\ 
+	pmed25 & 6.6 & 13.4 & 5.4 & 13.2 \\ 
+	pmedian avg & 10.3 & 19.8 & 10.5 & 8.6 \\ \hline
+\end{tabular}
+
+\caption{Average Computation Time (sec), FScore measure, and Approximation Coeffiecients for Hierarchical Clustering Algorithms}
+\end{figure*}
 
 In general, the hierarchical framework performed significantly better than both methods of agglomerative clustering in terms of FScore measure even for our logarithmic version. The FScore measures were very low for the agglomerative clustering methods, often around 0.25, but shot up to closer to the AMI measures we saw in flat clustering for our implemented algorithms. 
 
-For $k$-medoids in the non-logarithmic version and PAM in the logarithmic version, the hierarchical framework increased the computation time by three orders of magnitude, whereas this was decreased to two orders difference for $k$-medoids logarithmic version. Interestingly, the approximation factors did not seem to change between the randomized and deterministic versions for $k$-medoids. The approximation ratios seemed best as $n$ increased or as the dimension increased. In particular, for the Gaussian data in 7 dimensions, the approximation ratio was often around 3. Recall that this approximation measures the constructed $k$-median solution on every level against an optimal one so we expect the ratio to not come close to 1 in many cases.  
+For $k$-medoids in the non-logarithmic version and PAM in the logarithmic version, the hierarchical framework increased the computation time by three orders of magnitude, whereas this was decreased to two orders difference for $k$-medoids logarithmic version. Interestingly, the approximation factors did not seem to change between the randomized and deterministic versions for $k$-medoids. The approximation ratios seemed best as $n$ increased or as the dimension increased. In particular, for the Gaussian data in 7 dimensions, the approximation ratio was often around 3. Recall that this approximation measures the constructed $k$-median solution on every level against an optimal one so we expect the ratio be higher than 1.  The high approximation ratio for the iris data set was due to the fact that the optimal solution for $k = n-1, n-2$ was almost equal to zero and our heuristic $k$-median algorithms only sometimes picked up on these solutions. The approximation factor on the lower levels was more consistent with the other results. 
 
 
 \section{Conclusion and Future Work}
 For partitional clustering, it seems that the approximation algorithms in the literature are in general slower and cannot improve much on the current heuristics used despite their approximation guarantees. This was not true in the hierarchical clustering case where we saw significant improvement in the FScore measures for our implemented methods and overall good approximation ratios where none were had before. In particular, our logarithmic nesting algorithm seems to provide the best balance between performance and computation.
 
-In the future, we hope to explore how linear programming based methods perform in this context as well and to implement our own agglomerative clustering so we can test it on the OR library instances. Lastly, when nesting solutions in the logarithmic framework, we could use agglomerative clustering to make smarter local merges. 
+In the future, we hope to explore how linear programming based methods perform in both the flat and hierarchical context as well and to implement our own agglomerative clustering to test on the OR library instances and help make smarter local merges in the nesting framework.
 
 %\section{Acknowledgements}
 %We would like to acknowledge David P. Williamson and Karthik Sridharan for their valuable feedback on this project.
