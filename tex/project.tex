@@ -292,15 +292,15 @@ For each data set and each clustering method, we report the approximation ratio,
 \hline
 	   & Time & Time & Time & Time & Time & Time \\ \hline
 	Dataset & Ave Linking & Ward Linking & K-med & K-med logn ran & k-med ran & PAM logn ran \\ \hline
-	Soybean & 0.0002 & 0.0002 & 0.2 & 0 & 0.2 & 0.2 \\ 
-	Iris & 0.0023 & 0.003 & 3.2 & 0.2 & 3.8 & 5.1 \\ 
-	Gauss\_5\_5\_5 &  & & & & & \\
-	Gauss\_5\_10\_5 & & & & & & \\
+	Soybean & 0.0002 & 0.0002 & 0.286 & 0 & 0.294 & 0.167 \\ 
+	Iris & 0.002 & 0.003 & 3.161 & 0.226 & 3.794 & 5.122 \\ 
+	Gauss\_5\_5\_5 & 0.038 & 0.060 & 106.619 & 2.735 &120.893 & 147.137 \\
+	Gauss\_5\_10\_5 & 0.099 & 0.096 & 383.854 & 10.259 & 383.298 & 494.554 \\
 	%Gauss\_5\_50\_5 &  & & & & & \\
-	Gaussian Average & 0.0858 & 0.0853 & 354.5 & 7.5 & 369.9 & 423.3 \\ 
-	pmed5 & 1.2 & 0.1 & 1.3 & 1.7 & \  & \  \\ 
-	pmed25 & 279.3 & 5 & 306.7 & 312.5 & \  & \  \\ 
-	pmedian avg & 87.4 & 2 & 94.5 & 101.6 & \  & \  \\ \hline
+	Gaussian Average & 0.0858 & 0.0853 & 354.459 & 7.492 & 369.967 & 423.293 \\ 
+	pmed5 &  N/A & N/A & 1.184 & 0.102 & 1.288 & 1.673   \\ 
+	pmed25 & N/A & N/A & 279.334 & 5.011 & 306.684 & 312.503   \\ 
+	pmedian avg & N/A & N/A &  87.355 & 1.957 & 94.548 & 101.576   \\ \hline
 \end{tabular}
 \vspace{0.2 cm}
 
@@ -308,12 +308,12 @@ For each data set and each clustering method, we report the approximation ratio,
 \hline
 	   & F-Score & F-Score & F-Score & F-Score & F-Score & F-Score \\ \hline
 	Dataset & Ave Linking & Ward Linking & K-med & K-med logn ran & k-med ran & PAM logn ran \\ \hline
-	Soybean & 0.6 & 0.5 & 0.8 & 0.6 & 0.7 & 0.6 \\ 
-	Iris & 0.5 & 0.5 & 0.9 & 0.8 & 0.8 & 0.7 \\ 
-	Gauss\_5\_5\_5 &  & & & & & \\
-	Gauss\_5\_10\_5 &  & & & & & \\
+	Soybean & 0.615 & 0.510 & 0.772 & 0.643 & 0.742 & 0.633 \\ 
+	Iris & 0.5 & 0.5 & 0.888 & 0.767 & 0.762 & 0.732 \\ 
+	Gauss\_5\_5\_5 & 0.519 & 0.516 & 0.591 & 0.816 & 0.761 & 0.785 \\
+	Gauss\_5\_10\_5 & 0.298 & 0.289 & 0.589 & 0.584 & 0.576 & 0.446 \\
 	%Gauss\_5\_50\_5 &  & & & & & \\
-	Gaussian Average & 0.4 & 0.4 & 0.6 & 0.6 & 0.6 & 0.6 \\ \hline
+	Gaussian Average & 0.393 & 0.375 & 0.649 & 0.616 & 0.624 & 0.624 \\ \hline
 \end{tabular}
 \vspace{0.2 cm}
 
@@ -321,15 +321,15 @@ For each data set and each clustering method, we report the approximation ratio,
 \hline
 	   & Approx & Approx & Approx & Approx \\ \hline
 	Dataset & K-med & K-med logn ran & k-med ran & PAM logn ran \\ \hline
-	Soybean & 1.6 & 2.3 & 1.7 & 2 \\ 
-	Iris & 2560631.5 & 2550279.6 & 2787312 & 1623132.1 \\ 
-	Gauss\_5\_5\_5 &  & & &  \\
-	Gauss\_5\_10\_5 &  & & &  \\
+	Soybean & 1.585 & 2.334 & 1.711 & 2.001 \\ 
+	Iris & 2560631.459 & 2550279.566 & 2787312.009 & 1623132.096 \\ 
+	Gauss\_5\_5\_5 & 6.459 & 13.394 & 8.624 & 7.791 \\
+	Gauss\_5\_10\_5 &  3.420 & 3.756 & 4.196 & 2.309  \\
 	%Gauss\_5\_50\_5 &  & & &  \\
-	Gaussian Average & 5.2 & 7.3 & 5.5 & 4.7 \\ 
-	pmed5 & 11.4 & 51.1 & 16.3 & 12 \\ 
-	pmed25 & 6.6 & 13.4 & 5.4 & 13.2 \\ 
-	pmedian avg & 10.3 & 19.8 & 10.5 & 8.6 \\ \hline
+	Gaussian Average & 5.182 & 7.262  & 5.537 & 4.739 \\ 
+	pmed5 & 11.367 & 51.141 & 16.261 & 11.950 \\ 
+	pmed25 & 6.641 & 13.372 & 5.378 & 13.200 \\ 
+	pmedian avg & 10.330 & 19.822 & 10.524 & 8.599 \\ \hline
 \end{tabular}
 
 \caption{Average Computation Time (sec), FScore measure, and Approximation Coeffiecients for Hierarchical Clustering Algorithms}
