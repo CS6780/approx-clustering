@@ -60,18 +60,18 @@ def bucketed_solns(distances, beta, beta_0, alg, logn = False):
 
     min_cost = (1.0/np.min([all_costs[i] for i in range(len(all_costs)) if all_costs[i] != 0]))
     all_costs = [min_cost*all_costs[i] for i in range(len(all_costs))]
-    print min_cost
     
     bucketed_centers = []
     lb = 0
     ub = beta_0
     k = n
     while k>1:
-        if k == n:
+        if k == n and np.min(all_costs) == 0:
             next_bucket = [i for i in range(len(all_costs)) if all_costs[i] == 0]           
         else:
             next_bucket = [i for i in range(len(all_costs)) if all_costs[i]< ub and \
                            all_costs[i] >= lb]
+            
         if len(next_bucket) > 0 and len(next_bucket) != n:
             x = min(next_bucket)
             k = len(all_centers[x])
@@ -140,24 +140,24 @@ def cluster(distances, alg = ["k-medoids", None], random = False, logn = False):
         
     return Z
     
-if __name__ == '__main__':
-    centers = [[1, 1], [-1, -1], [1, -1]]
-    X, y,n,k = LoadData.LoadData("/Users/Alice/Desktop/approx-clustering/data/Real Data Sets/iris.data.txt",0,0)
-    
-    distances = np.zeros(shape=(n,n))
-    for i in range(n):
-        for j in range(n):
-            distances[i][j] = np.linalg.norm(X[i]-X[j])
-
-    Z= cluster(distances,["k-medoids",None],0,0)
-    print Z
-    
-    assignment = [i for i in range(n)]
-    for k in range(n-1,145,-1):
-        assignment = next_assignment(Z,k,assignment)
-        cost = sum([distances[i][assignment[i]] for i in range(n)])
-        print assignment
-        print cost
+##if __name__ == '__main__':
+##    centers = [[1, 1], [-1, -1], [1, -1]]
+##    X, y,n,k = LoadData.LoadData("/Users/Alice/Desktop/approx-clustering/data/Real Data Sets/iris.data.txt",0,0)
+##    
+##    distances = np.zeros(shape=(n,n))
+##    for i in range(n):
+##        for j in range(n):
+##            distances[i][j] = np.linalg.norm(X[i]-X[j])
+##
+##    Z= cluster(distances,["k-medoids",None],0,0)
+##    print Z
+##    
+##    assignment = [i for i in range(n)]
+##    for k in range(n-1,145,-1):
+##        assignment = next_assignment(Z,k,assignment)
+##        cost = sum([distances[i][assignment[i]] for i in range(n)])
+##        print assignment
+##        print cost
     
         
 
