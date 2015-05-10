@@ -121,14 +121,14 @@ def cluster2(distances, k, p, warm_start = None, epsilon=0):
     
     return kmedoids.cluster(distances, k, max_iter=10, warm_start = list(medoids))
 
-if __name__ == '__main__':
-    centers = [[1, 1], [-1, -1], [1, -1]]
-    X, labels_true = make_blobs(n_samples=100, centers=centers, cluster_std=0.5,
-                            random_state=999)
-    distances = pairwise_distances(X)
-
-    # distances, n, k = LoadpMedian.LoadpMedian("C:\\Users\\ajp336\\Dropbox\\approx-clustering\\data\\p-median Instances\\pmed22.txt")
-    cluster2(distances,3,1,None,0.1)
+##if __name__ == '__main__':
+##    centers = [[1, 1], [-1, -1], [1, -1]]
+##    X, labels_true = make_blobs(n_samples=100, centers=centers, cluster_std=0.5,
+##                            random_state=999)
+##    distances = pairwise_distances(X)
+##
+##    # distances, n, k = LoadpMedian.LoadpMedian("C:\\Users\\ajp336\\Dropbox\\approx-clustering\\data\\p-median Instances\\pmed22.txt")
+##    cluster2(distances,3,1,None,0.1)
 
 
 
