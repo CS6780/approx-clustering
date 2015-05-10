@@ -287,7 +287,15 @@ We also tested a more computationally friendly heuristic of the hierarchical fra
  
 For each data set and each clustering method, we report the approximation ratio, computation time, and FScore measure.  FScore is a measure that looks at the clusters represented on each level and how they represent the true clustering in terms of precision and recall. See \cite{Larsen} for more information. 
 
+In general, the hierarchical framework performed significantly better than both methods of agglomerative clustering in terms of FScore measure even for our logarithmic version. The FScore measures were very low for the agglomerative clustering methods, often around 0.25, but shot up to closer to the AMI measures we saw in flat clustering for our implemented algorithms. 
+
+For $k$-medoids in the non-logarithmic version and PAM in the logarithmic version, the hierarchical framework increased the computation time by three orders of magnitude, whereas this was decreased to two orders difference for $k$-medoids logarithmic version. Interestingly, the approximation factors did not seem to change between the randomized and deterministic versions for $k$-medoids. The approximation ratios seemed best as $n$ increased or as the dimension increased. In particular, for the Gaussian data in 7 dimensions, the approximation ratio was often around 3. Recall that this approximation measures the constructed $k$-median solution on every level against an optimal one so we expect the ratio to not come close to 1 in many cases.  
+
+
 \section{Conclusion and Future Work}
+For partitional clustering, it seems that the approximation algorithms in the literature are in general slower and cannot improve much on the current heuristics used despite their approximation guarantees. This was not true in the hierarchical clustering case where we saw significant improvement in the FScore measures for our implemented methods and overall good approximation ratios where none were had before. In particular, our logarithmic nesting algorithm seems to provide the best balance between performance and computation.
+
+In the future, we hope to explore how linear programming based methods perform in this context as well and to implement our own agglomerative clustering so we can test it on the OR library instances. Lastly, when nesting solutions in the logarithmic framework, we could use agglomerative clustering to make smarter local merges. 
 
 \section{Acknowledgements}
 We would like to acknowledge David P. Williamson and Karthik Sridharan for their valuable feedback on this project.
