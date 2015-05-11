@@ -286,29 +286,29 @@ For each data set discussed previously, and each clustering method, we report th
 \begin{tabular}{ | l | l | l | l | l | l | l | }
 \hline
 	   & Time & Time & Time & Time & Time & Time \\ \hline
-	Dataset & Ave Linking & Ward Linking & K-med & K-med logn ran & k-med ran & PAM logn ran \\ \hline
-	Soybean & 0.0002 & 0.0002 & 0.286 & 0 & 0.294 & 0.167 \\ 
-	Iris & 0.002 & 0.003 & 3.161 & 0.226 & 3.794 & 5.122 \\ 
-	Gauss\_5\_5\_5 & 0.038 & 0.060 & 106.619 & 2.735 &120.893 & 147.137 \\
-	Gauss\_5\_10\_5 & 0.099 & 0.096 & 383.854 & 10.259 & 383.298 & 494.554 \\
+	Dataset & Ave Linkage & Ward Linkage & K-med & K-med logn ran & k-med ran & PAM logn ran \\ \hline
+	Soybean & 0.0004 & 0.0002 & 0.286 & 0 & 0.294 & 0.167 \\ 
+	Iris & 0.0021 & 0.0011 & 3.161 & 0.226 & 3.794 & 5.122 \\ 
+	Gauss\_5\_5\_5 & 0.0097 & 0.0109 & 106.619 & 2.735 &120.893 & 147.137 \\
+	Gauss\_5\_10\_5 & 0.0237 & 0.0256 & 383.854 & 10.259 & 383.298 & 494.554 \\
 	%Gauss\_5\_50\_5 &  & & & & & \\
-	Gaussian Average & 0.0858 & 0.0853 & 354.459 & 7.492 & 369.967 & 423.293 \\ 
-	pmed5 &  N/A & N/A & 1.184 & 0.102 & 1.288 & 1.673   \\ 
-	pmed25 & N/A & N/A & 279.334 & 5.011 & 306.684 & 312.503   \\ 
-	pmedian avg & N/A & N/A &  87.355 & 1.957 & 94.548 & 101.576   \\ \hline
+	Gaussian Average & 0.0229 & 0.0239 & 354.459 & 7.492 & 369.967 & 423.293 \\ 
+	pmed5 &  0.0004 & N/A & 1.184 & 0.102 & 1.288 & 1.673   \\ 
+	pmed25 & 0.0174 & N/A & 279.334 & 5.011 & 306.684 & 312.503   \\ 
+	pmedian avg & 0.0067 & N/A &  87.355 & 1.957 & 94.548 & 101.576   \\ \hline
 \end{tabular}
 \vspace{0.2 cm}
 
 \begin{tabular}{ | l | l | l | l | l | l | l | }
 \hline
 	   & F-Score & F-Score & F-Score & F-Score & F-Score & F-Score \\ \hline
-	Dataset & Ave Linking & Ward Linking & K-med & K-med logn rand & K-med rand & PAM logn rand \\ \hline
-	Soybean & 0.615 & 0.510 & 0.772 & 0.643 & 0.742 & 0.633 \\ 
+	Dataset & Ave Linkage & Ward Linkage & K-med & K-med logn rand & K-med rand & PAM logn rand \\ \hline
+	Soybean & 0.615 & 0.554 & 0.772 & 0.643 & 0.742 & 0.633 \\ 
 	Iris & 0.5 & 0.5 & 0.888 & 0.767 & 0.762 & 0.732 \\ 
-	Gauss\_5\_5\_5 & 0.519 & 0.516 & 0.591 & 0.816 & 0.761 & 0.785 \\
-	Gauss\_5\_10\_5 & 0.298 & 0.289 & 0.589 & 0.584 & 0.576 & 0.446 \\
+	Gauss\_5\_5\_5 & 0.519 & 0.520 & 0.591 & 0.816 & 0.761 & 0.785 \\
+	Gauss\_5\_10\_5 & 0.298 & 0.281 & 0.589 & 0.584 & 0.576 & 0.446 \\
 	%Gauss\_5\_50\_5 &  & & & & & \\
-	Gaussian Average & 0.393 & 0.375 & 0.649 & 0.616 & 0.624 & 0.624 \\ \hline
+	Gaussian Average & 0.393 & 0.378 & 0.649 & 0.616 & 0.624 & 0.624 \\ \hline
 \end{tabular}
 \vspace{0.2 cm}
 
@@ -330,15 +330,17 @@ For each data set discussed previously, and each clustering method, we report th
 \caption{Average Computation Time (sec), FScore measure, and Approximation Coeffiecients for Hierarchical Clustering Algorithms. K-med and PAM represent the black-box $k$-median solvers used and rand and logn indicate whether the randomized and logarithmic setting were used, respectively.}
 \end{figure*}
 
-In general, the hierarchical framework performed significantly better than both methods of agglomerative clustering in terms of FScore measure, even for our logarithmic version. The FScore measures were very low for the agglomerative clustering methods, often around 0.25, but were much closer to the AMI measures we saw in flat clustering for our implemented algorithms. 
+In general, the hierarchical framework performed significantly better than both methods of agglomerative clustering in terms of FScore measure, even for our logarithmic version. The FScore measures were very low for the agglomerative clustering methods, sometimes around 0.25, but were much closer to the AMI measures we saw in flat clustering for our implemented algorithms. 
 
 For $k$-medoids in the non-logarithmic version and PAM in the logarithmic version, the hierarchical framework increased the computation time by three orders of magnitude, and increased by two orders of magnitude for $k$-medoids in the logarithmic version. Interestingly, the approximation factors did not change significantly between the randomized and deterministic versions for $k$-medoids. The approximation ratios were strongest as $n$ increased or as the dimension increased. In particular, for the Gaussian data in 7 dimensions, the approximation ratio was often around 3.  The high approximation ratio for the iris data set was due to the fact that the optimal solution for $k = n-1, n-2$ was very close to zero, and our heuristic $k$-median algorithm only sometimes picked up on these solutions. The approximation factor at lower levels was more consistent with the other results. 
 
 
 \section{Conclusion and Future Work}
+We implemented various simple approximation algorithms for partitional clustering, and a framework for hierarchical clustering.  We compared these algorithms, along with heuristic modifications, against the most common clustering algorithms used in practice.
+
 For partitional clustering, we found that the approximation algorithms in the literature are in general slower and cannot improve much on current heuristics used despite their approximation guarantees. This was not true in the hierarchical clustering case where we saw significant improvement in FScore measures for our implemented methods and overall good approximation ratios where none were had before. In particular, our logarithmic nesting algorithm seems to provide the best balance between performance and computational efficiency.
 
-In the future, we hope to explore how linear programming based methods perform in both the flat and hierarchical context as well and to implement our own agglomerative clustering to test on the OR library instances and help make smarter local merges in the nesting framework.
+In the future, we hope to explore how linear programming based methods perform in both the flat and hierarchical context as well and to implement our own agglomerative clustering to help make smarter local merges in the nesting framework.
 
 \section{Acknowledgements}
 We would like to acknowledge David P. Williamson and Karthik Sridharan for their valuable feedback on this project.
