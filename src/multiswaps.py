@@ -81,7 +81,7 @@ def predict(medoids, distances):
     n = distances.shape[0]
     return [ find_closest_median(i, medoids, distances) for i in range(n) ]
 
-def cluster(distances, k, p, warm_start = None, epsilon=0):
+def cluster(distances, k, p, warm_start = None, epsilon=0.1):
     n = distances.shape[0]
     p = min(k,p)
     delta = epsilon/float(binom(n-k,p)*binom(k,p))
@@ -101,7 +101,7 @@ def cluster(distances, k, p, warm_start = None, epsilon=0):
 
     return predict(medoids, distances), list(medoids)
 
-def cluster2(distances, k, p, warm_start = None, epsilon=0):
+def cluster2(distances, k, p, warm_start = None, epsilon=0.1):
     n = distances.shape[0]
     p = min(k,p)
     delta = epsilon/float(binom(n-k,p)*binom(k,p))
@@ -120,6 +120,32 @@ def cluster2(distances, k, p, warm_start = None, epsilon=0):
                                                     p, delta)
     
     return kmedoids.cluster(distances, k, max_iter=10, warm_start = list(medoids))
+
+def cluster_hier(distances, kvals, p, warm_start=None, epsilon=0.1):
+    m = len(kvals)
+    print kvals
+    n = distances.shape[0]
+    all_costs = [0 for i in range(m)]
+    all_centers = [[0 for j in range(kvals[i])] for i in range(m)]
+
+    for i in range(m):
+        k = kvals[i]
+        if k == 1:
+            k_clusters, k_centers = cluster2(distances, k, p)
+            k_cost = sum([distances[j][k_clusters[j]] for j in range(n)])
+        else:
+            warm_start = k_centers
+            non_centers = [l for l in range(n) if l not in k_centers]
+            warm_start = np.append(warm_start,np.random.choice(\
+                non_centers,size=k-len(k_centers), replace=False))
+            k_clusters, k_centers = cluster2(distances, k, p, warm_start)
+            k_cost = sum([distances[j][k_clusters[j]] for j in range(n)])
+            
+        all_costs[i] = k_cost
+        all_centers[i] = k_centers
+
+    return all_centers, all_costs
+        
 
 ##if __name__ == '__main__':
 ##    centers = [[1, 1], [-1, -1], [1, -1]]

@@ -1,12 +1,13 @@
 import numpy as np
-#from sklearn import metrics
+from sklearn import metrics
 import kmedoids
+import LP_greedy
 import multiswaps
 import math
 import LoadData
 
 #from sklearn.datasets.samples_generator import make_blobs
-#from sklearn.metrics.pairwise import pairwise_distances
+from sklearn.metrics.pairwise import pairwise_distances
 
 def next_assignment(Z, k, assignment):
     n= len(assignment)
@@ -17,46 +18,28 @@ def next_assignment(Z, k, assignment):
             assignment[j] = int(c1)
     return assignment
 
-# Calls k-median algorithm
-def k_cluster_alg(k, distances, alg, warm_start = None):
-    if alg[0] == "multiswaps":
-        clusters, centers = multiswaps.cluster(distances, k, alg[1])
-    elif alg[0] == "multiswaps-plus":
-        clusters, centers = multiswaps.cluster2(distances, k, alg[1])
-    else:
-        clusters, centers = kmedoids.cluster(distances, k, 1000, warm_start)
-    distances_to_centers = distances[:,centers]
-    cost = sum( np.min(distances_to_centers, axis=1))
-              
-    return centers, cost
 
 # Finds the solutions with costs in buckets [lb, ub] with the fewest
 # cluster centers
 def bucketed_solns(distances, beta, beta_0, alg, logn = False):
     n = distances.shape[0]
-    all_centers = []
-    all_costs = []
+    if logn:
+        p = int(math.floor(math.log(n,2)))
+        kvals = [2**i for i in range(p+1)]
+    else:
+        kvals = [i for i in range(1,n)]
 
-    k = 1
-    while k < n:
-        if k == 1:
-            k_centers, k_cost = k_cluster_alg(k, distances, alg)
-        else:
-            warm_start = k_centers
-            non_centers = [i for i in range(n) if i not in k_centers]
-            warm_start = np.append(warm_start,np.random.choice(\
-                non_centers,size=k-len(k_centers), replace=False))
-            k_centers, k_cost = k_cluster_alg(k, distances, alg, warm_start)
+    if alg[0] == "multiswaps-plus":
+        all_centers, all_costs = multiswaps.cluster_hier(distances, kvals, alg[1])
+    elif alg[0] == "k-medoids":
+        all_centers, all_costs = kmedoids.cluster_hier(distances, kvals, 1000)
+    elif alg[0] == "LP-greedy-rand":
+        kvals.reverse()
+        all_centers, all_costs = LP_greedy.cluster_hier(distances, kvals, 1)
+    else:
+        kvals.reverse()
+        all_centers, all_costs = LP_greedy.cluster_hier(distances, kvals, 0)
             
-            
-        if k == 1 or k_cost < all_costs[-1]:
-            all_centers.append(k_centers)
-            all_costs.append(k_cost)
-            
-        if logn:
-            k = 2*k
-        else:
-            k += 1
 
     min_cost = (1.0/np.min([all_costs[i] for i in range(len(all_costs)) if all_costs[i] != 0]))
     all_costs = [min_cost*all_costs[i] for i in range(len(all_costs))]
@@ -96,17 +79,28 @@ def nest(curr_centers, curr_clusters, next_centers, distances, Z):
     new_centers = list(set(closest_centers))
 
     rem_centers = [x for x in curr_centers if x not in new_centers]
+    m = len(rem_centers)
+    rep_centers = [0 for _ in range(m)]
+    rep_costs = [0 for _ in range(m)]
     new_clusters = curr_clusters
     
-    for y in rem_centers:
-        # Find points to merge
-        points1 = [i for i in range(n) if curr_clusters[i] == y]
-        
-        x = replacement_center(new_centers, points1, distances)
-        # Relabel with x
-        for p in points1:
+    for i in range(m):
+        y = rem_centers[i]
+        # Find points to merge and rep center/cost
+        points = [j for j in range(n) if curr_clusters[j] == y]
+        x = replacement_center(new_centers, points, distances)
+        rep_centers[i] = x
+        rep_costs[i] = sum([distances[j][x]-distances[j][y] for j in range(n)])
+
+        # relabel
+        for p in points:
             new_clusters[p] = x
             
+    # smartly merge
+    by_cost = np.argsort(rep_costs)
+    for i in range(m):
+        y = rem_centers[by_cost[i]]
+        x = rep_centers[by_cost[i]]
         Z[n-k] = [x, y]
         k -= 1
         
@@ -140,25 +134,17 @@ def cluster(distances, alg = ["k-medoids", None], random = False, logn = False):
         
     return Z
     
-##if __name__ == '__main__':
-##    centers = [[1, 1], [-1, -1], [1, -1]]
-##    X, y,n,k = LoadData.LoadData("/Users/Alice/Desktop/approx-clustering/data/Real Data Sets/iris.data.txt",0,0)
-##    
-##    distances = np.zeros(shape=(n,n))
-##    for i in range(n):
-##        for j in range(n):
-##            distances[i][j] = np.linalg.norm(X[i]-X[j])
-##
-##    Z= cluster(distances,["k-medoids",None],0,0)
-##    print Z
-##    
-##    assignment = [i for i in range(n)]
-##    for k in range(n-1,145,-1):
-##        assignment = next_assignment(Z,k,assignment)
-##        cost = sum([distances[i][assignment[i]] for i in range(n)])
-##        print assignment
-##        print cost
+if __name__ == '__main__':
+    centers = [[1, 1], [-1, -1], [1, -1]]
+    X, y,n,k = LoadData.LoadData("C:\\Users\\ajp336\\Dropbox\\approx-clustering\\data\\Gaussian2\\Gauss_3_5_0.txt")
+    distances = pairwise_distances(X)
+
+    Z= cluster(distances,["LP-greedy",None],0,0)
     
+    assignment = [i for i in range(n)]
+    for k in range(n-1,145,-1):
+        assignment = next_assignment(Z,k,assignment)
+        cost = sum([distances[i][assignment[i]] for i in range(n)])
         
 
     

@@ -85,3 +85,79 @@ Average: Time: 0.091678 F-Score: 0.361081
 Gauss_7_5_5.txt 
 Average: Time: 0.115605 F-Score: 0.415352 
 
+pmed1.txt 
+Average: Time: 0.000398 Approx: 1.000000 
+
+pmed10.txt 
+Average: Time: 0.001719 Approx: 1.000000 
+
+pmed11.txt 
+Average: Time: 0.004641 Approx: 1.000000 
+
+pmed12.txt 
+Average: Time: 0.004470 Approx: 1.000000 
+
+pmed13.txt 
+Average: Time: 0.004561 Approx: 1.000000 
+
+pmed14.txt 
+Average: Time: 0.004586 Approx: 1.000000 
+
+pmed15.txt 
+Average: Time: 0.004620 Approx: 1.000000 
+
+pmed16.txt 
+Average: Time: 0.009640 Approx: 1.000000 
+
+pmed17.txt 
+Average: Time: 0.009629 Approx: 1.000000 
+
+pmed18.txt 
+Average: Time: 0.009411 Approx: 1.000000 
+
+pmed19.txt 
+Average: Time: 0.009561 Approx: 1.000000 
+
+pmed2.txt 
+Average: Time: 0.000424 Approx: 1.000000 
+
+pmed20.txt 
+Average: Time: 0.009320 Approx: 1.000000 
+
+pmed21.txt 
+Average: Time: 0.017100 Approx: 1.000000 
+
+pmed22.txt 
+Average: Time: 0.016739 Approx: 1.000000 
+
+pmed23.txt 
+Average: Time: 0.017508 Approx: 1.000000 
+
+pmed24.txt 
+Average: Time: 0.016999 Approx: 1.000000 
+
+pmed25.txt 
+Average: Time: 0.017399 Approx: 1.000000 
+
+pmed3.txt 
+Average: Time: 0.000507 Approx: 1.000000 
+
+pmed4.txt 
+Average: Time: 0.000410 Approx: 1.000000 
+
+pmed5.txt 
+Average: Time: 0.000426 Approx: 1.000000 
+
+pmed6.txt 
+Average: Time: 0.001745 Approx: 1.000000 
+
+pmed7.txt 
+Average: Time: 0.001624 Approx: 1.000000 
+
+pmed8.txt 
+Average: Time: 0.001662 Approx: 1.000000 
+
+pmed9.txt 
+Average: Time: 0.001667 Approx: 1.000000 
+
+
