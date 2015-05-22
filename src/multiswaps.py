@@ -59,7 +59,7 @@ def search_for_swap(medoids, obj, distances, FDict, p=2, delta=0):
         #            new_objective = objective(new_medoids, distances, FDict)
         #            if new_objective < (1.0-delta)*prev_objective:
         #                improvement = True
-        #                #print("Improvement: %f" % (prev_objective - new_objective))
+        #                #print"Improvement: %f" % (prev_objective - new_objective))
         #                return new_medoids, new_objective, improvement
         #else:
         #print q
@@ -123,7 +123,6 @@ def cluster2(distances, k, p, warm_start = None, epsilon=0.1):
 
 def cluster_hier(distances, kvals, p, warm_start=None, epsilon=0.1):
     m = len(kvals)
-    print kvals
     n = distances.shape[0]
     all_costs = [0 for i in range(m)]
     all_centers = [[0 for j in range(kvals[i])] for i in range(m)]

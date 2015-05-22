@@ -2,6 +2,7 @@ import numpy as np
 from sklearn import metrics
 import kmedoids
 import LP_greedy
+import LP_charikar
 import multiswaps
 import math
 import LoadData
@@ -30,15 +31,21 @@ def bucketed_solns(distances, beta, beta_0, alg, logn = False):
         kvals = [i for i in range(1,n)]
 
     if alg[0] == "multiswaps-plus":
-        all_centers, all_costs = multiswaps.cluster_hier(distances, kvals, alg[1])
+        all_centers, all_costs = multiswaps.cluster_hier(distances, kvals, 1)
     elif alg[0] == "k-medoids":
         all_centers, all_costs = kmedoids.cluster_hier(distances, kvals, 1000)
     elif alg[0] == "LP-greedy-rand":
         kvals.reverse()
         all_centers, all_costs = LP_greedy.cluster_hier(distances, kvals, 1)
-    else:
+    elif alg[0] == "LP-greedy":
         kvals.reverse()
         all_centers, all_costs = LP_greedy.cluster_hier(distances, kvals, 0)
+    elif alg[0] == "LP-charikar":
+        kvals.reverse()
+        all_centers, all_costs = LP_charikar.cluster_hier(distances, kvals, 1)
+    else:
+        kvals.reverse()
+        all_centers, all_costs = LP_charikar.cluster_hier(distances, kvals, 1000)
             
 
     min_cost = (1.0/np.min([all_costs[i] for i in range(len(all_costs)) if all_costs[i] != 0]))

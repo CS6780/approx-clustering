@@ -2,6 +2,10 @@ import numpy as np
 from gurobipy import *
 import LoadData
 from sklearn.metrics.pairwise import pairwise_distances
+import timeit
+
+from itertools import izip
+argmin = lambda array: min(izip(array, xrange(len(array))))[1]
 
 def assign_points_to_clusters(medoids, distances):
     distances_to_medoids = distances[:,medoids]
@@ -66,46 +70,66 @@ def bundle(C_sub, x, y, distances):
             if (x[i,j].X > 0) and (distances[i][j] <= 1.5*Ri) and \
                (y_assign[j] == n):
                 y_assign[j] = i
-                vols[j] += y[i].X
-                U[j].append(i)
-                
+                vols[i] += y[j].X
+                U[i].append(j)
+
     return y_assign, U, vols
 
 # Greedily match clients based on distance
 def match(C_sub, distances):
     unmatched = set(C_sub)
     matching = {}
-
+    m = len(C_sub)
+    sort_dists = [ np.argsort([distances[C_sub[i]][C_sub[j]] for j in range(i+1, m)]) \
+                   for i in range(m)]
+    min_index = [0 for _ in range(m-1)]
+    mins = [distances[C_sub[i]][C_sub[sort_dists[i][0]+i+1]] for i in range(m-1)]
+    mins.append(float('inf'))
+    
     while len(unmatched) > 0:
         if len(unmatched) == 1:
             j = unmatched.pop()
             matching[j] = j
         else:
             # Find closest unmatched pair
-            min_dist = float('inf')
-            min_pair = None
-            for i in unmatched:
-                for j in unmatched:
-                    if i != j:
-                        if distances[i][j] < min_dist:
-                            min_dist = distances[i][j]
-                            min_pair = [i,j]
+            j = argmin(mins)
+            k = sort_dists[j][min_index[j]]+j+1
+            x = C_sub[j]
+            y = C_sub[k]
 
             # match that pair
-            matching[min_pair[0]] = min_pair[1]
-            matching[min_pair[1]] = min_pair[0]
-            unmatched.remove(min_pair[0])
-            unmatched.remove(min_pair[1])
+            matching[x] = y
+            matching[y] = x
+            unmatched.remove(x)
+            unmatched.remove(y)
+            mins[j] = float('inf')
+            mins[k] = float('inf')
 
+            # Update mins
+            for i in range(m-1):
+                if (C_sub[i] in unmatched):
+                    while True:
+                        if min_index[i] >= m-i-1:
+                            mins[i] = float('inf')
+                            break
+                        elif C_sub[sort_dists[i][min_index[i]]+i+1] not in unmatched:
+                            min_index[i] += 1
+                        else:
+                            break
     return matching
+
+def open_bundle(U, y, vol):
+    probs = [(y[l].X)/float(vol) for l in U]
+    return np.random.choice(U, p=probs)
 
 # sample a list of centers
 def sample(y, y_assign, U, vols, matching, size):
     medoids = []
     n = len(y)
-    sampled = [0 for _ in range(n)]
+
     while True:
         medoids = []
+        sampled = [0 for _ in range(n)]
         for i in range(n):
             # If y not in a client subset, sample with LP value
             if y_assign[i] == n:
@@ -113,42 +137,51 @@ def sample(y, y_assign, U, vols, matching, size):
                     medoids.append(i)
             else:
                 j = y_assign[i]
-                if not sampled[j]:
+                if sampled[j] == 0:
                     k = matching[j]
-
                     # If j not matched use vol of subset assigned to j
                     if j == k:
                         if np.random.uniform(0,1) <= vols[j]:
-                            medoids.extend(U[j])
+                            medoids.append(open_bundle(U[j],y, vols[j]))
                     # Otherwise, use both vols of the matched pair
                     else:
                         uni = np.random.uniform(0,1)
                         if uni < 1-vols[k]:
-                            medoids.extend(U[j])
+                            medoids.append(open_bundle(U[j],y, vols[j]))
                         elif uni < 2 - vols[k] - vols[j]:
-                            medoids.extend(U[k])
+                            medoids.append(open_bundle(U[k],y, vols[k]))
                         else:
-                            medoids.extend(U[k])
-                            medoids.extend(U[j])
+                            medoids.append(open_bundle(U[j],y, vols[j]))
+                            medoids.append(open_bundle(U[k],y, vols[k]))
                     sampled[j] = 1
                     sampled[k] = 1
+                    
+            
         if len(medoids) == size:
             break
+        
     return np.array(medoids)             
                     
-def convert_to_int(X, y, k, distances, random):
-    print k
+def convert_to_int(X, y, k, distances, max_iter):
+    k = int(sum([y[i].X for i in range(distances.shape[0])]))
     C_sub = client_subset(X, y, distances)
+    n = distances.shape[0]
     y_assign, U, vols = bundle(C_sub, X, y, distances)
     matching = match(C_sub, distances)
-    while True:
+
+    best_med = []
+    best_cost = float('inf')
+    for i in range(max_iter):
         medoids = sample(y, y_assign, U, vols, matching, k)
-        if len(medoids) == k:
-            break
-    return medoids 
+        assignment = assign_points_to_clusters(medoids, distances)
+        cost = sum([distances[j][assignment[j]] for j in range(n)])
+        if cost < best_cost:
+            best_cost = cost
+            best_med = medoids
+    return medoids, cost
     
 
-def cluster_hier(distances, kvals, random=False):
+def cluster_hier(distances, kvals, max_iter = 1000):
     model = Model("k-median")
     n = np.shape(distances)[0]
     y,x = {}, {}
@@ -191,9 +224,7 @@ def cluster_hier(distances, kvals, random=False):
         model.optimize()
 
         # Round and get assignment/cost
-        medoids =  convert_to_int(x, y, k, distances, random)
-        assignment = assign_points_to_clusters(medoids, distances)
-        cost = sum([distances[j][assignment[j]] for j in range(n)])
+        medoids, cost =  convert_to_int(x, y, k, distances, max_iter)
         all_costs[m-i-1] = cost
         all_centers[m-i-1] = medoids
 
@@ -203,9 +234,21 @@ def cluster_hier(distances, kvals, random=False):
 
 if __name__ == '__main__':
     #centers = [[1, 1], [-1, -1], [1, -1]]
-    X, y,n,k = LoadData.LoadData("C:\\Users\\ajp336\\Dropbox\\approx-clustering\\data\\Gaussian2\\Gauss_3_5_0.txt")
+    X, y,n,k = LoadData.LoadData("C:\\Users\\ajp336\\Dropbox\\approx-clustering\\data\\Real Data Sets\\iris.data.txt", 0, 0)
     distances = pairwise_distances(X)
     #distances = np.array([[0, 1, 2, 1], [1, 0, 1, 2], [2, 1, 0, 1], [1, 2, 1, 0]])
-    print cluster_hier(distances,[4,3,2],1)
+    start_time = timeit.default_timer()
+    kvals = [n-i for i in range(n)]
+    cluster_hier(distances,kvals,1)
+    print timeit.default_timer()-start_time
+
+##    start_time = timeit.default_timer()
+##    kvals = [i+1 for i in range(536, n)]
+##    cluster_hier(distances,kvals,1)
+##    print timeit.default_timer()-start_time
+
+    #start_time = timeit.default_timer()
+    #cluster_hier(distances,[12, 11, 10, 9, 8],1000)
+    #print timeit.default_timer()-start_time
     
 
