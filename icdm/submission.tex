@@ -40,14 +40,13 @@ One common objective function for partitional clustering is to minimize the sum 
 \[ f(S) = \sum_{ i\in X} \min_{j \in S} d(i,j). \]
 The clustering is obtained from the set of centers $S$ by assigning each data point to its closest center.  An $\alpha$-approximation algorithm for this problem produces a set $S$ in polynomial time such that $f(S) \leq \alpha \cdot f(O)$ for all $O \subseteq X$ with $|O| = k$. 
 
-\begin{figure*}[!t]
+\begin{figure*}[!]
 \centerline{\subfloat[Partitional Clustering]{\includegraphics[width =1.75in]{partitional_clustering}
 \label{fig_part}}
 \hfil
 \subfloat[Hierarchical Clustering]{\includegraphics[width=2.5in]{hier_clustering}
-\label{fig_second_case}}}
-\caption{A partitional clustering for $k=3$ and a hierarchical clustering of the data where the clustering on the third level down (represented by the red line) corresponds to the partitional clustering on the left.}
-\label{fig_hier}
+\label{fig_hier}}}
+\caption{A partitional clustering for $k=3$, where the colors represent the different partitions, and a dendrogram representation of a hierarchical clustering of the data where edges represent merges of clusters and the clustering on the third level down (represented by the red line) corresponds to the partitional clustering on the left.}
 \end{figure*}
 
 This objective function can then be extended to the hierarchical $k$-median problem which represents an objective function relating to the hierarchical clustering problem. Suppose we represent a solution to the $k$-median problem as a pair $(S, a)$ where $S \subseteq X$ such that $|S| \leq k$ and $a$ is an assignment function that maps each $i \in X$ to a center in $S$. Then, for any $i \in S$, $a^{-1}(i)$ is the cluster centered at $i$. We define $f(S,a) := \sum_{i \in X} d(i, a(i))$. This is the same objective function as above except the assignment is given rather than implied.
@@ -58,7 +57,21 @@ Given solution pairs $(S_1, a_1)$ and $(S_2, a_2)$, we say that $(S_1, a_1)$ is 
 	\item $\forall  j \in X$, if $a_2(j) \in S_1$, then $a_1(j) = a_2(j)$, 
 	\item $\forall j, k \in X$, if $a_2(j) = a_2(k)$, then $a_1(j) = a_1(k)$.
 \end{enumerate}
-A solution to the hierarchical $k$-median problem is a nested chain of solutions, and the hierarchical clustering it generates is found by looking at the clusters given by each $(S_i, a_i)$. However, we want this solution to stay close to the optimal $k$-median solutions when looking at any level of the hierarchy. An $\alpha$-approximation algorithm for this problem generates a nested chain of solutions in polynomial time such that for all $k = 1, \ldots, |X|$ there exists $(S_i, a_i)$ in the chain such that $|S_i| \leq k$ and $f(S_i, a_i) \leq \alpha \cdot f(O)$ for all $O \subseteq X$ with $|O| = k$.
+A solution to the hierarchical $k$-median problem is a nested chain of solutions, and the hierarchical clustering it generates is found by looking at the clusters given by each $(S_i, a_i)$. An example is given in Fig.~\ref{fig_chain1}-\ref{fig_chain4}. However, we want this solution to stay close to the optimal $k$-median solutions when looking at any level of the hierarchy. An $\alpha$-approximation algorithm for this problem generates a nested chain of solutions in polynomial time such that for all $k = 1, \ldots, |X|$ there exists $(S_i, a_i)$ in the chain such that $|S_i| \leq k$ and $f(S_i, a_i) \leq \alpha \cdot f(O)$ for all $O \subseteq X$ with $|O| = k$.
+
+\begin{figure*}[b]
+\centering
+\subfloat[$(S_1, a_1)$]{\includegraphics[width =1.75in]{chain1}
+\label{fig_chain1}} \hspace{15mm}
+\subfloat[$(S_2, a_2)$]{\includegraphics[width=1.75in]{chain2}
+\label{fig_chain2}} \\
+\subfloat[$(S_3, a_3)$]{\includegraphics[width=1.75in]{chain3}
+\label{fig_chain3}}  \hspace{15mm}
+\subfloat[$(S_4, a_4)$]{\includegraphics[width=1.75in]{chain4}
+\label{fig_chain4}}
+\caption{An example of a nested chain of solutions. $S_i$ is indicated by the colored nodes and $a_i$ by the edges. The clusters on that level are given by the connected components. Note that $S_{i-1}$ is a subset of $S_i$ and the assignments stay consistent. }
+\label{fig_sim}
+\end{figure*}
 
 While some partitional clustering methods use the $k$-median objective function to inform their decisions, popular methods for hierarchical clustering do not and rely on greedy algorithms which have no guarantee on the solution produced with respect to the objective function but are typically fast and easy to implement. This paper looks at how using this objective function can vastly improve the hierarchical clusterings produced. 
 In particular, we show how an approximation framework for this problem, which takes in partitional clusterings for all values of $k$, compares in practice to some of the most widely used clustering algorithms, both in the quality of the solution and in computation time. The algorithms we use to produce these partitional clusterings include both approximation algorithms for the $k$-median problem, which offer an overall approximation guarantee for the hierarchical $k$-median problem, and some heuristic algorithms that have been shown to perform well in practice. 
@@ -76,9 +89,9 @@ The $k$-median problem is also a fundamental problem in approximation algorithms
 \subsection{Hierarchical Clustering}
 The most common method for hierarchical clustering is agglomerative clustering. Agglomerative clustering starts with each data point in its own cluster, and proceeds to recursively merge the two closest clusters to form the next clustering level in the hierarchy, repeating until the entire data set is a single cluster.  There are several choices on how to measure distance in order to choose which clusters to merge. Single linkage (also called nearest neighbor) defines the distance between two clusters to be the minimum pairwise distance between the data points in each cluster.  Complete linkage clustering instead defines the distance to be the largest pairwise distance. A method between these two extremes is group average linkage which looks at the average pairwise distance between clusters. This strikes a balance between the closeness and compactness of the two techniques above and gives more reasonable results in practice \cite{ESL}. Lastly, there is Ward's method which chooses the two clusters to merge so as to minimize the sum of each cluster's variance \cite{Ward}.
 
-Approximation algorithms for hierarchical clustering have also been studied, where we aim to identify a hierarchy of clusters so as to minimize the ratio of the objective value on every level in the hierarchy of size $k$ to the optimal objective value of the partitional clustering problem with $k$ clusters. Note that it may not always be possible to find a solution with approximation ratio 1. The hierarchical $k$-median problem was originally introduced by Plaxton who gave a 238.88 approximation algorithm \cite{Plaxton}. This was improved by Lin et al.~\cite{Lin} who gave an incremental approximation algorithm framework. In particular, their approach relies on a black box $k$-median solver and then uses these solutions for $k=1, \ldots, n$ to greedily construct a hierarchical clustering that increases the objective value by at most a factor of $20.71$ (or $10.03$ when randomized) at each level. Using the local $p$-swap $(3+\frac{2}{p})$-approximation algorithm mentioned above as the black-box $k$-median solver performed well in experimental hierarchical $k$-median test problems \cite{Nagarajan}. While the authors tested the variants of this algorithm for different $k$-median approximation algorithms, it has not been tested against traditional clustering algorithms or on any labeled data sets. 
+Approximation algorithms for hierarchical clustering have also been studied, where we aim to identify a hierarchy of clusters so as to minimize the ratio of the objective value on every level in the hierarchy of size $k$ to the optimal objective value of the partitional clustering problem with $k$ clusters. Note that it may not always be possible to find a solution with approximation ratio 1. The hierarchical $k$-median problem was originally introduced by Plaxton who gave a 238.88 approximation algorithm \cite{Plaxton}. This was improved by Lin et al.~\cite{Lin} who gave an incremental approximation algorithm framework. In particular, their approach relies on a black box $k$-median solver and then uses these solutions for $k=1, \ldots, n$ to greedily construct a hierarchical clustering that increases the objective value by at most a factor of $20.71$ (or $10.03$ when randomized) at each level. Using the local $p$-swap $(3+\frac{2}{p})$-approximation algorithm mentioned above as the black-box $k$-median solver performed well in experiments on hierarchical $k$-median test problems \cite{Nagarajan}. While the authors tested the variants of this algorithm for different $k$-median approximation algorithms, it has not been tested against traditional clustering algorithms or on any labeled data sets. 
 
-Several algorithms have been built upon agglomerative clustering that we choose not to compare with our proposed algorithms. Divisive clustering, similar to agglomerative, starts with the data in one cluster and repeatedly splits a cluster on each level. This method has not been studied nearly as much as agglomerative clustering \cite{ESL} but has had relative success in classifying document datasets \cite{Zhao}.  Algorithms such as the CURE, ROCK, and Chameleon \cite{Guha_CURE, Guha_ROCK, Karypis} incorporate non-spherical cluster shapes and cluster density, but do not relate as much to the above approximation algorithm in their objective. We also choose not compare the approximation framework with Bayesian hierarchical methods since these methods require many more parameters and add additional prior information that our algorithms do not use. 
+Several algorithms have been built upon agglomerative clustering that we choose not to compare with our proposed algorithms. Divisive clustering, similar to agglomerative, starts with the data in one cluster and repeatedly splits a cluster on each level. This method has not been studied nearly as much as agglomerative clustering \cite{ESL} but has had relative success in classifying document datasets \cite{Zhao}.  Algorithms such as the CURE, ROCK, and Chameleon \cite{Guha_CURE, Guha_ROCK, Karypis} incorporate non-spherical cluster shapes and cluster density, but do not relate as much to the above approximation algorithm in their objective. We also choose not to compare our algorithms with Bayesian hierarchical methods since these methods require many more parameters and add additional prior information that our algorithms do not use. 
 
 \section{Proposed Algorithms}
 
@@ -90,7 +103,7 @@ Consider any $k$-median algorithm $\mathcal{A}$. After running $\mathcal{A}$ for
 
 First, set $\beta = 3+\sqrt{3}$, and $\beta_0 = 1$ (for the randomized algorithm we switch $\beta = 6.355$ and set $\beta_0 = \beta^X$, where $X$ is chosen from a uniform distribution on $[0,1]$). Let $V_i$ be the solutions generated from running $\mathcal{A}$ for $k=n-i+1$ for $i=1, \ldots, n$. The cost of these solutions is determined by assigning each point to the nearest cluster center and is scaled so that the minimum cost for $k<n$ is at least one. We then bucket these solutions by cost into buckets of the form $[0,0], (\beta_0, \beta_0 \beta], (\beta_0 \beta, \beta_0 \beta^2], \ldots $. 
 
-From each non-empty bucket, pick the solution with the smallest number of cluster centers, and let these solutions be $\overline{V}_1, \overline{V}_2, \ldots \overline{V}_r$. We then inductively build our nested solutions. Set $S_1 = \overline{V}_1$ and $a_1$ to be the assignment that assigns each point to the closest point in $S_1$. Given $(S_{i-1}, a_{i-1})$ and $\overline{V}_i$, we construct $S_i$ by  adding the closest point $j \in S_{i-1}$ to $l$ for each $l \in \overline{V}_i$. Note that $|S_{i}| \leq |\overline{V}_i|$. 
+From each non-empty bucket, pick the solution with the smallest number of cluster centers, and let these solutions be $\overline{V}_1, \overline{V}_2, \ldots \overline{V}_r$. We then inductively build our nested solutions: Set $S_1 = \overline{V}_1$ and $a_1$ to be the assignment that assigns each point to the closest point in $S_1$. Given $(S_{i-1}, a_{i-1})$ and $\overline{V}_i$, we construct $S_i$ by  adding the closest point $j \in S_{i-1}$ to $l$ for each $l \in \overline{V}_i$. Note that $|S_{i}| \leq |\overline{V}_i|$. 
 
 \begin{figure*}[!t]
 \centering
@@ -112,13 +125,13 @@ We continue this nesting until $|S_i| = 1$, reaching the top level of the hierar
 
 
 \subsection{Partitional Clustering Algorithms}
-This nesting framework allows us to choose the partitional clustering algorithm $\mathcal{A}$. As mentioned above, PAM and $k$-medoids are two potential algorithms. PAM has the added benefit of being a 5-approximation algorithm for the partitional $k$-median problem which yields to an overall approximation ratio of $20.71 \cdot 5 = 103.55$ for the hierarchical $k$-median problem ($10.03 \cdot 5 = 50.15$ randomized). We also considered the size of the local swaps in PAM to improve the approximation ratio but found that the approximation ratio of constructed solutions for given values of $k$ did not significantly improve while the computation time increased greatly. 
+This nesting framework allows us to choose the partitional clustering algorithm $\mathcal{A}$. As mentioned above, PAM and $k$-medoids are two potential algorithms. PAM has the added benefit of being a 5-approximation algorithm for the partitional $k$-median problem which yields to an overall approximation ratio of $20.71 \cdot 5 = 103.55$ for the hierarchical $k$-median problem ($10.03 \cdot 5 = 50.15$ randomized). We looked at increasing the size of the local swaps in PAM to improve the approximation ratio but found that the approximation ratio of constructed solutions for given values of $k$ did not significantly improve while the computation time increased greatly. 
 
-We also consider two linear programming based algorithms, one of which has an approximation guarantee. We first present the linear programming formulation for the $k$-median problem. Suppose we have a set $X$ and we let $s_i \in \{0,1\}$ be the variable representing whether or not we want to make $i$ a center for all $i \in X$. We also create a variable $a_{i,j} \in \{0, 1\}$ which represents whether or not we assign $i \in X$ to the cluster with center $j \in X$. Given this set and assignment, the $k$-median objective function is 
+We also consider three linear programming based algorithms, one of which has an approximation guarantee. We first present the linear programming formulation for the $k$-median problem. Suppose we have a set $X$. Let $s_i \in \{0,1\}$ be the variable representing whether or not we want to make $i$ a center for all $i \in X$. We also create a variable $a_{i,j} \in \{0, 1\}$ which represents whether or not we assign $i \in X$ to the cluster with center $j \in X$. Given this set and assignment, the $k$-median objective function is 
 \begin{equation}
 \sum_{i \in X} \sum_{j \in X} a_{i,j} d(i,j), 
 \end{equation}
-which we want to minimize. However, we are restricted by the fact that we can choose at most $k$ centers, every point must be assigned to a single cluster center, and that we can only assign a point to a center that is actually in $S$. This is represented by the three equations:
+which we want to minimize. However, we are restricted by the fact that we can choose at most $k$ centers, every point must be assigned to a single cluster center, and that we can only assign a point to a center that is actually in $S$. This is represented by the following three equations, respectively:
 \begin{eqnarray}
 \sum_{i \in X} s_i   \leq k & ,\\
 \sum_{j \in X} a_{i,j}  = 1 & \forall i \in X, \\
@@ -135,7 +148,7 @@ Therefore, solving the following integer program would directly find the optimal
 \end{eqnarray}
 Relaxing the constraints so that $s_i \in [0,1]$ for all $i \in X$ and $a_{i,j} \in [0,1]$ for all $i,j \in X$ yields the linear programming (LP) relaxation for the $k$-median problem, which we can solve in polynomial time.
 
-Interestingly, the solution to the linear programming is often integer valued \cite{Nagarajan}. Based on this fact, we propose two partitional clustering algorithms: one that solves the LP relaxation and constructs $S$ by taking the points in $X$ with the $k$ highest $s_i$ values and one that solves the LP relaxation and constructs $S$ by choosing $i$ to be in $S$ with probability $s_i$, sampling for each $i \in X$ until $k$ centers are chosen. We refer to these algorithms as LP-greedy and LP-rand, respectively.
+Interestingly, the solution to the linear programming is often integer valued \cite{Nagarajan}. Based on this fact, we propose two LP-based clustering algorithms: one that solves the LP relaxation and constructs $S$ by taking the points in $X$ with the $k$ highest $s_i$ values and one that solves the LP relaxation and constructs $S$ by choosing $i$ to be in $S$ with probability $s_i$, sampling for each $i \in X$ until $k$ centers are chosen. We refer to these algorithms as LP-greedy and LP-rand, respectively.
 Charikar and Li \cite{Charikar} introduce a 3.25-approximation algorithm that uses this LP solution to smartly construct a set of centers. We refer to this algorithm as LP-Charikar. We choose to implement this LP algorithm rather than the LP-based approximation algorithm with best approximation ratio because the algorithm is simpler to implement (and we expect it to have a lower running time). 
 
 The algorithm works by first choosing a subset of data points $C \subseteq X$ to represent the demand. For each data point $i$, let $d_{av}(i) = \sum_{j \in X : a_{i,j} > 0} s_j \cdot d(i,j)$. We start with $C = \emptyset$. At each step, we choose a point $j \in X$ to add to $C$, and all points $j'$ such that $d(j,j') \leq 4 d_{av}(j') $ are removed from $X$. This is continued until $X$ is empty. 
@@ -154,8 +167,8 @@ This sampling process returns a set of centers of size $k$  in expectation and p
 
 \subsection{Implementation Specifics}
 
-All tests were conducted using Python 2.7.9 on a 64-bit Windows platform with a 4 core 3.4 Ghz Intel i7 processor and 16 GB physical memory. All code is available at \url{https://github.com/apaul29/Hierarchical-Code}.
-We chose to test our methods on a variety of data:
+All tests were conducted using Python 2.7.9 on a 64-bit Windows platform with a 4 core 3.4 Ghz Intel i7 processor and 16 GB physical memory. All code and the full computational results are available at \url{https://github.com/apaul29/Hierarchical-Code}.
+We chose to test our methods on data from a few different contexts:
 \begin{LaTeXdescription}
 \item[Gaussian] 27 synthetic $k$-center Gaussian data sets, generated in Python. In particular, Gauss\textunderscore d\textunderscore k\textunderscore e was generated by first choosing $k$ random centers in $[-1,1]^d$. Around each center, we then generated $(1000/k) \cdot \mathrm{Unif}[0,1]$ Gaussian points of which $e$ percent had standard deviation 0.25 (noisy) and $1-e$ percent had standard deviation $0.05$. 
 \item[OR $p$-median Library] \cite{Beasley} From a collection of classic test data sets for approximation algorithms created by Beasley with 40 test sets of size $100, 200, \ldots, 900$ and varying values of $k$. This data is unlabeled.
@@ -170,15 +183,16 @@ We chose to test our methods on a variety of data:
 \begin{tabular}{ | l | l | l | l | l | }
 \hline
  Dataset Name & Opt Obj & $k$ & $n$ & dim \\ \hline
-Soybean & 114 & 4 & 47 & 35 \\ 
-Iris & 98 & 3 & 150 & 4 \\ 
-Gauss\_5\_5\_5 & 195.4 & 5 & 388 & 5 \\ 
-Gauss\_5\_10\_5 & 270 & 10 & 544 & 5 \\ 
-Gaussian avg & 241 & 22 & 507 & 5 \\ 
+Soybean & 113.805 & 4 & 47 & 35 \\ 
+Iris & 98.214 & 3 & 150 & 4 \\ 
+Gauss\_5\_5\_5 & 195.414 & 5 & 388 & 5 \\ 
+Gauss\_5\_10\_5 & 270.066 & 10 & 544 & 5 \\ 
+Gauss\_5\_50\_5 & 178.122 & 50 & 408 & 5 \\ 
+Gaussian avg & 241.497 & 21.7 & 507 & 5 \\ 
 pmed5 & 1355 & 33 & 100 & \  \\ 
 pmed20 & 1789 & 133 & 400 & \  \\ 
-% pmed40 & 5128 & 90 & 900 & \  \\ 
-$p$-median avg & 5535 & 46 & 460 & \  \\ \hline
+pmed35 & 10400 & 5 & 800 & \  \\ 
+$p$-median avg & 5535.3 & 45.9 & 460 & \  \\ \hline
  \end{tabular}
 \end{table}
 
@@ -186,12 +200,11 @@ $p$-median avg & 5535 & 46 & 460 & \  \\ \hline
  For the black-box $k$-median algorithm, we implemented $k$-medoids, PAM, LP-greedy, LP-rand, and LP-Charikar in Python using Gurobi 6.0.3 to solve the linear programming instances. 
 To avoid cycling, we limited the number of iterations in $k$-medoids to 1000. For PAM, we also needed to limit the number of swaps to achieve a reasonable runtime. Instead of searching over all potential swaps, we sample at most $n$ potential ones. We also ensure that some minimum progress is achieved by ensuring the algorithm decreases in objective by at least a factor of 0.9 in each iteration. At the end of PAM, we run 10 iterations of $k$-medoids to ensure the algorithm finds a local optimum. These choices were made by looking at the relative performance and computation time on random Gaussian data not in the data sets above.
 
-Before implementing these data sets in the hiearchical framework, we tested them as partitional algorithms on the data above which had given values of $k$. For comparison, we also included the results from running $k$-means (implemented in the scikit-learn package in Python) and the extension of PAM called 2-swaps that also looks at local swaps of size 2 (which improves the $k$-median approximation ratio to 4 from 5). 
+Before implementing these data sets in the hierarchical framework, we compared them as partitional algorithms on the data above which had given values of $k$. For context, we also included the results from running $k$-means (implemented in the scikit-learn package in Python) and the extension of PAM called 2-swaps that also looks at local swaps of size 2 (which improves the $k$-median approximation ratio to 4 from 5). 
 
-For each data set and each partitional clustering method, we recorded the approximation ratio (for the flat $k$-median objective function), computation time, and, where applicable, adjusted mutual information (AMI).  AMI is a measure which scores accuracy of predicted clusters compared to a true labeling by measuring the agreement of two assignments. The measure is normalized to reflect chance, so that a perfect labeling receives a score of 1 and an independent random labeling receives a score of 0 in expectation.  See \cite{Vinh} for further information.  Results are given in Tables~\ref{fig:flat_hier_comp}-\ref{fig:flat_hier_approx}  below with some results averaged due to space constraints. The results reported are average values across 10 trials.
+For each data set and each partitional clustering method, we recorded the approximation ratio (for the flat $k$-median objective function), computation time, and, where applicable, adjusted mutual information (AMI).  AMI is a measure which scores accuracy of predicted clusters compared to a true labeling by measuring the agreement of two assignments. The measure is normalized to reflect chance, so that a perfect labeling receives a score of 1 and an independent random labeling receives a score of 0 in expectation.  See \cite{Vinh} for further information.  Results are given in Tables~\ref{fig:flat_results_comp}-\ref{fig:flat_results_approx}  below with some results averaged due to space constraints. The results reported are average values across 10 trials.
 
 \begin{table*}[!t]
-\label{fig:flat_results_comp}
 \caption{Average Computation Time (sec) for Partitional Clustering Algorithms.}
 \centering
 \begin{tabular}{ | l | l | l | l | l | l | l | l|}
@@ -208,10 +221,10 @@ pmed20	&	N/A	&	1.7947	&	44.9791	&	68.2306	&	18.2055	&		&		\\
 pmed35	&	N/A	&	0.1133	&	5.8814	&	9.2881	&	117.4038	&		&		\\
 $p$-median avg	&	N/A	&	0.8072	&	40.3474	&	56.7595	&	46.1541	&		&		\\ \hline
 \end{tabular}
+\label{fig:flat_results_comp}
 \end{table*}
 
 \begin{table*}[!t]
-\label{fig:flat_results_AMI}
 \caption{Average AMI measure for Partitional Clustering Algorithms.}
 \centering
 \begin{tabular}{ | l | l | l | l | l | l | l | l| }
@@ -224,12 +237,12 @@ Gauss\_5\_10\_5	&	0.783	&	0.677	&	0.725	&	0.737	&	0.729	&		&		\\
 Gauss\_5\_50\_5	&	0.646	&	0.621	&	0.619	&	0.631	&	0.631	&		&		\\
 Gaussian avg	&	0.777	&	9.112	&	0.761	&	0.761	&	0.767	&		&		\\ \hline
 \end{tabular}
+\label{fig:flat_results_AMI}
 \end{table*}
 
 
 \begin{table*}[!t]
-\label{fig:flat_results_approx}
-\caption{Average Approximation Coeffiecients for Partitional Clustering Algorithms.}
+\caption{Average Approximation Coefficients for Partitional Clustering Algorithms.}
 \centering
 \begin{tabular}{ | l | l | l | l | l | l| l|}
 \hline
@@ -245,6 +258,7 @@ pmed20	&	1.501	&	1.032	&	1.027	&	1.000	&		&		\\
 pmed35	&	1.083	&	1.005	&	1.007	&	1.027	&		&		\\
 $p$-median avg	&	1.187	&	1.017	&	1.019	&	1.000	&		&		\\ \hline
 \end{tabular}
+\label{fig:flat_results_approx}
 \end{table*}
 
 
@@ -270,11 +284,10 @@ and the overall FScore is the sum of weighted FScores for each class
 \end{equation}
 See \cite{Larsen} for more information. 
 
-Results are given in Tables~\ref{fig:hier_results_comp}-\ref{fig:hier_results_approx} for the full hierarchical version and in Tables~\ref{fig:hier_log_results_compt}-\ref{fig:hier_log_results_approx} for the logarithmic version. The results reported are average values across 10 trials.
+Results are given in Tables~\ref{fig:hier_results_comp}-\ref{fig:hier_results_approx} for the full hierarchical version and in Tables~\ref{fig:hier_log_results_comp}-\ref{fig:hier_log_results_approx} for the logarithmic version. The results reported are average values across 10 trials.
 
 \begin{table*}[!t]
-\label{fig:hier_results_comp}
-\caption{Average Computation Time (sec) for Hierarchical Clustering Algorithms. Besides the agglomerative methods, the algorithm is denoted by the $k$-median solver used and [R] and [D] are used to denote the randomized and determinisitic versions, respectively.}
+\caption{Average Computation Time (sec) for Hierarchical Clustering Algorithms. Besides the agglomerative methods, the algorithm is denoted by the $k$-median solver used and [R] and [D] are used to denote the randomized and deterministic versions, respectively.}
 \centering
 \begin{tabular}{ | l | l | l | l | l | l | l | l| l| }
 \hline
@@ -285,15 +298,15 @@ Gauss\_5\_5\_5	&	0.0123	&	0.0105	&	165.3442	&	106.6187	&	712.6960	&	273.1223	&	2
 Gauss\_5\_10\_5	&	0.0284	&	0.0260	&	556.8065	&	383.8541	&	2088.8757	&	793.7941	&	622.8916	&	623.8670	\\
 Gauss\_5\_50\_5	&	0.0121	&	0.0112	&	176.8477	&	128.2697	&	764.3297	&	269.5327	&	253.2762	&	222.7860	\\
 Gaussian avg	&	0.0250	&	0.0217	&	521.3331	&	354.4588	&	1695.7987	&	666.5034	&	566.4133	&	567.0086	\\
-pmed5	&	N/A	&	0.0004	&	1.4797	&	1.1839	&		&	3.8239	&	4.6917	&		\\
+pmed5	&	N/A	&	0.0004	&	1.4797	&	1.1839	&		&	3.8239	&	4.6917	&		4.290 \\
 pmed20	&	N/A	&	0.0098	&	153.5358	&	121.9013	&	550.8604	&	240.8364	&	193.8426	&	189.6854	\\
 pmed35	&	N/A	&	0.0666	&	3225.4469	&	1957.6519	&		&	1939.0170	&	2326.1185	&	1801.2031	\\
-$p$-median avg	&	N/A	&	0.0243	&	1021.8706	&	652.1928	&		&	723.1452	&	857.3750	&		\\ \hline
+$p$-median avg	&	N/A	&	0.0243	&	1021.8706	&	652.1928	&		&	723.1452	&	857.3750	&	704.8966	\\ \hline
 \end{tabular}
+\label{fig:hier_results_comp}
 \end{table*}
 
 \begin{table*}[!t]
-\label{fig:hier_results_FScore}
 \caption{Average FScore measure for Hierarchical Clustering Algorithms.}
 \centering
 \begin{tabular}{ | l | l | l | l | l | l | l | l| l| }
@@ -306,12 +319,12 @@ Gauss\_5\_10\_5	&	0.281	&	0.285	&	0.463	&	0.589	&	0.575	&	0.536	&	0.506	&	0.466	
 Gauss\_5\_50\_5	&	0.509	&	0.519	&	0.554	&	0.539	&	0.607	&	0.579	&	0.560	&	0.594	\\
 Gaussian avg	&	0.378	&	0.391	&	0.592	&	0.649	&	0.603	&	0.619	&	0.593	&	0.614	\\ \hline
 \end{tabular}
+\label{fig:hier_results_FScore}
 \end{table*}
 
 
 \begin{table*}[!t]
-\label{fig:hier_results_approx}
-\caption{Average Approximation Coeffiecients for Hierarchical Clustering Algorithms.}
+\caption{Average Approximation Coefficients for Hierarchical Clustering Algorithms.}
 \centering
 \begin{tabular}{ | l | l | l | l | l | l| l|}
 \hline
@@ -322,16 +335,16 @@ Gauss\_5\_5\_5	&	5.601	&	6.459	&	2.327	&	2.153	&	2.210	&	1.858	\\
 Gauss\_5\_10\_5	&	3.775	&	3.420	&	2.055	&	2.232	&	2.212	&	2.145	\\
 Gauss\_5\_50\_5	&	2.840	&	3.210	&	1.872	&	1.993	&	2.063	&	1.626	\\
 Gaussian avg	&	5.502	&	5.182	&	2.292	&	2.282	&	2.290	&	2.075	\\
-pmed5	&	28.151	&	11.367	&		&	1.710	&	1.759	&		\\
+pmed5	&	28.151	&	11.367	&		&	1.710	&	1.759	&	1.5791	\\
 pmed20	&	11.606	&	7.210	&	1.756	&	1.757	&	1.776	&	1.680	\\
 pmed35	&	5.476	&	3.850	&		&	1.817	&	1.834	&	1.690	\\
-$p$-median avg	&	12.005	&	8.260	&		&	1.758	&	1.762	&		\\ \hline
+$p$-median avg	&	12.005	&	8.260	&		&	1.758	&	1.762	&	1.634	\\ \hline
 \end{tabular}
+\label{fig:hier_results_approx}
 \end{table*}
 
 
 \begin{table*}[!t]
-\label{fig:hier_log_results_comp}
 \caption{Average Computation Time (sec) for the Logarithmic Hierarchical Clustering Algorithms. The algorithm is denoted by the $k$-median solver used and [R] indicates that the randomized version was used.}
 \centering
 \begin{tabular}{ | l | l | l | l | l | l | }
@@ -345,13 +358,13 @@ Gauss\_5\_50\_5	&	176.3119	&	3.3950	&	76.7538	&	222.7860 	&	58.5883	\\
 Gaussian avg	&	445.8375	&	8.3335	&	181.0512	&	380.8876 	&	146.9885	\\
 pmed5	&	1.4092	&	0.1142	&	1.3029	&		&	0.9092	\\
 pmed20	&	149.3397	&	3.5036	&	53.7326	&	36.1935	&	43.3070	\\
-pmed35	&	1351.1987	&	28.6012	&	554.3661	&		&	488.2756	\\
+pmed35	&	1351.1987	&	28.6012	&	554.3661	&	375.4926	&	488.2756	\\
 $p$-median avg	&	492.7771	&	10.5447	&	204.3356	&		&	173.2638	\\ \hline
 \end{tabular}
+\label{fig:hier_log_results_comp}
 \end{table*}
 
 \begin{table*}[!t]
-\label{fig:hier_log_results_FScore}
 \caption{Average FScore measure for Logarithmic Hierarchical Clustering Algorithms.}
 \centering
 \begin{tabular}{ | l | l | l | l | l | l | }
@@ -359,16 +372,16 @@ $p$-median avg	&	492.7771	&	10.5447	&	204.3356	&		&	173.2638	\\ \hline
 Dataset	&	PAM	&	$k$-medoids [R]	&	LP-Charikar [R]	&	LP-rand [R]	&	LP-greedy [R]	\\ \hline
 Soybean	&	0.664	&	0.645	&	0.664	&	0.633	&	0.626	\\
 Iris	&	0.790	&	0.754	&	0.777	&	0.784	&	0.714	\\
-Gauss\_5\_5\_5	&	0.727	&	0.692	&	0.747	&		&	0.724	\\
-Gauss\_5\_10\_5	&	0.605	&	0.506	&	0.557	&		&	0.546	\\
-Gauss\_5\_50\_5	&	0.509	&	0.557	&	0.578	&		&	0.551	\\
-Gaussian avg	&	0.595	&	0.585	&	0.576	&		&	0.590	\\ \hline
+Gauss\_5\_5\_5	&	0.727	&	0.692	&	0.747	&	0.775	&	0.724	\\
+Gauss\_5\_10\_5	&	0.605	&	0.506	&	0.557	&	0.466	&	0.546	\\
+Gauss\_5\_50\_5	&	0.509	&	0.557	&	0.578	&	0.594	&	0.551	\\
+Gaussian avg	&	0.595	&	0.585	&	0.576	&	0.602	&	0.590	\\ \hline
 \end{tabular}
+\label{fig:hier_log_results_FScore}
 \end{table*}
 
 
 \begin{table*}[!t]
-\label{fig:hier_log_results_approx}
 \caption{Average Approximation Coeffiecients for Logarithmic Hierarchical Clustering Algorithms.}
 \centering
 \begin{tabular}{ | l | l | l | l | l | l| }
@@ -382,22 +395,23 @@ Gauss\_5\_50\_5	&	4.694	&	9.615	&	5.114	&	1.626	&	5.525	\\
 Gaussian avg	&	8.494	&	18.565	&	7.282	&	5.000	&	7.004	\\
 pmed5	&	26.550	&	73.950	&	14.000	&		&	21.800	\\
 pmed20	&	11.850	&	38.863	&	10.000	&	7.000	&	8.000	\\
-pmed35	&	6.017	&	25.900	&	4.207	&		&	6.000	\\
+pmed35	&	6.017	&	25.900	&	4.207	&	3.634	&	6.000	\\
 $p$-median avg	&	12.739	&	40.316	&	9.158	&		&	10.066	\\ \hline
 \end{tabular}
+\label{fig:hier_log_results_approx}
 \end{table*}
 
-In general, the full hierarchical framework performed significantly better than both methods of agglomerative clustering in terms of FScore measure. The FScore measures were very low for the agglomerative clustering methods, consistently under 0.5 and sometimes around 0.25, but averaged around 0.6 for our nesting algorithms. Surprisingly, the algorithms all had similar FScore measures. However, the approximation ratios for the LP algorithms, which were all around 2 for the Gaussian data and slightly under 2 for the pmedian instances, outperformed the $k$-medoids algorithm, which often had approximation coefficients around 5 for the Gaussian data and around 10 for the pmedian data. The high approximation ratio for some of the $k$-medoids algorithms on the iris data set was due to the fact that the optimal solution for $k = n-1, n-2$ was very close to zero, and some heuristic algorithms only sometimes picked up on these solutions. The approximation factor at lower levels was more consistent with the other results. 
+In general, the full hierarchical framework performed significantly better than both methods of agglomerative clustering in terms of FScore measure. The FScore measures were very low for the agglomerative clustering methods, consistently under 0.5 and averaging around 0.38, but averaged around 0.6 for our nesting algorithms. Surprisingly, the algorithms all had similar FScore measures with no method consistently scoring higher than the others. However, the approximation ratios for the LP algorithms, which were all around 2 for the Gaussian data and slightly under 2 for the $p$-median instances, outperformed the $k$-medoids algorithm, which often had approximation coefficients around 5 for the Gaussian data and around 10 for the $p$-median data. The high approximation ratio for some of the $k$-medoids algorithms on the Iris data set was due to the fact that the optimal solution for $k = n-1, n-2$ was very close to zero, and some heuristic algorithms only sometimes picked up on these solutions. The approximation factor at lower levels was more consistent with the other results. 
 
-There were several interesting trends in the performance. First, the deterministic versions had higher FScore measures and lower approximation coefficients on average compared to their randomized counterparts so we would advise to just use the deterministic version despite its higher approximation guarantee. Similarly, our simple LP heuristics performed comparably to the more advanced LP-Charikar algorithm. Also worth noting is the fact that the approximation ratio for $k$-medoids improved as $n$ increased in the $p$-median instances. 
+There were several interesting trends in the performance. First, the deterministic versions had higher FScore measures and lower approximation coefficients on average compared to their randomized counterparts so we would advise to just use the deterministic version despite its higher approximation guarantee. Similarly, our simple LP heuristics performed comparably to the more advanced LP-Charikar algorithm. Also worth noting is the fact that the approximation ratio for $k$-medoids improved as $n$ increased in the $p$-median instances, which is surprising the values of $k$ for some of the instances increased proporitional to $n$ so we would expect the overall difficulty to be higher. 
 
 In terms of the computation time, the agglomerative clustering methods were significantly faster than all of nesting algorithms, which we would expect given how many $k$-median instances they have to solve. $k$-medoids was the fastest method, but $k$-medoids, LP-greedy, and LP-rand all performed around 4 orders of magnitude slower than the agglomerative methods (this order increased to 5 for a few of the very large $p$-median instances). LP-Charikar was the slowest method and was often at least 5 orders of magnitude slower than the agglomerative methods. 
 
 In the logarithmic version, the computation times all improved. For $k$-medoids, the algorithm became 2-3 orders of magnitude slower than agglomerative clustering while the LP methods all decreased by 1 order of magnitude. However, LP-rand now had the worst running time whereas LP-Charikar improved to be similar to LP-greedy. PAM, on the other hand, was 4-5 orders of magnitude higher, similar to the methods used in the full hierarchical framework. 
 
-Using the logarithmic version did decrease the FScores slightly, but the averages still remained close to 0.6 and above the agglomerative methods. Again, the algorithms performed similarly in FScore. The approximation ratios also suffered with the $k$-medoids algorithm suffering the most. PAM had an average Gaussian approximation ratio of around 8.5, LP-Charikar and LP-greedy around 7, and LP-rand around 5 (the ratios did improve as the dimension increased). These averages all increased slightly for the $p$-median instances. 
+Using the logarithmic version did decrease the FScores slightly, but the averages still remained close to 0.6 and above the agglomerative methods. Again, the algorithms performed similarly in FScore. The approximation ratios, on the other hand, did change significantly in the logarithmic version with the $k$-medoids algorithm having the highest increases in ratio. PAM had an average Gaussian approximation ratio of around 8.5, LP-Charikar and LP-greedy around 7, and LP-rand around 5 (the ratios did improve as the dimension increased). These averages all increased slightly for the $p$-median instances. The algorithms also seemed to do worse on the Iris data set and not pick up on the optimal solution for the higher levels. This indicates that if a data set has a very steep change in objective function between neighboring solutions that the full hierarchical version should be used. 
 
-Given these performances, we would recommend using the deterministic, logarithmic framework with a simple LP heuristic as the black-box $k$-median solver. If one does not want to use an LP solver, then $k$-medoids is a good choice given the low running times but the approximation ratio might suffer. Switching to the full hierarchical version does increase the run time by around one order of magnitude, but offers better FScore and approximation ratios. Using PAM seems to be the least beneficial option since the full hierarchical version with $k$-medoids as a solver has better overall performance.
+Given these performances, we would recommend using the deterministic, logarithmic framework with a simple LP heuristic as the black-box $k$-median solver. If one does not want to use an LP solver, then $k$-medoids is a good choice given the low running times but the approximation ratio might increase. Switching to the full hierarchical version does increase the run time by around one order of magnitude, but offers better FScore and approximation ratios. Using PAM seems to be the least beneficial option since the full hierarchical version with $k$-medoids as a solver has better overall performance.
 
 \section{Conclusion and Future Work}
 We implemented the nesting framework introduced by Lin et al.~\cite{Lin}, which focuses on minimizing the hierarchical $k$-median objective function, to produce hierarchical clusterings using various methods for constructing the inputted partitional clusterings.  Overall, we saw significant improvement in FScore measures for our implemented methods compared to agglomerative clustering and overall good approximation ratios where none were had before. In particular, our logarithmic nesting algorithm seems to provide the best balance between performance and computational efficiency.
