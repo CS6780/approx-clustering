@@ -76,7 +76,7 @@ A solution to the hierarchical $k$-median problem is a nested chain of solutions
 \label{fig_sim}
 \end{figure*}
 
-While some partitional clustering methods use the $k$-median objective function to inform their decisions, popular methods for hierarchical clustering do not and rely on greedy algorithms which have no guarantee on the solution produced with respect to the objective function but are typically fast and easy to implement. This paper looks at how using this objective function can vastly improve the hierarchical clusterings produced. 
+While some partitional clustering methods use the $k$-median objective function to inform their decisions, popular methods for hierarchical clustering do not and instead rely on greedy algorithms which have no guarantee on the solution produced with respect to the objective function but are typically fast and easy to implement. This paper looks at how using this objective function can vastly improve the hierarchical clusterings produced. 
 In particular, we show how an approximation framework for this problem, which takes in partitional clusterings for all values of $k$, compares in practice to some of the most widely used clustering algorithms, both in the quality of the solution and in computation time. The algorithms we use to produce these partitional clusterings include both approximation algorithms for the $k$-median problem, which offer an overall approximation guarantee for the hierarchical $k$-median problem, and some heuristic algorithms that have been shown to perform well in practice. 
 
 \section{Literature Review}
@@ -161,7 +161,7 @@ The algorithm first chooses a subset of data points $C \subseteq X$ to represent
 
 $C$ now represents data points that are relatively far apart. These points then choose a bundle of points $U_j$ that represent potential centers they would like to be assigned to. In particular, for each point $j \in C$, we look at all points $i \in X$ such that $0 < d(i,j) < 1.5 R_j$, where $R_j$ is half the distance from $j$ to its nearest point in $C$, and bundle these points into $U_j$ (if a point is in multiple bundles, choose one arbitrarily). Now these bundles of points have a sum of $s_i$ values of at least one half. For each $U_j$, we define the volume of $U_j$ to be $\mathrm{vol}(U_j) = \sum_{i \in U_j} s_i$. Lastly, these bundles are matched together greedily by distance. 
 
-Now that the algorithm has grouped and matched together points so the volume is at least 1, the algorithm starts choosing points from these various groups through sampling. Here, opening $U_j$ refers to selecting a point $i \in U_j$ with probabilities proportional to the $s_i$ values and adding that point to $S$. 
+Now that the algorithm has grouped and matched together points so that the volume is at least 1, the algorithm starts choosing points from these various groups through sampling. Here, opening $U_j$ refers to selecting a point $i \in U_j$ with probabilities proportional to the $s_i$ values and adding that point to $S$. 
 \begin{enumerate}[\IEEEsetlabelwidth{3)}]
 \item For each matched $U_j$ and $U_{j'}$, the algorithm opens $U_j$ with probability $1-\mathrm{vol}(U_{j'})$, opens $U_{j'}$ with probability $1- \mathrm{vol}(U_j)$, and opens both $U_{j}$ and $U_{j'}$ with probability $\mathrm{vol}(U_j) + \mathrm{vol}(U_{j'}) -1$. 
 \item For any unmatched $U_j$, it is opened with probability $\mathrm{vol}(U_j)$.
