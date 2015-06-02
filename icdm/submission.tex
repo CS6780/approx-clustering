@@ -30,15 +30,8 @@ Hierarchical clustering organizes large data into smaller, more informative grou
 
 
 \section{Introduction and Notation}
-% As the data we have access to grows in variety and size and becomes cheaper to store, we need methods to efficiently learn from this data. 
-% Partitioning data (clustering) into similar groups (clusters) is one of the key tools to learn about a set of unlabeled data such as a set of customers who have visited a website or a set of handwritten documents.
-% Clustering in these situations helps us learn underlying structure and classifications of our data, and it allows large data sets to be presented in a simplified and compressed view \cite{Jain}.
+Clustering algorithms date back more than 50 years, and there have been many variations introduced since \cite{Jain}.  The two main branches of clustering are partitional (or flat) and hierarchical. In partitional clustering, we often specify a number $k$ and pairwise distances between the data points, representing a measure of dissimilarity such as Euclidean distance. A clustering algorithm thus partitions the data into $k$ disjoint sets where the sets represent relatively similar data. For hierarchical clustering, we are interested in finding a nested tree of partitions. This offers the user a global view of the data and allows the user to choose a ``natural'' level of clustering \cite{ESL}.  Examples of both partitional and hierarchical clustering are given in Fig.~\ref{fig_part}-\ref{fig_hier}.
 
-[INTRODUCE HIERARCHICAL CLUSTERING]
-
-There are two main branches of clustering: partitional (or flat) and hierarchical. In partitional clustering, we often specify a number $k$ and pairwise distances between the data points, representing a measure of dissimilarity such as Euclidean distance. The clustering algorithm then partitions the data into $k$ disjoint sets where the sets represent relatively similar data. In hierarchical clustering, on the other hand, we are interested in finding a nested tree of partitions. This offers the user a global view of the data and allows the user to choose a ``natural'' level of clustering \cite{ESL}. For example, a retailer could use a hierarchical clustering of customers to first find regions of customers in order to tailor the products offered in each region. The retailer could then also offer specialized discounts to subgroups in each region based on each cluster's shopping records. Examples of both types of clustering are given in Fig.~\ref{fig_part}-\ref{fig_hier}.
-
-Clustering algorithms date back more than 50 years, and there have been many variations introduced since then \cite{Jain}. However, clustering algorithms are often formulated as NP-hard problems with non-convex objective functions, which are inherently hard to solve \cite{Jain}.
 One common objective function for partitional clustering is to minimize the sum of distances from each point to the median point of its cluster, called $k$-median or $k$-medoids clustering. More specifically, suppose we are given a set $X$ and a distance (dissimilarity) metric $d(i,j)$ for all $i,j \in X$. The goal is to find a set of centers $S \subseteq X$ such that $|S| \leq k$ so as to minimize 
 \[ f(S) = \sum_{ i\in X} \min_{j \in S} d(i,j). \]
 The clustering is obtained from the set of centers $S$ by assigning each data point to its nearest center.  An $\alpha$-approximation algorithm for this problem produces a set $S$ in polynomial time such that $f(S) \leq \alpha \cdot f(O)$ for all $O \subseteq X$ with $|O| = k$. 
@@ -52,7 +45,7 @@ The clustering is obtained from the set of centers $S$ by assigning each data po
 \caption{A partitional clustering for $k=3$, where the colors represent the different partitions, and a dendrogram representation of a hierarchical clustering of the data, where edges represent mergeing of clusters.  Note the clustering on the third level (represented by the red line) corresponds to the partitional clustering on the left.}
 \end{figure*}
 
-This objective function can then be extended to the hierarchical $k$-median problem which represents an objective function relating to the hierarchical clustering problem. Suppose we represent a solution to the $k$-median problem as a pair $(S, a)$ where $S \subseteq X$ such that $|S| \leq k$ and $a$ is an assignment function that maps each $i \in X$ to a center in $S$. Then, for any $i \in S$, $a^{-1}(i)$ is the cluster centered at $i$. We define $f(S,a) := \sum_{i \in X} d(i, a(i))$. This is the same objective function as above except the assignment is given rather than implied.
+This objective function can then be extended to the hierarchical $k$-median problem. Suppose we represent a solution to the $k$-median problem as a pair $(S, a)$ where $S \subseteq X$ such that $|S| \leq k$ and $a$ is an assignment function that maps each $i \in X$ to a center in $S$. Then, for any $i \in S$, $a^{-1}(i)$ is the cluster centered at $i$. We define $f(S,a) := \sum_{i \in X} d(i, a(i))$. Note this is the same objective function as above, except the assignment is given rather than implied.
 
 Given solution pairs $(S_1, a_1)$ and $(S_2, a_2)$, we say that $(S_1, a_1)$ is \emph{nested} in $(S_2, a_2)$ (denoted $(S_1, a_1) \subseteq (S_2, a_2)$) if the following conditions hold:
 \begin{enumerate}[\IEEEsetlabelwidth{3)}]
@@ -60,7 +53,9 @@ Given solution pairs $(S_1, a_1)$ and $(S_2, a_2)$, we say that $(S_1, a_1)$ is 
 	\item $\forall  j \in X$, if $a_2(j) \in S_1$, then $a_1(j) = a_2(j)$, 
 	\item $\forall j, k \in X$, if $a_2(j) = a_2(k)$, then $a_1(j) = a_1(k)$.
 \end{enumerate}
-A solution to the hierarchical $k$-median problem is a nested chain of solutions, and the hierarchical clustering it generates is found by looking at the clusters given by each $(S_i, a_i)$. An example is given in Fig.~\ref{fig_chain1}-\ref{fig_chain4}. However, we want this solution to stay close to the optimal $k$-median solutions when looking at any level of the hierarchy. An $\alpha$-approximation algorithm for this problem generates a nested chain of solutions in polynomial time such that for all $k = 1, \ldots, |X|$ there exists $(S_i, a_i)$ in the chain such that $|S_i| \leq k$ and $f(S_i, a_i) \leq \alpha \cdot f(O)$ for all $O \subseteq X$ with $|O| = k$.
+A solution to the hierarchical $k$-median problem is a nested chain of solutions, and the hierarchical clustering it generates is found by looking at the clusters given by each $(S_i, a_i)$. An example is given in Fig.~\ref{fig_chain1}-\ref{fig_chain4}. 
+
+We would like a nested hierachical solution to stay close to the optimal $k$-median solutions when looking at any level of the hierarchy. An $\alpha$-approximation algorithm for this problem generates a nested chain of solutions in polynomial time such that for all $k = 1, \ldots, |X|$ there exists $(S_i, a_i)$ in the chain such that $|S_i| \leq k$ and $f(S_i, a_i) \leq \alpha \cdot f(O)$ for all $O \subseteq X$ with $|O| = k$.
 
 \begin{figure*}[b]
 \centering
